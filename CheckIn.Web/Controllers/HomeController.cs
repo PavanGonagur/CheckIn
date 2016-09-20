@@ -15,7 +15,7 @@ namespace CheckIn.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Jere oos bitta";
 
             return View();
         }

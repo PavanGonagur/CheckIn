@@ -1,3 +1,5 @@
+using CheckIn.Data.Entities;
+
 namespace CheckIn.Data.Migrations
 {
     using System;
@@ -26,6 +28,11 @@ namespace CheckIn.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Admins.AddOrUpdate(
+                  //new Person { FullName = "Andrew Peters" },
+                  //new Person { FullName = "Brice Lambson" },
+                  new Admin { Name = "Pavan Gonagur", Email = "p@v.com", Password = "p", PhoneNumber = "1234567890" }
+                );
         }
     }
 }

@@ -80,7 +80,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -210,43 +209,35 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessImpl\AdminBusiness.cs" />
-    <Compile Include="BusinessImpl\AuthenticationBusiness.cs" />
-    <Compile Include="BusinessImpl\UserChannelMapBusiness.cs" />
     <Compile Include="BusinessImpl\UserBusiness.cs" />
     <Compile Include="Business\IAdminBusiness.cs" />
-    <Compile Include="Business\IAuthenticationBusiness.cs" />
-    <Compile Include="Business\IUserChannelMapBusiness.cs" />
     <Compile Include="Business\IUserBusiness.cs" />
-    <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\ResponseCodes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WebApiControllers\AdminController.cs" />
-    <Compile Include="Controllers\WebApiControllers\ChannelController.cs" />
-    <Compile Include="Controllers\WebApiControllers\UserChannelMapController.cs" />
     <Compile Include="Controllers\WebApiControllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\UserChannelMapModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\AuthenticateAdminModel.cs" />
-    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\RegisterToChannelModel.cs" />
-    <Compile Include="Models\ResponseMessage.cs" />
-    <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\UpdateUserRegistrationModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\AuthenticationFilter.cs" />
+    <Compile Include="Utilities\AuthenticationUtility.cs" />
     <Compile Include="Utilities\EmailGateway.cs" />
+    <Compile Include="Utilities\FcmNotification.cs" />
     <Compile Include="Utilities\HashUtility.cs" />
-    <Compile Include="Utilities\OTPUtility.cs" />
+    <Compile Include="Utilities\Interface\INotification.cs" />
+    <Compile Include="Utilities\JsonUtility.cs" />
+    <Compile Include="Utilities\SessionUtility.cs" />
     <Compile Include="Utilities\SMSGateway.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +298,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -332,9 +324,6 @@
       <Project>{514e854b-8545-4009-8e8d-953d3dff86dd}</Project>
       <Name>CheckIn.Handler</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

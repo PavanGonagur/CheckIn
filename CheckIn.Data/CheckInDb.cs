@@ -29,6 +29,14 @@ namespace CheckIn.Data
 
         public DbSet<UserEmailChannel> UserEmailChannels { get; set; }
 
+        public DbSet<ChatRoom> ChatRooms { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
+        public DbSet<Profile> Profiles { get; set; }
+
+        public DbSet<ProfileKeyValue> ProfileKeyValues { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

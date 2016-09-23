@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CheckIn.Data.Entities
 {
-    public class UserEmailChannel
+    public class Profile
     {
-        public int UserEmailChannelId { get; set; }
-
-        public string Email { get; set; }
-
-        public string EmailUserName { get; set; }
+        public int ProfileId { get; set; }
 
         public int ChannelId { get; set; }
 
+        public ProfileType Type { get; set; }
+
         public virtual Channel Channel { get; set; }
+
+        public ICollection<ProfileKeyValue> Data { get; set; }
     }
 }

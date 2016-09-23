@@ -25,5 +25,9 @@ namespace CheckIn.Data.Entities
         public virtual ICollection<UserChannelMap> UserChannelMaps { get; set; }
 
         public virtual ICollection<UserEmailChannel> UserEmailChannels { get; set; }
+
+        public virtual ICollection<ChatRoom> ChatRooms { get; set; }
+
+        public virtual ICollection<Profile> Profiles { get; set; }
     }
 }

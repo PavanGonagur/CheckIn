@@ -18,6 +18,8 @@ namespace CheckIn.Data.Entities
 
         public string Email { get; set; }
 
+        public string EmailUserName { get; set; }
+
         public string RegistrationId { get; set; }
 
         public string FirstName { get; set; }
@@ -27,5 +29,7 @@ namespace CheckIn.Data.Entities
         public string UserPhoto { get; set; }
 
         public virtual ICollection<UserChannelMap> UserChannelMaps { get; set; }
+
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

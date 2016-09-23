@@ -20,6 +20,8 @@ namespace CheckIn.Data.Entities
 
         public string Password { get; set; }
 
+        public bool IsSuperAdmin { get; set; }
+
         public virtual ICollection<AdminChannelMap> AdminChannelMaps { get; set; }
     }
 }

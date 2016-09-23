@@ -214,6 +214,7 @@
     <Compile Include="Business\IUserBusiness.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WebApiControllers\AdminController.cs" />
     <Compile Include="Controllers\WebApiControllers\UserController.cs" />
@@ -229,9 +230,14 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\AuthenticationFilter.cs" />
     <Compile Include="Utilities\AuthenticationUtility.cs" />
     <Compile Include="Utilities\EmailGateway.cs" />
+    <Compile Include="Utilities\FcmNotification.cs" />
     <Compile Include="Utilities\HashUtility.cs" />
+    <Compile Include="Utilities\Interface\INotification.cs" />
+    <Compile Include="Utilities\JsonUtility.cs" />
+    <Compile Include="Utilities\SessionUtility.cs" />
     <Compile Include="Utilities\SMSGateway.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +298,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,4 +11,9 @@ namespace CheckIn.Data
         WiFi = 0,
         Silent
     }
+
+    public enum NotificationType
+    {
+        ChatMessage
+    }
 }

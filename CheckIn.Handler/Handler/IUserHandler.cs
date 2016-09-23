@@ -15,5 +15,11 @@ namespace CheckIn.Handler.Handler
         User RetrieveUser(int userId);
 
         void UpdateUser(User user);
+
+        List<User> RetrieveAllUsers();
+
+        void DeleteUser(User user);
+
+        User RetrieveUserOnEmail(string emailId);
     }
 }

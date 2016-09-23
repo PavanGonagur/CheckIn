@@ -7,11 +7,15 @@ using System.Web.Routing;
 
 namespace CheckIn.Web
 {
+    using System.Web.Http;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapHttpRoute("DefaultApi", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

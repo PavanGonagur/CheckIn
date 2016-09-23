@@ -40,9 +40,7 @@ namespace CheckIn.Handler.HandlerImpl
 
         public Admin RetrieveAdmin(int adminId)
         {
-            var query = from r in this.checkInDb.Admins
-                        where r.AdminId == adminId
-                        select r;
+            var query = this.checkInDb.Admins.Where(x => x.AdminId == adminId);
             if (query.Any())
             {
                 var currentUser = query.FirstOrDefault();
@@ -68,6 +66,22 @@ namespace CheckIn.Handler.HandlerImpl
                 }
             }
             return null;
+        }
+
+        public List<Admin> RetrieveAllAdmins()
+        {
+            var users = this.checkInDb.Admins;
+            if (users != null)
+            {
+                return users.ToList();
+            }
+            return null;
+        }
+
+        public void DeleteAdmin(Admin admin)
+        {
+            this.checkInDb.Admins.Remove(admin);
+            this.checkInDb.SaveChanges();
         }
     }
 }

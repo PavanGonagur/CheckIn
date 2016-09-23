@@ -13,5 +13,9 @@ namespace CheckIn.Web.Business
         string RetrieveUser(int userId);
 
         int AddUser(UserModel user);
+
+        string RetrieveAllUsers();
+
+        void UpdateUserRegistrationId(UpdateUserRegistrationModel updateUserRegistrationModel);
     }
 }

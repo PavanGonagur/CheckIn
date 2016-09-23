@@ -34,9 +34,7 @@ namespace CheckIn.Handler.HandlerImpl
 
         public User RetrieveUser(int userId)
         {
-            var query = from r in this.checkInDb.Users
-                        where r.UserId == userId
-                        select r;
+            var query = this.checkInDb.Users.Where(x => x.UserId == userId);
             if (query.Any())
             {
                 var currentUser = query.FirstOrDefault();
@@ -51,6 +49,36 @@ namespace CheckIn.Handler.HandlerImpl
         public void UpdateUser(User user)
         {
             this.checkInDb.Users.AddOrUpdate(user);
+            this.checkInDb.SaveChanges();
+        }
+
+        public List<User> RetrieveAllUsers()
+        {
+            var users = this.checkInDb.Users;
+            if (users != null)
+            {
+                return users.ToList();
+            }
+            return null;
+        }
+
+        public User RetrieveUserOnEmail(string emailId)
+        {
+            var query = this.checkInDb.Users.Where(x => x.Email.Equals(emailId));
+            if (query.Any())
+            {
+                var currentUser = query.FirstOrDefault();
+                if (currentUser != null)
+                {
+                    return currentUser;
+                }
+            }
+            return null;
+        }
+
+        public void DeleteUser(User user)
+        {
+            this.checkInDb.Users.Remove(user);
             this.checkInDb.SaveChanges();
         }
     }

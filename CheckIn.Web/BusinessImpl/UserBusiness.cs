@@ -24,7 +24,11 @@ namespace CheckIn.Web.BusinessImpl
         public string RetrieveUser(int userId)
         {
             var user = this.userHandler.RetrieveUser(userId);
-            return JsonConvert.SerializeObject(user);
+            if (user != null)
+            {
+                return JsonConvert.SerializeObject(user);
+            }
+            return null;
         }
 
         public int AddUser(UserModel user)
@@ -34,10 +38,30 @@ namespace CheckIn.Web.BusinessImpl
                                      Email = user.Email,
                                      Name = user.Name,
                                      PhoneNumber = user.PhoneNumber,
-                                     ProfilePhoteUrl = user.ProfilePhotoUrl
+                                     ProfilePhoteUrl = user.ProfilePhotoUrl,
+                                     UserPhoto = user.UserPhoto,
+                                     FirstName = user.FirstName,
+                                     LastName = user.LastName
                                  };
 
             return this.userHandler.AddUser(userEntity);
+        }
+
+        public string RetrieveAllUsers()
+        {
+            var users = this.userHandler.RetrieveAllUsers();
+            if (users != null)
+            {
+                return JsonConvert.SerializeObject(users);
+            }
+            return null;
+        }
+
+        public void UpdateUserRegistrationId(UpdateUserRegistrationModel updateUserRegistrationModel)
+        {
+            var user = this.userHandler.RetrieveUser(updateUserRegistrationModel.CheckInServerUserId);
+            user.RegistrationId = updateUserRegistrationModel.RegistrationId;
+            this.userHandler.UpdateUser(user);
         }
     }
 }

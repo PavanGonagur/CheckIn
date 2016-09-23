@@ -12,21 +12,20 @@ namespace CheckIn.Web.Utilities
     {
         public static string GetHash(string input)
         {
-
-            MD5 md5 = MD5.Create();
-
-            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            StringBuilder sb = new StringBuilder();
-
-            foreach (byte t in hash)
+            byte[] hash;
+            StringBuilder hashBuilder = new StringBuilder();
+            var data = Encoding.UTF8.GetBytes(input);
+            using (SHA512 shaM = new SHA512Managed())
             {
-                sb.Append(t.ToString("X2"));
+                hash = shaM.ComputeHash(data);
             }
 
-            return sb.ToString();
+            foreach (byte x in hash)
+            {
+                hashBuilder.Append(x.ToString("X2"));
+            }
+
+            return hashBuilder.ToString();
         }
     }
 }

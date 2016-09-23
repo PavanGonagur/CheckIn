@@ -17,5 +17,9 @@ namespace CheckIn.Handler.Handler
         Admin RetrieveAdmin(int adminId);
 
         Admin RetrieveAdminOnEmail(string email);
+
+        List<Admin> RetrieveAllAdmins();
+
+        void DeleteAdmin(Admin admin);
     }
 }

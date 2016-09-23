@@ -20,5 +20,7 @@ namespace CheckIn.Handler.Handler
         Channel RetrieveChannel(int channelId);
 
         int AddChannel(Channel channel);
+
+        User RetrieveUserOnEmail(string email);
     }
 }

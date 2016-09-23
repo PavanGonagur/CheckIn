@@ -32,16 +32,21 @@
             try
             {
                 var user = this.userBusiness.RetrieveUser(id);
+                Status status;
                 if (user != null)
                 {
-                    return user;
+                    var data = new Data() { JsonDataResponse = user };
+                    status = new Status() { Code = 0, Message = "Got User" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
                 }
 
-                return "User Not Found";
+                status = new Status() { Code = 1, Message = "User Not Found" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
 
@@ -74,16 +79,21 @@
         {
             try
             {
+                Status status;
                 var users = this.userBusiness.RetrieveAllUsers();
                 if (users != null)
                 {
-                    return users;
+                    var data = new Data() { JsonDataResponse = users };
+                    status = new Status() { Code = 0, Message = "Got Users" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
                 }
-                return "No Users Found";
+                status = new Status() { Code = 1, Message = "No Users Found" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
 

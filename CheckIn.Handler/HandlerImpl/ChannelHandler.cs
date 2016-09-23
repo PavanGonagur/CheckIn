@@ -65,5 +65,35 @@ namespace CheckIn.Handler.HandlerImpl
             this.checkInDb.Channels.Remove(channel);
             this.checkInDb.SaveChanges();
         }
+
+        public Channel RegisterToChannel(string otp)
+        {
+            var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == otp);
+            if (query.Any())
+            {
+                var currentChannel = query.FirstOrDefault();
+                if (currentChannel != null)
+                {
+                    return this.RetrieveChannel(currentChannel.ChannelId);
+                }
+            }
+            return null;
+        }
+
+        public User RetrieveUserOnEmail(string email)
+        {
+            var query = from r in this.checkInDb.Users
+                        where r.Email == email
+                        select r;
+            if (query.Any())
+            {
+                var currentUser = query.FirstOrDefault();
+                if (currentUser != null)
+                {
+                    return currentUser;
+                }
+            }
+            return null;
+        }
     }
 }

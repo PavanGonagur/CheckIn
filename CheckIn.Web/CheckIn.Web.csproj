@@ -211,26 +211,33 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessImpl\AdminBusiness.cs" />
     <Compile Include="BusinessImpl\AuthenticationBusiness.cs" />
+    <Compile Include="BusinessImpl\UserChannelMapBusiness.cs" />
     <Compile Include="BusinessImpl\UserBusiness.cs" />
     <Compile Include="Business\IAdminBusiness.cs" />
     <Compile Include="Business\IAuthenticationBusiness.cs" />
+    <Compile Include="Business\IUserChannelMapBusiness.cs" />
     <Compile Include="Business\IUserBusiness.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\ResponseCodes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WebApiControllers\AdminController.cs" />
+    <Compile Include="Controllers\WebApiControllers\ChannelController.cs" />
+    <Compile Include="Controllers\WebApiControllers\UserChannelMapController.cs" />
     <Compile Include="Controllers\WebApiControllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UserChannelMapModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\AuthenticateAdminModel.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterToChannelModel.cs" />
     <Compile Include="Models\ResponseMessage.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\UpdateUserRegistrationModel.cs" />

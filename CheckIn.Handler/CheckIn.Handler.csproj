@@ -51,9 +51,13 @@
   <ItemGroup>
     <Compile Include="HandlerImpl\AdminHandler.cs" />
     <Compile Include="HandlerImpl\ChannelHandler.cs" />
+    <Compile Include="HandlerImpl\UserChannelMapHandler.cs" />
+    <Compile Include="HandlerImpl\UserEmailChannelHandler.cs" />
     <Compile Include="HandlerImpl\UserHandler.cs" />
     <Compile Include="Handler\IAdminHandler.cs" />
     <Compile Include="Handler\IChannelHandler.cs" />
+    <Compile Include="Handler\IUserChannelMapHandler.cs" />
+    <Compile Include="Handler\IUserEmailChannelHandler.cs" />
     <Compile Include="Handler\IUserHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

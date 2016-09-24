@@ -17,5 +17,7 @@ namespace CheckIn.Web.Business
         string RetrieveAllUsers();
 
         void UpdateUserRegistrationId(UpdateUserRegistrationModel updateUserRegistrationModel);
+
+        void UpdateUserPhoneNumber(AddPhoneNumberModel addPhoneNumberModel);
     }
 }

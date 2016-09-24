@@ -10,6 +10,10 @@ namespace CheckIn.Handler.Handler
 
     public interface IUserEmailChannelHandler
     {
-        int AddUserEmailChannel(UserEmailChannel userEmailChannel);
+        void AddUserEmailChannel(UserEmailChannel userEmailChannel);
+
+        List<UserEmailChannel> RetrieveUserEmailChannelOnUserEmail(string userEmail);
+
+        void DeleteUserEmailChannel(UserEmailChannel userEmail);
     }
 }

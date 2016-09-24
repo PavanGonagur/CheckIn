@@ -11,8 +11,10 @@ namespace CheckIn.Web.Business
 
     public interface IUserChannelMapBusiness
     {
-        Channel RegisterToChannel(string otp);
+        RegisterToChannelResponseModel RegisterToChannel(string otp);
 
         void AddUserChannelMap(UserChannelMapModel userChannelMapModel);
+
+        void ResendOtp(ResendOtpModel resendOtpModel);
     }
 }

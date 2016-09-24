@@ -35,9 +35,8 @@
                 Status status;
                 if (user != null)
                 {
-                    var data = new Data() { JsonDataResponse = user };
                     status = new Status() { Code = 0, Message = "Got User" };
-                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = user, Status = status });
                 }
 
                 status = new Status() { Code = 1, Message = "User Not Found" };
@@ -56,14 +55,20 @@
         {
             try
             {
+                Status status;
                 var stream = await this.Request.Content.ReadAsStringAsync();
                 var user = JsonConvert.DeserializeObject<UserModel>(stream);
                 
                 var userId = this.userBusiness.AddUser(user).ToString();
+                if (userId.Equals("0"))
+                {
+                    status = new Status() { Code = 1, Message = "Failed to add user" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() {Status = status });
+                }
 
-                var data = new Data() { JsonDataResponse = JsonConvert.SerializeObject(userId) };
-                var status = new Status() { Code = 0, Message = "Added User" };
-                return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                var addUserResponse = new AddUserResponse() {UserId = userId};
+                status = new Status() { Code = 0, Message = "Added User" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
 
             }
             catch (Exception ex)
@@ -83,9 +88,8 @@
                 var users = this.userBusiness.RetrieveAllUsers();
                 if (users != null)
                 {
-                    var data = new Data() { JsonDataResponse = users };
                     status = new Status() { Code = 0, Message = "Got Users" };
-                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = users, Status = status });
                 }
                 status = new Status() { Code = 1, Message = "No Users Found" };
                 return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
@@ -117,20 +121,58 @@
             }
         }
 
-        [HttpGet]
-        public string TestApi()
+        [HttpPost]
+        [Route("AddPhoneNumber")]
+
+        public async Task<string> AddPhoneNumber()
         {
             try
             {
-                //EmailGateway.SendMail(new EmailModel());
-                //SMSGateway.SendSms("Hello sede","9738131081");
-                //return OTPUtility.GenerateOTP();
-                return "success";
+                var stream = await this.Request.Content.ReadAsStringAsync();
+                var user = JsonConvert.DeserializeObject<AddPhoneNumberModel>(stream);
+
+                this.userBusiness.UpdateUserPhoneNumber(user);
+                var status = new Status() { Code = 0, Message = "Updated User PhoneNumber" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "fail";
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
+
+        //[HttpPost]
+        //public async Task<string> TestApi()
+        //{
+        //    try
+        //    {
+        //        Status status;
+        //        var stream = await this.Request.Content.ReadAsStringAsync();
+        //        var user = JsonConvert.DeserializeObject<UserModel>(stream);
+
+        //        var userId = this.userBusiness.AddUser(user).ToString();
+        //        if (userId.Equals("0"))
+        //        {
+        //            status = new Status() { Code = 1, Message = "Failed to add user" };
+        //            return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+        //        }
+
+        //        var addUserResponse = new AddUserResponse() { UserId = userId };
+        //        status = new Status() { Code = 0, Message = "Added User" };
+        //        var test = JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
+        //        var b = test.Replace("\\","");
+        //        var revert = JsonConvert.DeserializeObject<ResponseMessage>(b);
+
+        //        //EmailGateway.SendMail(new EmailModel());
+        //        //SMSGateway.SendSms("Hello sede","9738131081");
+        //        //return OTPUtility.GenerateOTP();
+        //        return "success";
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return "fail";
+        //    }
+        //}
     }
 }

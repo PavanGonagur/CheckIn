@@ -34,13 +34,23 @@ namespace CheckIn.Web.Controllers.WebApiControllers
         {
             try
             {
+                Status status;
                 var stream = await this.Request.Content.ReadAsStringAsync();
                 var admin = JsonConvert.DeserializeObject<AdminModel>(stream);
-                return this.adminBusiness.AddAdmin(admin).ToString();
+                var adminId = this.adminBusiness.AddAdmin(admin).ToString();
+                if (adminId.Equals("0"))
+                {
+                    status = new Status() { Code = 1, Message = "Failed to add user" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+                }
+                var addUserResponse = new AddAdminResponse() { AdminId = adminId };
+                status = new Status() { Code = 0, Message = "Added User" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
 
@@ -52,11 +62,14 @@ namespace CheckIn.Web.Controllers.WebApiControllers
             {
                 var stream = await this.Request.Content.ReadAsStringAsync();
                 var admin = JsonConvert.DeserializeObject<AuthenticateAdminModel>(stream);
-                return this.authenticationBusiness.CheckPasswordHashMatches(admin) ? "Success" : "Failure";
+                var isAuthenticated = this.authenticationBusiness.CheckPasswordHashMatches(admin);
+                var status = new Status() { Code = 0, Message = isAuthenticated ? "Success" : "Failure"};
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
 
@@ -66,18 +79,20 @@ namespace CheckIn.Web.Controllers.WebApiControllers
         {
             try
             {
+                Status status;
                 var admin = this.adminBusiness.RetrieveAdmin(id);
                 if (admin != null)
                 {
-                    var data = new Data() { JsonDataResponse = JsonConvert.SerializeObject(admin) };
-                    var status = new Status() { Code = 0, Message = "Got Admin" };
-                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                    status = new Status() { Code = 0, Message = "Got Admin" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = admin, Status = status });
                 }
-                return "Admin Not Found";
+                status = new Status() { Code = 1, Message = "Admin not found" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
 
@@ -87,16 +102,20 @@ namespace CheckIn.Web.Controllers.WebApiControllers
         {
             try
             {
+                Status status;
                 var admins = this.adminBusiness.RetrieveAllAdmins();
                 if (admins != null)
                 {
-                    return admins;
+                    status = new Status() { Code = 0, Message = "Got Users" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = admins, Status = status });
                 }
-                return "No Admins Found";
+                status = new Status() { Code = 1, Message = "No Users Found" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)
             {
-                return "Error Occured " + ex;
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
         }
     }

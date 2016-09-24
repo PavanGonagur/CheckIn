@@ -13,5 +13,7 @@ namespace CheckIn.Handler.Handler
         UserChannelMap RegisterToChannel(string otp);
 
         void AddUserChannelMap(UserChannelMap userChannelMap);
+        
+        UserChannelMap RetrieveUserChannelMapOnUserChannel(int userId, int channelId);
     }
 }

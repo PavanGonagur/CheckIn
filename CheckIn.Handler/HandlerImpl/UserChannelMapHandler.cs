@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CheckIn.Handler.HandlerImpl
 {
+    using System.Data.Entity.Migrations;
+
     using CheckIn.Data;
     using CheckIn.Data.Entities;
     using CheckIn.Handler.Handler;
@@ -34,8 +36,22 @@ namespace CheckIn.Handler.HandlerImpl
 
         public void AddUserChannelMap(UserChannelMap userChannelMap)
         {
-            this.checkInDb.UserChannelMaps.Add(userChannelMap);
+            this.checkInDb.UserChannelMaps.AddOrUpdate(userChannelMap);
             this.checkInDb.SaveChanges();
+        }
+
+        public UserChannelMap RetrieveUserChannelMapOnUserChannel(int userId, int channelId)
+        {
+            var query = this.checkInDb.UserChannelMaps.Where(x => x.ChannelId == channelId && x.UserId == userId);
+            if (query.Any())
+            {
+                var current = query.FirstOrDefault();
+                if (current != null)
+                {
+                    return current;
+                }
+            }
+            return null;
         }
     }
 }

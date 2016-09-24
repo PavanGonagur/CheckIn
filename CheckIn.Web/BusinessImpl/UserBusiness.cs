@@ -9,17 +9,27 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Helpers;
     using CheckIn.Web.Models;
 
     using Newtonsoft.Json;
 
     public class UserBusiness:IUserBusiness
     {
-        private IUserHandler userHandler;
+        private readonly IUserHandler userHandler;
+
+        private readonly IUserEmailChannelHandler userEmailChannelHandler;
+
+        private readonly IUserChannelMapHelper userChannelMapHelper;
+
+        private readonly IChannelHandler channelHandler;
 
         public UserBusiness()
         {
             this.userHandler = new UserHandler();
+            this.userEmailChannelHandler = new UserEmailChannelHandler();
+            this.userChannelMapHelper = new UserChannelMapHelper();
+            this.channelHandler = new ChannelHandler();
         }
         public string RetrieveUser(int userId)
         {
@@ -33,6 +43,11 @@ namespace CheckIn.Web.BusinessImpl
 
         public int AddUser(UserModel user)
         {
+            var exsitingUserId = this.userHandler.CheckUserExists(user.Email);
+            if (exsitingUserId != 0)
+            {
+                return exsitingUserId;
+            }
             var userEntity = new User
                                  {
                                      Email = user.Email,
@@ -41,10 +56,24 @@ namespace CheckIn.Web.BusinessImpl
                                      ProfilePhoteUrl = user.ProfilePhotoUrl,
                                      UserPhoto = user.UserPhoto,
                                      FirstName = user.FirstName,
-                                     LastName = user.LastName
-                                 };
-
-            return this.userHandler.AddUser(userEntity);
+                                     LastName = user.LastName,
+                                     EmailUserName = user.Email.Split('@')[0]
+            };
+            var userId = this.userHandler.AddUser(userEntity);
+            if (userId > 0)
+            {
+                var userEmailChannelList = this.userEmailChannelHandler.RetrieveUserEmailChannelOnUserEmail(user.Email.Split('@')[0]);
+                if (userEmailChannelList != null)
+                {
+                    foreach (var userEmailChannel in userEmailChannelList)
+                    {
+                        var channel = this.channelHandler.RetrieveChannel(userEmailChannel.ChannelId);
+                        this.userChannelMapHelper.AddUserChannelMap(userEntity, channel);
+                        this.userEmailChannelHandler.DeleteUserEmailChannel(userEmailChannel);
+                    }
+                }
+            }
+            return userId;
         }
 
         public string RetrieveAllUsers()
@@ -61,6 +90,13 @@ namespace CheckIn.Web.BusinessImpl
         {
             var user = this.userHandler.RetrieveUser(updateUserRegistrationModel.CheckInServerUserId);
             user.RegistrationId = updateUserRegistrationModel.RegistrationId;
+            this.userHandler.UpdateUser(user);
+        }
+
+        public void UpdateUserPhoneNumber(AddPhoneNumberModel addPhoneNumberModel)
+        {
+            var user = this.userHandler.RetrieveUser(addPhoneNumberModel.CheckInServerUserId);
+            user.PhoneNumber = addPhoneNumberModel.PhoneNumber;
             this.userHandler.UpdateUser(user);
         }
     }

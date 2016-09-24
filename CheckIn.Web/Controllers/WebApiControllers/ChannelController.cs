@@ -17,34 +17,39 @@ namespace CheckIn.Web.Controllers.WebApiControllers
 
     public class ChannelController : ApiController
     {
-        private readonly IUserChannelMapBusiness channelBusiness;
+        private readonly IChannelBusiness channelBusiness;
 
         public ChannelController()
         {
-            this.channelBusiness = new UserChannelMapBusiness();
+            this.channelBusiness = new ChannelBusiness();
         }
 
-        //[HttpPost]
-        //[Route("AddChannel")]
-        //public async Task<string> AddChannel()
-        //{
-        //    try
-        //    {
-        //        var stream = await this.Request.Content.ReadAsStringAsync();
-        //        var user = JsonConvert.DeserializeObject<UserModel>(stream);
+        [HttpPost]
+        [Route("AddChannel")]
+        public async Task<string> AddChannel()
+        {
+            try
+            {
+                Status status;
+                var stream = await this.Request.Content.ReadAsStringAsync();
+                var channel = JsonConvert.DeserializeObject<ChannelModel>(stream);
 
-        //        var userId = this.channelBusiness.AddUser(user).ToString();
+                var channelId = this.channelBusiness.AddChannel(channel).ToString();
 
-        //        var data = new Data() { JsonDataResponse = JsonConvert.SerializeObject(userId) };
-        //        var status = new Status() { Code = 0, Message = "Added User" };
-        //        return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                if (channelId.Equals("0"))
+                {
+                    status = new Status() { Code = 1, Message = "Failed to add channel" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+                }
+                status = new Status() { Code = 0, Message = "Added Channel" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Data = new AddChannelResponse() {ChannelId = channelId}, Status = status });
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var status = new Status() { Code = 1, Message = ex.Message };
-        //        return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+            }
+        }
     }
 }

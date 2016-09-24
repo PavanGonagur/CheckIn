@@ -8,6 +8,6 @@ namespace CheckIn.Web.Models
     public class ResponseMessage
     {
         public Status Status { get; set; }
-        public Data Data { get; set; }
+        public object Data { get; set; }
     }
 }

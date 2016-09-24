@@ -12,6 +12,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
     using CheckIn.Web.Common;
+    using CheckIn.Web.Helpers;
     using CheckIn.Web.Models;
     using CheckIn.Web.Utilities;
 
@@ -25,20 +26,33 @@ namespace CheckIn.Web.BusinessImpl
 
         private readonly IUserEmailChannelHandler userEmailChannelHandler;
 
+        private readonly IUserChannelMapHelper userChannelMapHelper;
+
         public UserChannelMapBusiness()
         {
             this.userChannelMapHandler = new UserChannelMapHandler();
             this.channelHandler = new ChannelHandler();
             this.userHandler = new UserHandler();
             this.userEmailChannelHandler = new UserEmailChannelHandler();
+            this.userChannelMapHelper = new UserChannelMapHelper();
         }
-        public Channel RegisterToChannel(string otp)
+        public RegisterToChannelResponseModel RegisterToChannel(string otp)
         {
             var hashedOtp = HashUtility.GetHash(otp);
             var userMapChannel = this.userChannelMapHandler.RegisterToChannel(hashedOtp);
             if (userMapChannel != null)
             {
-                return this.channelHandler.RetrieveChannel(userMapChannel.ChannelId);
+                var channel = this.channelHandler.RetrieveChannel(userMapChannel.ChannelId);
+                var registerToChannel = new RegisterToChannelResponseModel()
+                                            {
+                                               Name = channel.Name,
+                                               ChannelId = channel.ChannelId,
+                                               IsLocationBased = channel.IsLocationBased,
+                                               IsPublic = channel.IsPublic,
+                                               Latitude = channel.Latitude,
+                                               Longitude = channel.Longitude
+                                            };
+                return registerToChannel;
             }
             return null;
         }
@@ -46,17 +60,13 @@ namespace CheckIn.Web.BusinessImpl
         public void AddUserChannelMap(UserChannelMapModel userChannelMapModel)
         {
             var unRegisteredEmails = new List<string>();
+            var channel = this.channelHandler.RetrieveChannel(userChannelMapModel.ChannelId);
             foreach (var email in userChannelMapModel.Emails)
             {
                 var user = this.userHandler.RetrieveUserOnEmail(email);
                 if (user != null)
                 {
-                    var userChannelEntity = new UserChannelMap()
-                    {
-                        UserId = user.UserId,
-                        ChannelId = userChannelMapModel.ChannelId
-                    };
-                    this.userChannelMapHandler.AddUserChannelMap(userChannelEntity);
+                    this.userChannelMapHelper.AddUserChannelMap(user, channel);
                 }
                 else
                 {
@@ -70,19 +80,17 @@ namespace CheckIn.Web.BusinessImpl
                     this.userEmailChannelHandler.AddUserEmailChannel(userEmailEntity);
                 }
             }
-            Parallel.ForEach(unRegisteredEmails, x => this.SendMail(x, userChannelMapModel.ChannelId));
+            Parallel.ForEach(unRegisteredEmails, x => this.userChannelMapHelper.SendMail(channel,x, Constants.UserRegisterBody, Constants.UserRegisterSubject));
         }
 
-        private void SendMail(string email,int channelId)
+        public void ResendOtp(ResendOtpModel resendOtpModel)
         {
-            var channel = this.channelHandler.RetrieveChannel(channelId);
-            EmailGateway.SendMail(
-                new EmailModel()
-                    {
-                        To = email,
-                        Subject = string.Format(Constants.UserRegisterSubject, channel.Name),
-                        Body = string.Format(Constants.UserRegisterBody, channel.Name)
-                    });
+            var user = this.userHandler.RetrieveUser(resendOtpModel.CheckInServerUserId);
+            var channel = this.channelHandler.RetrieveChannel(resendOtpModel.ChannelId);
+            if (user != null && channel != null)
+            {
+                this.userChannelMapHelper.AddUserChannelMap(user,channel);
+            }
         }
     }
 }

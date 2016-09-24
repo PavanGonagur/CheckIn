@@ -20,8 +20,7 @@ namespace CheckIn.Web.Utilities
                     int temp = objrandom.Next(0, 9);
                     otp += temp;
                 }
-                var hashedOtp = HashUtility.GetHash(otp);
-                return hashedOtp;
+                return otp;
             }
             catch (Exception ex)
             {

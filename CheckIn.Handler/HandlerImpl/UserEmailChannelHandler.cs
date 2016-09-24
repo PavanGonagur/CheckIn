@@ -16,18 +16,26 @@ namespace CheckIn.Handler.HandlerImpl
         {
             this.checkInDb = new CheckInDb();
         }
-        public int AddUserEmailChannel(UserEmailChannel userEmailChannel)
+        public void AddUserEmailChannel(UserEmailChannel userEmailChannel)
         {
             this.checkInDb.UserEmailChannels.Add(userEmailChannel);
             this.checkInDb.SaveChanges();
-            var query = from r in this.checkInDb.UserEmailChannels
-                        orderby r descending
-                        select r;
+        }
+
+        public List<UserEmailChannel> RetrieveUserEmailChannelOnUserEmail(string userEmail)
+        {
+            var query  = this.checkInDb.UserEmailChannels.Where(x => x.EmailUserName.Equals(userEmail));
             if (query.Any())
             {
-                return query.First().UserEmailChannelId;
+                return query.ToList();
             }
-            return 0;
+            return null;
+        }
+
+        public void DeleteUserEmailChannel(UserEmailChannel userEmail)
+        {
+            this.checkInDb.UserEmailChannels.Remove(userEmail);
+            this.checkInDb.SaveChanges();
         }
     }
 }

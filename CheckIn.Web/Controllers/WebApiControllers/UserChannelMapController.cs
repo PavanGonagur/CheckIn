@@ -35,9 +35,8 @@ namespace CheckIn.Web.Controllers.WebApiControllers
                 var channel = this.channelBusiness.RegisterToChannel(registerToChannel.OTP);
                 if (channel != null)
                 {
-                    var data = new Data() { JsonDataResponse = JsonConvert.SerializeObject(channel) };
                     status = new Status() { Code = 0, Message = "Authentication successful, Got Channel details" };
-                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Data = channel, Status = status });
                 }
                 status = new Status() { Code = 1, Message = "Authentication failed" };
                 return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
@@ -58,14 +57,29 @@ namespace CheckIn.Web.Controllers.WebApiControllers
                 var stream = await this.Request.Content.ReadAsStringAsync();
                 var userChannelMapModel = JsonConvert.DeserializeObject<UserChannelMapModel>(stream);
                 Status status;
-                //var channel = this.channelBusiness.RegisterToChannel(userChannelMapModel);
-                //if (channel != null)
-                //{
-                //    var data = new Data() { JsonDataResponse = JsonConvert.SerializeObject(channel) };
-                //    status = new Status() { Code = 0, Message = "Authentication successful, Got Channel details" };
-                //    return JsonConvert.SerializeObject(new ResponseMessage() { Data = data, Status = status });
-                //}
-                status = new Status() { Code = 1, Message = "Authentication failed" };
+                this.channelBusiness.AddUserChannelMap(userChannelMapModel);
+                status = new Status() { Code = 0, Message = "Users Added" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+            }
+            catch (Exception ex)
+            {
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+            }
+        }
+
+        [HttpPost]
+        [Route("ResendOtp")]
+
+        public async Task<string> ResendOtp()
+        {
+            try
+            {
+                var stream = await this.Request.Content.ReadAsStringAsync();
+                var userChannelMapModel = JsonConvert.DeserializeObject<ResendOtpModel>(stream);
+                Status status;
+                this.channelBusiness.ResendOtp(userChannelMapModel);
+                status = new Status() { Code = 0, Message = "Resend Otp successful" };
                 return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
             }
             catch (Exception ex)

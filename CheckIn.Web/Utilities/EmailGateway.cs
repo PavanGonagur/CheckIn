@@ -19,9 +19,9 @@ namespace CheckIn.Web.Utilities
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
                 mail.From = new MailAddress("raybackclinton@gmail.com");
-                mail.To.Add("nikhiljere2@gmail.com");
-                mail.Subject = "Test Mail";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
+                mail.To.Add(emailModel.To);
+                mail.Subject = emailModel.Subject;
+                mail.Body = emailModel.Body;
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("raybackclinton@gmail.com", "wwerayback1");

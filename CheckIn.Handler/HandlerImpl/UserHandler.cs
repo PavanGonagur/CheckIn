@@ -32,6 +32,16 @@ namespace CheckIn.Handler.HandlerImpl
             return 0;
         }
 
+        public int CheckUserExists(string email)
+        {
+            var query = this.checkInDb.Users.Where(x => x.Email.Equals(email));
+            if (query.Any())
+            {
+                return query.First().UserId;
+            }
+            return 0;
+        }
+
         public User RetrieveUser(int userId)
         {
             var query = this.checkInDb.Users.Where(x => x.UserId == userId);

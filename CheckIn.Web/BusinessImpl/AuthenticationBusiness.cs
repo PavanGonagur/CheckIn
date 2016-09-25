@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CheckIn.Data.Entities;
 
-namespace CheckIn.Web.Utilities
+namespace CheckIn.Web.BusinessImpl
 {
-    using CheckIn.Data.Entities;
     using CheckIn.Web.Business;
-    using CheckIn.Web.BusinessImpl;
+    using CheckIn.Web.Models;
+    using CheckIn.Web.Utilities;
 
-    public class AuthenticationUtility
+    public class AuthenticationBusiness:IAuthenticationBusiness
     {
         private IAdminBusiness adminBusiness;
-        public AuthenticationUtility()
+        public AuthenticationBusiness()
         {
             this.adminBusiness = new AdminBusiness();
         }
-        public bool CheckPasswordHashMatches(string password, string email)
+        public bool CheckPasswordHashMatches(AuthenticateAdminModel authenticateAdminModel)
         {
             try
             {
-                var admin = this.adminBusiness.RetrieveAdminOnEmail(email);
-                var hash = HashUtility.GetHash(password);
+                var admin = this.adminBusiness.RetrieveAdminOnEmail(authenticateAdminModel.Email);
+                var hash = HashUtility.GetHash(authenticateAdminModel.Password);
                 return admin.Password.Equals(hash);
             }
             catch (Exception ex)

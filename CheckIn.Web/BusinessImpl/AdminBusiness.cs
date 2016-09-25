@@ -10,6 +10,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
     using CheckIn.Web.Models;
+    using CheckIn.Web.Utilities;
 
     using Newtonsoft.Json;
 
@@ -21,10 +22,11 @@ namespace CheckIn.Web.BusinessImpl
         {
             this.adminHandler = new AdminHandler();
         }
-        public string RetrieveAdmin(int id)
+        public Admin RetrieveAdmin(int id)
         {
             var admin = this.adminHandler.RetrieveAdmin(id);
-            return JsonConvert.SerializeObject(admin);
+            
+            return admin;
         }
 
         public int AddAdmin(AdminModel admin)
@@ -34,7 +36,8 @@ namespace CheckIn.Web.BusinessImpl
                 Email = admin.Email,
                 Name = admin.Name,
                 PhoneNumber = admin.PhoneNumber,
-                ProfilePhoteUrl = admin.ProfilePhoteUrl
+                ProfilePhoteUrl = admin.ProfilePhoteUrl,
+                Password = HashUtility.GetHash(admin.Password)
             };
 
             return this.adminHandler.AddAdmin(userEntity);
@@ -43,6 +46,16 @@ namespace CheckIn.Web.BusinessImpl
         public Admin RetrieveAdminOnEmail(string email)
         {
             return this.adminHandler.RetrieveAdminOnEmail(email);
+        }
+
+        public string RetrieveAllAdmins()
+        {
+            var admins = this.adminHandler.RetrieveAllAdmins();
+            if (admins != null)
+            {
+                return JsonConvert.SerializeObject(admins);
+            }
+            return null;
         }
     }
 }

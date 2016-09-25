@@ -11,10 +11,12 @@ namespace CheckIn.Web.Business
 
     public interface IAdminBusiness
     {
-        string RetrieveAdmin(int userId);
+        Admin RetrieveAdmin(int userId);
 
         int AddAdmin(AdminModel user);
 
         Admin RetrieveAdminOnEmail(string email);
+
+        string RetrieveAllAdmins();
     }
 }

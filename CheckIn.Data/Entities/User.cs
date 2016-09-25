@@ -22,6 +22,12 @@ namespace CheckIn.Data.Entities
 
         public string RegistrationId { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string UserPhoto { get; set; }
+
         public virtual ICollection<UserChannelMap> UserChannelMaps { get; set; }
 
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }

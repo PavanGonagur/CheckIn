@@ -208,10 +208,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BusinessImpl\AuthenticationBusiness.cs" />
+    <Compile Include="BusinessImpl\ChannelBusiness.cs" />
+    <Compile Include="BusinessImpl\UserChannelMapBusiness.cs" />
     <Compile Include="BusinessImpl\AdminBusiness.cs" />
     <Compile Include="BusinessImpl\UserBusiness.cs" />
     <Compile Include="Business\IAdminBusiness.cs" />
+    <Compile Include="Business\IChannelBusiness.cs" />
     <Compile Include="Business\IUserBusiness.cs" />
+    <Compile Include="Business\IAuthenticationBusiness.cs" />
+    <Compile Include="Business\IUserChannelMapBusiness.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\ResponseCodes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,17 +227,34 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WebApiControllers\AdminController.cs" />
     <Compile Include="Controllers\WebApiControllers\UserController.cs" />
+    <Compile Include="Controllers\WebApiControllers\ChannelController.cs" />
+    <Compile Include="Controllers\WebApiControllers\UserChannelMapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IUserChannelMapHelper.cs" />
+    <Compile Include="Helpers\UserChannelMapHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddAdminResponse.cs" />
+    <Compile Include="Models\AddChannelResponse.cs" />
+    <Compile Include="Models\AddPhoneNumberModel.cs" />
+    <Compile Include="Models\AddUserResponse.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Admin\AdminListModel.cs" />
     <Compile Include="Models\AuthenticateAdminModel.cs" />
+    <Compile Include="Models\ChannelModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterToChannelResponseModel.cs" />
+    <Compile Include="Models\ResendOtpModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\RegisterToChannelModel.cs" />
+    <Compile Include="Models\ResponseMessage.cs" />
+    <Compile Include="Models\UserChannelMapModel.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\UpdateUserRegistrationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AuthenticationFilter.cs" />
@@ -241,6 +266,7 @@
     <Compile Include="Utilities\JsonUtility.cs" />
     <Compile Include="Utilities\SessionUtility.cs" />
     <Compile Include="Utilities\SMSGateway.cs" />
+    <Compile Include="Utilities\OTPUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

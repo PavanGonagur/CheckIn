@@ -9,22 +9,33 @@ namespace CheckIn.Web.Models
 
     public class UserModel
     {
-        [JsonProperty("userId")]
-        public int UserId { get; set; }
-        [JsonProperty("name")]
+        //CheckInServerUserId from CheckIn Server
+        [JsonProperty("CheckInServerUserId")]
+        public int CheckInServerUserId { get; set; }
+
+        [JsonProperty("UserName")]
         public string Name { get; set; }
 
-        [JsonProperty("profilePhotoUrl")]
+        [JsonProperty("RemotePhotoServerURL")]
         public string ProfilePhotoUrl { get; set; }
 
-        [JsonProperty("phoneNumber")]
+        [JsonProperty("PhoneNumber")]
         public string PhoneNumber { get; set; }
 
-        [JsonProperty("email")]
+        [JsonProperty("UserEmail")]
         public string Email { get; set; }
 
-        [JsonProperty("registrationId")]
-        public string RegistrationId { get; set; }
+        //UserID from google
+        //[JsonProperty("UserID")]
+        //public string UserID { get; set; }
 
+        [JsonProperty("UserPhoto")]
+        public string UserPhoto { get; set; }
+
+        [JsonProperty("LastName")]
+        public string LastName { get; set; }
+
+        [JsonProperty("FirstName")]
+        public string FirstName { get; set; }
     }
 }

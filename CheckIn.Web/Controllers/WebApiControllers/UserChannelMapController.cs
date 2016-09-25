@@ -32,7 +32,7 @@ namespace CheckIn.Web.Controllers.WebApiControllers
                 var stream = await this.Request.Content.ReadAsStringAsync();
                 var registerToChannel = JsonConvert.DeserializeObject<RegisterToChannelModel>(stream);
                 Status status;
-                var channel = this.channelBusiness.RegisterToChannel(registerToChannel.OTP);
+                var channel = this.channelBusiness.RegisterToChannel(registerToChannel);
                 if (channel != null)
                 {
                     status = new Status() { Code = 0, Message = "Authentication successful, Got Channel details" };

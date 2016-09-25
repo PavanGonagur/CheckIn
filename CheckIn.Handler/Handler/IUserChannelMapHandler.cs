@@ -10,10 +10,11 @@ namespace CheckIn.Handler.Handler
 
     public interface IUserChannelMapHandler
     {
-        UserChannelMap RegisterToChannel(string otp);
+        UserChannelMap RegisterToChannel(UserChannelMap userChannelMap);
 
         void AddUserChannelMap(UserChannelMap userChannelMap);
-        
+
+
         UserChannelMap RetrieveUserChannelMapOnUserChannel(int userId, int channelId);
     }
 }

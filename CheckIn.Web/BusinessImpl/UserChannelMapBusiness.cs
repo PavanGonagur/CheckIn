@@ -36,10 +36,15 @@ namespace CheckIn.Web.BusinessImpl
             this.userEmailChannelHandler = new UserEmailChannelHandler();
             this.userChannelMapHelper = new UserChannelMapHelper();
         }
-        public RegisterToChannelResponseModel RegisterToChannel(string otp)
+        public RegisterToChannelResponseModel RegisterToChannel(RegisterToChannelModel registerToChannelModel)
         {
-            var hashedOtp = HashUtility.GetHash(otp);
-            var userMapChannel = this.userChannelMapHandler.RegisterToChannel(hashedOtp);
+            var hashedOtp = HashUtility.GetHash(registerToChannelModel.OTP);
+            var userChannelMap = new UserChannelMap()
+                                                {
+                                                    UserId = registerToChannelModel.CheckInServerUserId,
+                                                    Otp = hashedOtp
+                                                };
+            var userMapChannel = this.userChannelMapHandler.RegisterToChannel(userChannelMap);
             if (userMapChannel != null)
             {
                 var channel = this.channelHandler.RetrieveChannel(userMapChannel.ChannelId);

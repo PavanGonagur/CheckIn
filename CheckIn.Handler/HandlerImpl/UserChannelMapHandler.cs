@@ -20,14 +20,18 @@ namespace CheckIn.Handler.HandlerImpl
         {
             this.checkInDb = new CheckInDb();
         }
-        public UserChannelMap RegisterToChannel(string otp)
+        public UserChannelMap RegisterToChannel(UserChannelMap userChannelMap)
         {
-            var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == otp);
+            var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == userChannelMap.Otp && x.UserId == userChannelMap.UserId);
             if (query.Any())
             {
                 var currentChannel = query.FirstOrDefault();
                 if (currentChannel != null)
                 {
+                    //Once otp authentication is successful set otp to null
+                    userChannelMap.ChannelId = currentChannel.ChannelId;
+                    userChannelMap.Otp = null;
+                    this.AddUserChannelMap(userChannelMap);
                     return currentChannel;
                 }
             }

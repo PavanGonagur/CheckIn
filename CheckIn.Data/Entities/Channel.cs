@@ -29,5 +29,13 @@ namespace CheckIn.Data.Entities
         public virtual ICollection<ChatRoom> ChatRooms { get; set; }
 
         public virtual ICollection<Profile> Profiles { get; set; }
+
+        public virtual ICollection<WebClip> WebClips { get; set; }
+
+        public virtual ICollection<Application> Applications { get; set; }
+
+        public virtual ICollection<Location> Locations { get; set; }
+
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 }

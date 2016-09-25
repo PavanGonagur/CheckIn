@@ -37,6 +37,14 @@ namespace CheckIn.Data
 
         public DbSet<ProfileKeyValue> ProfileKeyValues { get; set; }
 
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Application> Applications { get; set; }
+
+        public DbSet<WebClip> WebClips { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

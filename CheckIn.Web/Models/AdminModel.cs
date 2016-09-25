@@ -12,6 +12,10 @@ namespace CheckIn.Web.Models
         [JsonProperty("adminId")]
         public int AdminId { get; set; }
 
+        public int Channels { get; set; }
+
+        public bool IsSuperAdmin { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 

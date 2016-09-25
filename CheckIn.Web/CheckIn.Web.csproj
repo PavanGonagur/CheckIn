@@ -210,11 +210,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessImpl\AuthenticationBusiness.cs" />
     <Compile Include="BusinessImpl\ChannelBusiness.cs" />
+    <Compile Include="BusinessImpl\ChatBusiness.cs" />
     <Compile Include="BusinessImpl\UserChannelMapBusiness.cs" />
     <Compile Include="BusinessImpl\AdminBusiness.cs" />
     <Compile Include="BusinessImpl\UserBusiness.cs" />
     <Compile Include="Business\IAdminBusiness.cs" />
     <Compile Include="Business\IChannelBusiness.cs" />
+    <Compile Include="Business\IChatBusiness.cs" />
     <Compile Include="Business\IUserBusiness.cs" />
     <Compile Include="Business\IAuthenticationBusiness.cs" />
     <Compile Include="Business\IUserChannelMapBusiness.cs" />

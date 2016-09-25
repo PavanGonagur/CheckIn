@@ -83,6 +83,7 @@ textarea {
   padding: 0 15px;
   min-height: 800px;
   background-color: white;
+    margin-top: 0px;
 }
 @media (min-width: 768px) {
   #page-wrapper {

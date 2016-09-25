@@ -1,0 +1,55 @@
+﻿@model CheckIn.Web.Models.Admin.AdminListModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<br/>
+<p>
+    @Html.ActionLink("Add", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.FirstOrDefault().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.FirstOrDefault().PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.FirstOrDefault().Channels)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Admins.FirstOrDefault().IsSuperAdmin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Admins) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Channels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSuperAdmin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id = item.AdminId  }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AdminId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AdminId })
+        </td>
+    </tr>
+}
+
+</table>

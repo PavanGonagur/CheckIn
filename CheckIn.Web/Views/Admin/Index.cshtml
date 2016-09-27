@@ -5,7 +5,7 @@
 }
 <br/>
 <p>
-    @Html.ActionLink("Add", "Create")
+    @Html.ActionLink("Add", "Create", "Admin", null, new { @class = "modal-link btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -45,9 +45,9 @@
             @Html.DisplayFor(modelItem => item.IsSuperAdmin)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id = item.AdminId  }) |
-            @Html.ActionLink("Details", "Details", new { id = item.AdminId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AdminId })
+            @Html.ActionLink("Edit", "Edit", "Admin", new { id = item.AdminId }, new { @class = "modal-link btn btn-warning" }) |
+            @Html.ActionLink("Channels", "Channels", "Admin", new { id = item.AdminId }, new { @class = "modal-link btn btn-success" }) |
+            @Html.ActionLink("Delete", "Delete", "Admin", new { id = item.AdminId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CheckIn.Web.Business;
+using CheckIn.Web.BusinessImpl;
 using CheckIn.Web.Models;
 using CheckIn.Web.Models.Admin;
 using CheckIn.Web.Utilities;
@@ -12,6 +14,16 @@ namespace CheckIn.Web.Controllers
     [AuthenticationFilter]
     public class AdminController : Controller
     {
+        private readonly IAdminBusiness adminBusiness;
+
+        private readonly IAuthenticationBusiness authenticationBusiness;
+
+        public AdminController()
+        {
+            this.adminBusiness = new AdminBusiness();
+            this.authenticationBusiness = new AuthenticationBusiness();
+        }
+ 
         // GET: Admin
         public ActionResult Index()
         {
@@ -20,24 +32,30 @@ namespace CheckIn.Web.Controllers
         }
 
         // GET: Admin/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Channels(int id)
         {
-            return View();
+            return PartialView("_AdminChannels", new AdminChannelModel());
         }
 
         // GET: Admin/Create
         public ActionResult Create()
         {
-            return View("_Create", new AdminModel());
+            return PartialView("_Create", new AdminModel());
         }
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(AdminModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                var errorMessage = model.Validate();
+                if (errorMessage != null)
+                {
+                    ModelState.AddModelError("", errorMessage);
+                }
+
+                var id = adminBusiness.Save(model);
 
                 return RedirectToAction("Index");
             }
@@ -50,16 +68,23 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new AdminModel().ToModel(adminBusiness.RetrieveAdmin(id));
+            return PartialView("_Create", model);
         }
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(AdminModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                var errorMessage = model.Validate();
+                if (errorMessage != null)
+                {
+                    ModelState.AddModelError("", errorMessage);
+                }
+
+                var id = adminBusiness.Save(model);
 
                 return RedirectToAction("Index");
             }

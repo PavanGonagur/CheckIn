@@ -263,7 +263,6 @@
     <Compile Include="Models\Channel\WebClipModel.cs" />
     <Compile Include="Models\Chat\FcmPayload.cs" />
     <Compile Include="Models\Channel\ChannelCardModel.cs" />
-    <Compile Include="Models\Channel\ChannelListModel.cs" />
     <Compile Include="Models\Channel\ChannelUser.cs" />
     <Compile Include="Models\Channel\ChannelUserModel.cs" />
     <Compile Include="Models\Channel\ChannelViewModel.cs" />

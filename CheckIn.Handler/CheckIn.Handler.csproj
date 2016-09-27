@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomEntities\CustomUserEntity.cs" />
+    <Compile Include="HandlerImpl\AdminChannelMapHandler.cs" />
     <Compile Include="HandlerImpl\AdminHandler.cs" />
     <Compile Include="HandlerImpl\ApplicationHandler.cs" />
     <Compile Include="HandlerImpl\ChannelHandler.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="HandlerImpl\UserChannelMapHandler.cs" />
     <Compile Include="HandlerImpl\UserEmailChannelHandler.cs" />
     <Compile Include="HandlerImpl\UserHandler.cs" />
+    <Compile Include="Handler\IAdminChannelMapHandler.cs" />
     <Compile Include="Handler\IAdminHandler.cs" />
     <Compile Include="Handler\IApplicationHandler.cs" />
     <Compile Include="Handler\IChannelHandler.cs" />

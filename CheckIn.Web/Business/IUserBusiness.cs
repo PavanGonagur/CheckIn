@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Web.Models;
+    using CheckIn.Web.Models.User;
 
     public interface IUserBusiness
     {
@@ -19,5 +20,7 @@ namespace CheckIn.Web.Business
         void UpdateUserRegistrationId(UpdateUserRegistrationModel updateUserRegistrationModel);
 
         void UpdateUserPhoneNumber(AddPhoneNumberModel addPhoneNumberModel);
+
+        List<CustomUserModel> RetrieveUsersByChannel(int channelId);
     }
 }

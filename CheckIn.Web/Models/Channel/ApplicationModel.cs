@@ -15,6 +15,11 @@ namespace CheckIn.Web.Models.Channel
 
         public string ApplicationUrl { get; set; }
 
+        public ApplicationModel()
+        {
+            
+        }
+
         public ApplicationModel(Application application)
         {
             this.ApplicationId = application.ApplicationId;

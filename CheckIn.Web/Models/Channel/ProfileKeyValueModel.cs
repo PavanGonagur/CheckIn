@@ -13,6 +13,11 @@ namespace CheckIn.Web.Models.Channel
 
         public string Value { get; set; }
 
+        public ProfileKeyValueModel()
+        {
+            
+        }
+
         public ProfileKeyValueModel(ProfileKeyValue profileKeyValue)
         {
             this.Key = profileKeyValue.Key;

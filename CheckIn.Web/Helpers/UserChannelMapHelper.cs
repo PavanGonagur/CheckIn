@@ -20,19 +20,20 @@ namespace CheckIn.Web.Helpers
         {
             this.userChannelMapHandler = new UserChannelMapHandler();
         }
-        public void AddUserChannelMap(User user, Channel channel)
+        public void AddUserChannelMap(User user, Channel channel,string emailId)
         {
             var otp = OTPUtility.GenerateOTP();
             var userChannelEntity = new UserChannelMap()
             {
                 UserId = user.UserId,
                 ChannelId = channel.ChannelId,
-                Otp = HashUtility.GetHash(otp)
+                Otp = HashUtility.GetHash(otp),
+                EmailId = emailId
             };
             this.userChannelMapHandler.AddUserChannelMap(userChannelEntity);
             if (channel.IsLocationBased && !channel.IsPublic)
             {
-                this.SendMail(channel, user.Email, Constants.PrivateChannelBody, Constants.PrivateChannelSubject);
+                this.SendMail(channel, user.Email, Constants.PrivateChannelBody, Constants.PrivateChannelSubject,otp);
             }
             else if (!channel.IsPublic && !channel.IsLocationBased)
             {

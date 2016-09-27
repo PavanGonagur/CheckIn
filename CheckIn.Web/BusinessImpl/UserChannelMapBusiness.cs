@@ -45,7 +45,8 @@ namespace CheckIn.Web.BusinessImpl
             var userChannelMap = new UserChannelMap()
                                                 {
                                                     UserId = registerToChannelModel.Otp.CheckInServerUserId,
-                                                    Otp = hashedOtp
+                                                    Otp = hashedOtp,
+                                                    ChannelId = registerToChannelModel.Otp.ChannelId
                                                 };
             var userMapChannel = this.userChannelMapHandler.RegisterToChannel(userChannelMap);
             if (userMapChannel != null)
@@ -86,10 +87,11 @@ namespace CheckIn.Web.BusinessImpl
             var channel = this.channelHandler.RetrieveChannel(userChannelMapModel.ChannelId);
             foreach (var email in userChannelMapModel.Emails)
             {
-                var user = this.userHandler.RetrieveUserOnEmail(email);
+                var emailUserName = EmailUtility.GetFormattedEmailUserName(email.Split('@')[0]);
+                var user = this.userHandler.RetrieveUserOnEmailUserName(emailUserName);
                 if (user != null)
                 {
-                    this.userChannelMapHelper.AddUserChannelMap(user, channel);
+                    this.userChannelMapHelper.AddUserChannelMap(user, channel,email);
                 }
                 else
                 {
@@ -98,8 +100,8 @@ namespace CheckIn.Web.BusinessImpl
                                               {
                                                   ChannelId = userChannelMapModel.ChannelId,
                                                   Email = email,
-                                                  EmailUserName = email.Split('@')[0]
-                                              };
+                                                  EmailUserName = emailUserName
+                    };
                     this.userEmailChannelHandler.AddUserEmailChannel(userEmailEntity);
                 }
             }
@@ -110,9 +112,14 @@ namespace CheckIn.Web.BusinessImpl
         {
             var user = this.userHandler.RetrieveUser(resendOtpModel.CheckInServerUserId);
             var channel = this.channelHandler.RetrieveChannel(resendOtpModel.ChannelId);
+            
             if (user != null && channel != null)
             {
-                this.userChannelMapHelper.AddUserChannelMap(user,channel);
+                var userChannelMap =
+                this.userChannelMapHandler.RetrieveUserChannelMapOnUserChannel(
+                    resendOtpModel.CheckInServerUserId,
+                    resendOtpModel.ChannelId);
+                this.userChannelMapHelper.AddUserChannelMap(user,channel, userChannelMap.EmailId);
             }
         }
     }

@@ -17,6 +17,11 @@ namespace CheckIn.Web.Models.Channel
 
         public float Longitude { get; set; }
 
+        public LocationModel()
+        {
+            
+        }
+
         public LocationModel(Location location)
         {
             this.Longitude = location.Longitude;

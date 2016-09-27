@@ -11,6 +11,8 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Web.Business;
     using CheckIn.Web.Helpers;
     using CheckIn.Web.Models;
+    using CheckIn.Web.Models.User;
+    using CheckIn.Web.Utilities;
 
     using Newtonsoft.Json;
 
@@ -57,7 +59,7 @@ namespace CheckIn.Web.BusinessImpl
                                      UserPhoto = user.UserPhoto,
                                      FirstName = user.FirstName,
                                      LastName = user.LastName,
-                                     EmailUserName = user.Email.Split('@')[0]
+                                     EmailUserName = EmailUtility.GetFormattedEmailUserName(user.Email.Split('@')[0])
             };
             var userId = this.userHandler.AddUser(userEntity);
             if (userId > 0)
@@ -68,7 +70,7 @@ namespace CheckIn.Web.BusinessImpl
                     foreach (var userEmailChannel in userEmailChannelList)
                     {
                         var channel = this.channelHandler.RetrieveChannel(userEmailChannel.ChannelId);
-                        this.userChannelMapHelper.AddUserChannelMap(userEntity, channel);
+                        this.userChannelMapHelper.AddUserChannelMap(userEntity, channel,userEmailChannel.Email);
                         this.userEmailChannelHandler.DeleteUserEmailChannel(userEmailChannel);
                     }
                 }
@@ -98,6 +100,17 @@ namespace CheckIn.Web.BusinessImpl
             var user = this.userHandler.RetrieveUser(addPhoneNumberModel.CheckInServerUserId);
             user.PhoneNumber = addPhoneNumberModel.PhoneNumber;
             this.userHandler.UpdateUser(user);
+        }
+
+        public List<CustomUserModel> RetrieveUsersByChannel(int channelId)
+        {
+            var users = this.userHandler.RetrieveUsersByChannel(channelId);
+            if (users != null)
+            {
+                var customUsers = users.Select(x => new CustomUserModel(x)).ToList();
+                return customUsers;
+            }
+            return new List<CustomUserModel>();
         }
     }
 }

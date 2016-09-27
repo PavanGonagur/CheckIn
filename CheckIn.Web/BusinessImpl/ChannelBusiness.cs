@@ -37,12 +37,41 @@ namespace CheckIn.Web.BusinessImpl
         public ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
         {
             var channels = this.channelHandler.RetrieveChannelsByLocationAndUser(latitude, longitude, userId);
-            if (channels != null)
+            if (channels != null && channels.Count > 0)
             {
                 return new ChannelListModel()
                 {
                     Channels = channels.Select(x => new ChannelModelResponse(x)).ToList()
                 };
+            }
+            return null;
+        }
+
+
+        public ChannelListModel RetrieveChannelsByAdmin(int adminId)
+        {
+            var channels = this.channelHandler.RetrieveChannelsOnAdmin(adminId);
+            if (channels != null)
+            {
+                ChannelListModel channelListModel = new ChannelListModel()
+                                                        {
+                                                            Channels =
+                                                                channels.Select(
+                                                                    x => new ChannelModelResponse(x))
+                                                                .ToList()
+                                                        };
+                return channelListModel;
+            }
+            return new ChannelListModel();
+        }
+
+        public ChannelModel GetChannelOnText(string searchText)
+        {
+            var channel = this.channelHandler.GetChannelOnText(searchText);
+            if (channel != null)
+            {
+                var channelModel = new ChannelModel(channel);
+                return channelModel;
             }
             return null;
         }

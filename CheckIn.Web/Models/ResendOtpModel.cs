@@ -9,7 +9,7 @@ namespace CheckIn.Web.Models
 
     public class ResendOtpModel
     {
-        [JsonProperty("CheckInServerUserId")]
+        [JsonProperty("UserId")]
         public int CheckInServerUserId { get; set; }
 
         [JsonProperty("ChannelId")]

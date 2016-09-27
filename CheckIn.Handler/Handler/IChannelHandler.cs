@@ -23,6 +23,10 @@ namespace CheckIn.Handler.Handler
 
         User RetrieveUserOnEmail(string email);
 
+        List<Channel> RetrieveChannelsOnAdmin(int adminId);
+
+        Channel GetChannelOnText(string searchText);
+
         List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);
     }
 }

@@ -19,6 +19,11 @@ namespace CheckIn.Web.Models.Channel
 
         public bool OpenInBrowser { get; set; }
 
+        public WebClipModel()
+        {
+            
+        }
+
         public WebClipModel(WebClip webClip)
         {
             this.WebClipId = webClip.WebClipId;

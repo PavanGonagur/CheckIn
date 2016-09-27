@@ -9,7 +9,7 @@ namespace CheckIn.Web.Helpers
 
     public interface IUserChannelMapHelper
     {
-        void AddUserChannelMap(User user, Channel channel);
+        void AddUserChannelMap(User user, Channel channel,string email);
 
         void SendMail(Channel channel, string email, string body, string subject, string otp = null);
     }

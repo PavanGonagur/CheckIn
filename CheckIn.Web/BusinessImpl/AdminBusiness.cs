@@ -43,6 +43,17 @@ namespace CheckIn.Web.BusinessImpl
             return this.adminHandler.AddAdmin(userEntity);
         }
 
+        public int Save(AdminModel model)
+        {
+            var adminEntity = model.ToEntity();
+            if (model.AdminId > 0)
+            {
+                this.adminHandler.UpdateAdmin(adminEntity);
+                return model.AdminId;
+            }
+            return this.adminHandler.AddAdmin(adminEntity);
+        }
+
         public Admin RetrieveAdminOnEmail(string email)
         {
             return this.adminHandler.RetrieveAdminOnEmail(email);

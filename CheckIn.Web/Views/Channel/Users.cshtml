@@ -1,0 +1,21 @@
+﻿@using CheckIn.Web.Utilities
+@model CheckIn.Web.Models.Channel.ChannelUserModel
+
+<p>
+    @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddUsers", "Channel", new {id = Model.ChannelId}, new {@class = "modal-link btn btn-success"})
+</p>
+
+<div class="added-users-list">
+    <table>
+        <tr>
+            <th>Added Users</th>
+        </tr>
+        @foreach (var addedUser in Model.AddedUsers)
+            {
+            <tr>
+                <td>@addedUser.Email</td>
+            </tr>
+        }
+    </table>
+</div>

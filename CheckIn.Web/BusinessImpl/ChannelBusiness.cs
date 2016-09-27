@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CheckIn.Web.Utilities;
 
 namespace CheckIn.Web.BusinessImpl
 {
@@ -30,6 +31,19 @@ namespace CheckIn.Web.BusinessImpl
                                   Longitude = channelModel.Longitude
                               };
             return this.channelHandler.AddChannel(channel);
+        }
+
+        public List<Channel> GetChannelsForAdmin(int adminId)
+        {
+            if (SessionUtility.CurrentAdmin.IsSuperAdmin)
+            {
+                return channelHandler.RetrieveAllChannels();
+            }
+            else
+            {
+                //TODO Channels For Admin
+                return channelHandler.RetrieveAllChannels();
+            }
         }
     }
 }

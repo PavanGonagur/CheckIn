@@ -222,6 +222,7 @@
     <Compile Include="Common\ResponseCodes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -240,9 +241,15 @@
     <Compile Include="Models\AddPhoneNumberModel.cs" />
     <Compile Include="Models\AddUserResponse.cs" />
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\Admin\AdminChannelModel.cs" />
     <Compile Include="Models\Admin\AdminListModel.cs" />
     <Compile Include="Models\AuthenticateAdminModel.cs" />
     <Compile Include="Models\ChannelModel.cs" />
+    <Compile Include="Models\Channel\ChannelCardModel.cs" />
+    <Compile Include="Models\Channel\ChannelListModel.cs" />
+    <Compile Include="Models\Channel\ChannelUser.cs" />
+    <Compile Include="Models\Channel\ChannelUserModel.cs" />
+    <Compile Include="Models\Channel\ChannelViewModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -271,6 +278,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap1.css" />
+    <Content Include="Content\bootstrap1.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +289,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -329,6 +339,11 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\_Create.cshtml" />
+    <Content Include="Views\Admin\_AdminChannels.cshtml" />
+    <None Include="Views\Channel\Index.cshtml" />
+    <None Include="Views\Channel\Users.cshtml" />
+    <None Include="Views\Channel\_ChannelUsers.cshtml" />
+    <None Include="Views\Channel\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

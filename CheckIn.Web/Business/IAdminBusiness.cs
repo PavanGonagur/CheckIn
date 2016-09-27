@@ -15,6 +15,8 @@ namespace CheckIn.Web.Business
 
         int AddAdmin(AdminModel user);
 
+        int Save(AdminModel model);
+
         Admin RetrieveAdminOnEmail(string email);
 
         string RetrieveAllAdmins();

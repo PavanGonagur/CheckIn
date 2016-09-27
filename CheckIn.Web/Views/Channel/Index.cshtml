@@ -1,0 +1,53 @@
+﻿@model CheckIn.Web.Models.Channel.ChannelListModel
+
+<p>
+    @Html.ActionLink("Add", "Create", "Channel", null, new {@class = "modal-link btn btn-success"})
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsPublic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsLocationBased)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().Users)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsSuperAdmin)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Channels)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLocationBased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.IsSuperAdmin)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Channel", new { id = item.ChannelId }, new { @class = "modal-link btn btn-warning" }) |
+                @Html.ActionLink("Users", "Users", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Delete", "Delete", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

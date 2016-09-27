@@ -93,3 +93,15 @@ textarea {
     border-left: 1px solid #e7e7e7;
   }
 }
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.navbar-right {
+    margin-right: 0px;
+}
+
+.modal-content {
+         width: 600px !important;
+         margin: 30px auto !important;
+     }

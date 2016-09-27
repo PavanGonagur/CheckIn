@@ -8,11 +8,13 @@ namespace CheckIn.Web.Models.Channel
 {
     public class ChannelListModel
     {
-        public List<ChannelCardModel> Channels { get; set; }
+        public List<ChannelModelResponse> Channels { get; set; }
+
+        public List<ChannelCardModel> ChannelCardModels { get; set; }
 
         public ChannelListModel()
         {
-            Channels = new List<ChannelCardModel>();
+            ChannelCardModels = new List<ChannelCardModel>();
         }
 
         public ChannelListModel Fetch(int id, string searchText = "")
@@ -20,7 +22,7 @@ namespace CheckIn.Web.Models.Channel
             var channels = new ChannelBusiness().GetChannelsForAdmin(id);
             foreach (var channel in channels)
             {
-                Channels.Add(new ChannelCardModel().ToModel(channel));
+                ChannelCardModels.Add(new ChannelCardModel().ToModel(channel));
             }
             return this;
         }

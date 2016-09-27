@@ -14,7 +14,10 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Web.Common;
     using CheckIn.Web.Helpers;
     using CheckIn.Web.Models;
+    using CheckIn.Web.Models.Channel;
     using CheckIn.Web.Utilities;
+
+    using WebGrease.Css.Extensions;
 
     public class UserChannelMapBusiness : IUserChannelMapBusiness
     {
@@ -38,25 +41,40 @@ namespace CheckIn.Web.BusinessImpl
         }
         public RegisterToChannelResponseModel RegisterToChannel(RegisterToChannelModel registerToChannelModel)
         {
-            var hashedOtp = HashUtility.GetHash(registerToChannelModel.OTP);
+            var hashedOtp = HashUtility.GetHash(registerToChannelModel.Otp.Token);
             var userChannelMap = new UserChannelMap()
                                                 {
-                                                    UserId = registerToChannelModel.CheckInServerUserId,
+                                                    UserId = registerToChannelModel.Otp.CheckInServerUserId,
                                                     Otp = hashedOtp
                                                 };
             var userMapChannel = this.userChannelMapHandler.RegisterToChannel(userChannelMap);
             if (userMapChannel != null)
             {
                 var channel = this.channelHandler.RetrieveChannel(userMapChannel.ChannelId);
+                
                 var registerToChannel = new RegisterToChannelResponseModel()
                                             {
                                                Name = channel.Name,
                                                ChannelId = channel.ChannelId,
                                                IsLocationBased = channel.IsLocationBased,
                                                IsPublic = channel.IsPublic,
-                                               Latitude = channel.Latitude,
-                                               Longitude = channel.Longitude
-                                            };
+                                               CoordinatesModel = new CoordinatesModel()
+                                                                      {
+                                                   Latitude = channel.Latitude,
+                                                   Longitude = channel.Longitude
+                                               },
+                                               
+                                               Resources = new ResourceModel()
+                                                               {
+                                                   Profiles = channel.Profiles.Select(x => new ProfileModel(x)).ToList(),
+                                                   Applications = channel.Applications.Select(x => new ApplicationModel(x)).ToList(),
+                                                   ChatRooms = channel.ChatRooms.Select(x => new ChatRoomModel(x)).ToList(),
+                                                   Contacts = channel.Contacts.Select(x => new ContactModel(x)).ToList(),
+                                                   WebClips = channel.WebClips.Select(x => new WebClipModel(x)).ToList(),
+                                                   Locations = channel.Locations.Select(x => new LocationModel(x)).ToList()
+                                               }
+                                              
+                };
                 return registerToChannel;
             }
             return null;

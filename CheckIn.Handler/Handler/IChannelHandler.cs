@@ -22,5 +22,7 @@ namespace CheckIn.Handler.Handler
         int AddChannel(Channel channel);
 
         User RetrieveUserOnEmail(string email);
+
+        List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);
     }
 }

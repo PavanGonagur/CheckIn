@@ -16,6 +16,6 @@ namespace CheckIn.Data.Entities
 
         public virtual Channel Channel { get; set; }
 
-        public ICollection<ProfileKeyValue> Data { get; set; }
+        public virtual ICollection<ProfileKeyValue> Data { get; set; }
     }
 }

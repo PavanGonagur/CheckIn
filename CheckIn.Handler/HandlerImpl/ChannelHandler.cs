@@ -14,7 +14,7 @@ namespace CheckIn.Handler.HandlerImpl
     public class ChannelHandler: IChannelHandler
     {
         private readonly CheckInDb checkInDb;
-
+        private const float AssignmentLength = (float).05;
         public ChannelHandler()
         {
             this.checkInDb = new CheckInDb();
@@ -92,6 +92,26 @@ namespace CheckIn.Handler.HandlerImpl
                 {
                     return currentUser;
                 }
+            }
+            return null;
+        }
+
+        public List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
+        {
+            var query = from uc in this.checkInDb.UserChannelMaps
+                        join ch in this.checkInDb.Channels on uc.ChannelId equals ch.ChannelId
+                        where
+                            uc.UserId == userId
+                            && ((ch.Latitude >= (latitude - AssignmentLength))
+                                && (ch.Longitude >= (longitude - AssignmentLength))
+                                && (ch.Latitude <= (latitude + AssignmentLength))
+                                && (ch.Longitude <= (longitude + AssignmentLength)))
+                        select ch;
+
+            if (query.Any())
+            {
+                var channels = query.ToList();
+                return channels;
             }
             return null;
         }

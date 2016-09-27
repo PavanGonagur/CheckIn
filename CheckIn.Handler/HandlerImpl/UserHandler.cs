@@ -14,6 +14,7 @@ namespace CheckIn.Handler.HandlerImpl
     public class UserHandler:IUserHandler
     {
         private readonly CheckInDb checkInDb;
+        
         public UserHandler()
         {
             this.checkInDb = new CheckInDb();

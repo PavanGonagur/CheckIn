@@ -5,6 +5,10 @@ using System.Web;
 
 namespace CheckIn.Web.Models
 {
+    using CheckIn.Web.Models.Channel;
+
+    using Newtonsoft.Json;
+
     public class RegisterToChannelResponseModel
     {
         public int ChannelId { get; set; }
@@ -15,8 +19,8 @@ namespace CheckIn.Web.Models
 
         public bool IsLocationBased { get; set; }
 
-        public float Latitude { get; set; }
-
-        public float Longitude { get; set; }
+        [JsonProperty("Co-ordinates")]
+        public CoordinatesModel CoordinatesModel { get; set; }
+        public ResourceModel Resources { get; set; }
     }
 }

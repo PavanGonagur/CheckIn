@@ -20,6 +20,10 @@ namespace CheckIn.Data.Entities
 
         public float Longitude { get; set; }
 
+        public string TimeOfActivation { get; set; }
+
+        public string TimeOfDeactivation { get; set; }
+
         public virtual ICollection<AdminChannelMap> AdminChannelMaps { get; set; }
 
         public virtual ICollection<UserChannelMap> UserChannelMaps { get; set; }

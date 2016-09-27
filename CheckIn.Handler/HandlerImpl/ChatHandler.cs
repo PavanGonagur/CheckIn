@@ -67,5 +67,22 @@ namespace CheckIn.Handler.HandlerImpl
             }
             return null;
         }
+
+        public List<string> RetrieveRegistrationIds(int chatRoomId,int? userId)
+        {
+            var query = from userid in (from cr in this.checkInDb.ChatRooms
+                                        join uc in this.checkInDb.UserChannelMaps on cr.ChannelId equals uc.ChannelId
+                                        where cr.ChatRoomId == chatRoomId
+                                        select uc.UserId)
+                        join user in this.checkInDb.Users on userid equals user.UserId
+                        where user.UserId != userId
+                        select user.RegistrationId;
+            if (query.Any())
+            {
+                return query.ToList();
+            }
+            return null;
+
+        }
     }
 }

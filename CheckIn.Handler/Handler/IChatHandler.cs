@@ -17,5 +17,7 @@ namespace CheckIn.Handler.Handler
         int AddChatMessage(ChatMessage chatMessage);
 
         List<ChatMessage> RetrieveChatMessagesByChannelId(int channelId);
+
+        List<string> RetrieveRegistrationIds(int chatRoomId,int? userId);
     }
 }

@@ -10,9 +10,15 @@ namespace CheckIn.Web.Models
     public class RegisterToChannelModel
     {
         [JsonProperty("OTP")]
-        public string OTP { get; set; }
+        public OTP Otp { set; get; }
+    }
 
-        [JsonProperty("CheckInServerUserId")]
+    public class OTP
+    {
+        [JsonProperty("Token")]
+        public string Token { get; set; }
+
+        [JsonProperty("UserID")]
         public int CheckInServerUserId { get; set; }
     }
 }

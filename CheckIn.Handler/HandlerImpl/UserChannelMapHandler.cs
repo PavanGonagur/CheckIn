@@ -44,6 +44,16 @@ namespace CheckIn.Handler.HandlerImpl
             this.checkInDb.SaveChanges();
         }
 
+        public List<UserChannelMap> RetrieveUserChannelMapByChannelId(int channelId)
+        {
+            var query = this.checkInDb.UserChannelMaps.Where(x => x.ChannelId == channelId);
+            if (query.Any())
+            {
+                return query.ToList();
+            }
+            return null;
+        }
+
         public UserChannelMap RetrieveUserChannelMapOnUserChannel(int userId, int channelId)
         {
             var query = this.checkInDb.UserChannelMaps.Where(x => x.ChannelId == channelId && x.UserId == userId);

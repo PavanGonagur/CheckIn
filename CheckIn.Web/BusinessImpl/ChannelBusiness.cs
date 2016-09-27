@@ -9,7 +9,9 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
-    using CheckIn.Web.Models;
+    using CheckIn.Web.Models.Channel;
+
+    using ChannelModel = CheckIn.Web.Models.ChannelModel;
 
     public class ChannelBusiness : IChannelBusiness
     {
@@ -30,6 +32,19 @@ namespace CheckIn.Web.BusinessImpl
                                   Longitude = channelModel.Longitude
                               };
             return this.channelHandler.AddChannel(channel);
+        }
+
+        public ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
+        {
+            var channels = this.channelHandler.RetrieveChannelsByLocationAndUser(latitude, longitude, userId);
+            if (channels != null)
+            {
+                return new ChannelListModel()
+                {
+                    Channels = channels.Select(x => new ChannelModelResponse(x)).ToList()
+                };
+            }
+            return null;
         }
     }
 }

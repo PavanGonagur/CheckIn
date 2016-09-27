@@ -6,6 +6,8 @@ using CheckIn.Web.BusinessImpl;
 
 namespace CheckIn.Web.Models.Admin
 {
+    using CheckIn.Data.Entities;
+
     public class AdminListModel
     {
         public AdminListModel()
@@ -16,7 +18,7 @@ namespace CheckIn.Web.Models.Admin
 
         public AdminListModel Fetch(int id, string searchText = "")
         {
-            var admins = new List<Data.Entities.Admin> {new AdminBusiness().RetrieveAdminDummy(1)};
+            var admins = new List<Admin> {new AdminBusiness().RetrieveAdmin(1)};
             foreach (var admin in admins)
             {
                 Admins.Add(new AdminModel

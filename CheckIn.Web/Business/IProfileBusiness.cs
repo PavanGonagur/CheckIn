@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckIn.Data;
+using CheckIn.Web.Models.Channel.Profile;
 
 namespace CheckIn.Web.Business
 {
@@ -17,6 +19,8 @@ namespace CheckIn.Web.Business
 
         Profile RetrieveProfileById(int profileId);
 
-        List<ProfileModel> RetrieveProfilesByChannelId(int channelId);
+        List<Profile> RetrieveProfilesByChannelId(int channelId);
+
+        BaseProfileModel BuildProfileModel(int channelId, ProfileType type);
     }
 }

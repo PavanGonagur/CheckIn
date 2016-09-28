@@ -11,7 +11,7 @@ namespace CheckIn.Web.Business
 
     public interface IChannelBusiness
     {
-        int AddChannel(ChannelModel channelModel);
+        int AddChannel(ChannelViewModel channelModel);
 
         ChannelModel GetChannelOnText(string searchText);
         ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);

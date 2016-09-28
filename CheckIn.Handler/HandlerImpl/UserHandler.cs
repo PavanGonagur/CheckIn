@@ -104,9 +104,24 @@ namespace CheckIn.Handler.HandlerImpl
                                        Name = u.Name,
                                        Status = uc.Otp == null
                                    };
+            var tempUsers = from uc in this.checkInDb.UserEmailChannels
+                            where uc.ChannelId == channelId
+                            select new CustomUserEntity()
+                            {
+                                Email = uc.Email,
+                                Status = false
+                            };
             if (query.Any())
             {
-                return query.ToList();
+                if (tempUsers.Any())
+                {
+                    query.ToList().AddRange(tempUsers.ToList());
+                }
+                return query.OrderBy(x => x.Email).ToList();
+            }
+            else if (tempUsers.Any())
+            {
+                return tempUsers.OrderBy(x => x.Email).ToList();
             }
             return null;
         }

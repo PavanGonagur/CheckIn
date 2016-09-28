@@ -36,6 +36,7 @@ namespace CheckIn.Web.Models.Channel.Location
         {
             var location = new CheckIn.Data.Entities.Location()
             {
+                ChannelId = ChannelId,
                 LocationId = this.LocationId,
                 Longitude = this.Longitude,
                 Latitude = this.Latitude,

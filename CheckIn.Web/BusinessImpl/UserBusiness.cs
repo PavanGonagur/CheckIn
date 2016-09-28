@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CheckIn.Web.Models.Channel;
 
 namespace CheckIn.Web.BusinessImpl
 {
@@ -102,15 +103,15 @@ namespace CheckIn.Web.BusinessImpl
             this.userHandler.UpdateUser(user);
         }
 
-        public List<CustomUserModel> RetrieveUsersByChannel(int channelId)
+        public List<ChannelUser> RetrieveUsersByChannel(int channelId)
         {
             var users = this.userHandler.RetrieveUsersByChannel(channelId);
             if (users != null)
             {
-                var customUsers = users.Select(x => new CustomUserModel(x)).ToList();
+                var customUsers = users.Select(x => new ChannelUser {Email = x.Email, Status = x.Status}).ToList();
                 return customUsers;
             }
-            return new List<CustomUserModel>();
+            return new List<ChannelUser>();
         }
     }
 }

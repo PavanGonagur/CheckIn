@@ -28,11 +28,11 @@ namespace CheckIn.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            /*context.Admins.AddOrUpdate(
+            context.Admins.AddOrUpdate(
                   //new Person { FullName = "Andrew Peters" },
                   //new Person { FullName = "Brice Lambson" },
-                  new Admin { Name = "Pavan Gonagur", Email = "p@v.com", Password = "p", PhoneNumber = "1234567890" }
-                );*/
+                  new Admin { AdminId = 1, Name = "Pavan Gonagur", Email = "p@v.com", Password = "p", IsSuperAdmin = true, PhoneNumber = "1234567890" }
+                );
         }
     }
 }

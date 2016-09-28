@@ -33,6 +33,7 @@ namespace CheckIn.Web.Models.Channel.Application
         {
             var application = new CheckIn.Data.Entities.Application()
             {
+                ChannelId = ChannelId,
                 ApplicationId = this.ApplicationId,
                 ApplicationName = this.ApplicationName,
                 ApplicationUrl = this.ApplicationUrl

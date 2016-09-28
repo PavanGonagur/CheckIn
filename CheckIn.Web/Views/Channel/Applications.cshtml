@@ -17,7 +17,7 @@
             <tr>
                 <td>@item.ApplicationName</td>
                 <td>@item.ApplicationUrl</td>
-                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })
+                <td>@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })</td>
             </tr>
         }
     </table>

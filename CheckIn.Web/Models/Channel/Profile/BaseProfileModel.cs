@@ -13,5 +13,7 @@ namespace CheckIn.Web.Models.Channel.Profile
         public int ChannelId { get; set; }
 
         public ProfileType ProfileType { get; set; }
+
+        public abstract CheckIn.Data.Entities.Profile ToEntity();
     }
 }

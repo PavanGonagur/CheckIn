@@ -39,6 +39,7 @@ namespace CheckIn.Web.Models.Channel.WebClip
         {
             var webclip = new CheckIn.Data.Entities.WebClip()
             {
+                ChannelId = ChannelId,
                 WebClipId = this.WebClipId,
                 WebClipName = this.WebClipName,
                 WebClipUrl = this.WebClipUrl,

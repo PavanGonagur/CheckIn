@@ -19,6 +19,6 @@ namespace CheckIn.Web.Business
 
         Admin RetrieveAdminOnEmail(string email);
 
-        string RetrieveAllAdmins();
+        List<Admin> RetrieveAllAdmins();
     }
 }

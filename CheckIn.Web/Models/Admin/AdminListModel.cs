@@ -18,7 +18,7 @@ namespace CheckIn.Web.Models.Admin
 
         public AdminListModel Fetch(int id, string searchText = "")
         {
-            var admins = new List<Admin> {new AdminBusiness().RetrieveAdmin(1)};
+            var admins = new AdminBusiness().RetrieveAllAdmins() ?? new List<Admin>();
             foreach (var admin in admins)
             {
                 Admins.Add(new AdminModel

@@ -59,14 +59,9 @@ namespace CheckIn.Web.BusinessImpl
             return this.adminHandler.RetrieveAdminOnEmail(email);
         }
 
-        public string RetrieveAllAdmins()
+        public List<Admin> RetrieveAllAdmins()
         {
-            var admins = this.adminHandler.RetrieveAllAdmins();
-            if (admins != null)
-            {
-                return JsonConvert.SerializeObject(admins);
-            }
-            return null;
+            return this.adminHandler.RetrieveAllAdmins();
         }
     }
 }

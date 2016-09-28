@@ -1,0 +1,26 @@
+﻿@model CheckIn.Web.Models.Channel.ChannelContactListModel
+
+<p>
+    @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddContacts", "Channel", new { id = Model.ChannelId }, new { @class = "modal-link btn btn-success" })
+</p>
+
+@Html.HiddenFor(x => x.ChannelId)
+<div>
+    <table class="table">
+        <tr>
+            <th>Contact Name</th>
+            <th>Title</th>
+            <th>Contact Number</th>
+        </tr>
+        @foreach (var item in Model.Contacts)
+            {
+            <tr>
+                <td>@item.ContactName</td>
+                <td>@item.Title</td>
+                <td>@item.ContactNumber</td>
+                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = 1 }, new { @class = "btn btn-danger" })
+            </tr>
+        }
+    </table>
+</div>

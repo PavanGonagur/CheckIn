@@ -20,16 +20,16 @@ namespace CheckIn.Web.Models.Channel
             
         }
 
-        public ApplicationModel(Application application)
+        public ApplicationModel(CheckIn.Data.Entities.Application application)
         {
             this.ApplicationId = application.ApplicationId;
             this.ApplicationName = application.ApplicationName;
             this.ApplicationUrl = application.ApplicationUrl;
         }
 
-        public Application ToEntity()
+        public CheckIn.Data.Entities.Application ToEntity()
         {
-            var application = new Application()
+            var application = new CheckIn.Data.Entities.Application()
                                   {
                                         ApplicationId = this.ApplicationId,
                                       ApplicationName = this.ApplicationName,

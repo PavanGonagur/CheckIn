@@ -262,18 +262,29 @@
     <Compile Include="Models\AuthenticateAdminModel.cs" />
     <Compile Include="Models\ChannelModel.cs" />
     <Compile Include="Models\Channel\ApplicationModel.cs" />
+    <Compile Include="Models\Channel\Application\ApplicationEditModel.cs" />
+    <Compile Include="Models\Channel\Application\ChannelApplicationListModel.cs" />
+    <Compile Include="Models\Channel\ChannelContactListModel.cs" />
+    <Compile Include="Models\Channel\ChannelLocationListModel.cs" />
     <Compile Include="Models\Channel\ChannelModelResponse.cs" />
     <Compile Include="Models\Channel\ChannelListModel.cs" />
+    <Compile Include="Models\Channel\ChannelWebClipListModel.cs" />
     <Compile Include="Models\Channel\ChatMessageModel.cs" />
     <Compile Include="Models\Channel\ChatRoomModel.cs" />
+    <Compile Include="Models\Channel\Contact\ContactEditModel.cs" />
     <Compile Include="Models\Channel\CoordinatesModel.cs" />
     <Compile Include="Models\Channel\ContactModel.cs" />
     <Compile Include="Models\Channel\LocationModel.cs" />
+    <Compile Include="Models\Channel\Location\LocationEditModel.cs" />
     <Compile Include="Models\Channel\ProfileKeyValueModel.cs" />
     <Compile Include="Models\Channel\ProfileModel.cs" />
+    <Compile Include="Models\Channel\Profile\BaseProfileModel.cs" />
+    <Compile Include="Models\Channel\Profile\ProfileViewModel.cs" />
+    <Compile Include="Models\Channel\Profile\WifiProfileModel.cs" />
     <Compile Include="Models\Channel\ResourceModel.cs" />
     <Compile Include="Models\Channel\RetireveChannelByLocationAndUserModel.cs" />
     <Compile Include="Models\Channel\WebClipModel.cs" />
+    <Compile Include="Models\Channel\WebClip\WebClipEditModel.cs" />
     <Compile Include="Models\Chat\FcmPayload.cs" />
     <Compile Include="Models\Channel\ChannelCardModel.cs" />
     <Compile Include="Models\Channel\ChannelUser.cs" />
@@ -303,6 +314,7 @@
     <Compile Include="Utilities\ImageUtility.cs" />
     <Compile Include="Utilities\Interface\INotification.cs" />
     <Compile Include="Utilities\JsonUtility.cs" />
+    <Compile Include="Utilities\ModelBinders\ProfileModelBinder.cs" />
     <Compile Include="Utilities\SessionUtility.cs" />
     <Compile Include="Utilities\SMSGateway.cs" />
     <Compile Include="Utilities\OTPUtility.cs" />
@@ -333,7 +345,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -372,14 +386,26 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\_Create.cshtml" />
     <Content Include="Views\Admin\_AdminChannels.cshtml" />
+    <Content Include="Views\Channel\EditorTemplates\WifiProfileModel.cshtml" />
+    <Content Include="Views\Channel\Applications.cshtml" />
+    <Content Include="Views\Channel\Contacts.cshtml" />
     <None Include="Views\Channel\Index.cshtml" />
+    <Content Include="Views\Channel\Locations.cshtml" />
     <None Include="Views\Channel\Users.cshtml" />
+    <Content Include="Views\Channel\_ChannelProfiles.cshtml" />
+    <Content Include="Views\Channel\WebClips.cshtml" />
+    <Content Include="Views\Channel\_ChannelApplications.cshtml" />
+    <Content Include="Views\Channel\_ChannelLocations.cshtml" />
+    <Content Include="Views\Channel\_ChannelContacts.cshtml" />
     <None Include="Views\Channel\_ChannelUsers.cshtml" />
+    <Content Include="Views\Channel\_ChannelWebClips.cshtml" />
     <None Include="Views\Channel\_Create.cshtml" />
+    <Content Include="Views\Channel\_EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="MyImages\Chat\" />
+    <Folder Include="MyImages\Admin\" />
+    <Folder Include="MyImages\ChatMessage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

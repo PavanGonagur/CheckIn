@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using CheckIn.Web.Models.Channel.Profile;
+using CheckIn.Web.Utilities.ModelBinders;
 
 namespace CheckIn.Web
 {
@@ -16,6 +18,9 @@ namespace CheckIn.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Registering Model Binders
+            ModelBinders.Binders.Add(typeof(BaseProfileModel), new ProfileModelBinder());
         }
     }
 }

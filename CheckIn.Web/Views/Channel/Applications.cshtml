@@ -1,0 +1,24 @@
+﻿@model CheckIn.Web.Models.Channel.Application.ChannelApplicationListModel
+
+<p>
+    @Html.ActionLink("Back", "Index", "Channel", null, new {@class = "btn btn-default"})
+    @Html.ActionLink("Add", "AddApplications", "Channel", new {id = Model.ChannelId}, new {@class = "modal-link btn btn-success"})
+</p>
+
+@Html.HiddenFor(x => x.ChannelId)
+<div>
+    <table class="table">
+        <tr>
+            <th>Application Name</th>
+            <th>Application Url</th>
+        </tr>
+        @foreach (var item in Model.Applications)
+            {
+            <tr>
+                <td>@item.ApplicationName</td>
+                <td>@item.ApplicationUrl</td>
+                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })
+            </tr>
+        }
+    </table>
+</div>

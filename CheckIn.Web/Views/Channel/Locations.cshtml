@@ -1,0 +1,26 @@
+﻿@model CheckIn.Web.Models.Channel.ChannelLocationListModel
+
+<p>
+    @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddLocations", "Channel", new { id = Model.ChannelId }, new { @class = "modal-link btn btn-success" })
+</p>
+
+@Html.HiddenFor(x => x.ChannelId)
+<div>
+    <table class="table">
+        <tr>
+            <th>Location Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+        @foreach (var item in Model.Locations)
+            {
+            <tr>
+                <td>@item.LocationName</td>
+                <td>@item.Latitude</td>
+                <td>@item.Longitude</td>
+                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.LocationId }, new { @class = "btn btn-danger" })
+            </tr>
+        }
+    </table>
+</div>

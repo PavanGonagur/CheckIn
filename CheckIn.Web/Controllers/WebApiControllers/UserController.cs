@@ -149,20 +149,21 @@
         //    {
         //        Status status;
         //        var stream = await this.Request.Content.ReadAsStringAsync();
-        //        var user = JsonConvert.DeserializeObject<UserModel>(stream);
+        //        var channel = JsonConvert.DeserializeObject<ChannelId>(stream);
+        //        this.userBusiness.RetrieveUsersByChannel(channel.channelId);
 
-        //        var userId = this.userBusiness.AddUser(user).ToString();
-        //        if (userId.Equals("0"))
-        //        {
-        //            status = new Status() { Code = 1, Message = "Failed to add user" };
-        //            return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
-        //        }
+        //        //var userId = this.userBusiness.AddUser(user).ToString();
+        //        //if (userId.Equals("0"))
+        //        //{
+        //        //    status = new Status() { Code = 1, Message = "Failed to add user" };
+        //        //    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+        //        //}
 
-        //        var addUserResponse = new AddUserResponse() { UserId = userId };
-        //        status = new Status() { Code = 0, Message = "Added User" };
-        //        var test = JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
-        //        var b = test.Replace("\\","");
-        //        var revert = JsonConvert.DeserializeObject<ResponseMessage>(b);
+        //        //var addUserResponse = new AddUserResponse() { UserId = userId };
+        //        //status = new Status() { Code = 0, Message = "Added User" };
+        //        //var test = JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
+        //        //var b = test.Replace("\\", "");
+        //        //var revert = JsonConvert.DeserializeObject<ResponseMessage>(b);
 
         //        //EmailGateway.SendMail(new EmailModel());
         //        //SMSGateway.SendSms("Hello sede","9738131081");
@@ -173,6 +174,11 @@
         //    {
         //        return "fail";
         //    }
+        //}
+
+        //public class ChannelId
+        //{
+        //    public int channelId { get; set; }
         //}
     }
 }

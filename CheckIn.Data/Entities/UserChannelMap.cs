@@ -21,5 +21,7 @@ namespace CheckIn.Data.Entities
         public virtual Channel Channel { get; set; }
 
         public string Otp { get; set; }
+
+        public string EmailId { get; set; }
     }
 }

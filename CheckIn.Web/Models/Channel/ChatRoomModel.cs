@@ -15,6 +15,11 @@ namespace CheckIn.Web.Models.Channel
 
         public virtual ICollection<ChatMessageModel> ChatMessages { get; set; }
 
+        public ChatRoomModel()
+        {
+            
+        }
+
         public ChatRoomModel(ChatRoom chatRoom)
         {
             this.ChatRoomId = chatRoom.ChatRoomId;

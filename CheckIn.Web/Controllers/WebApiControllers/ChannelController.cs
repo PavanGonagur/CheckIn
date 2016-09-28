@@ -20,9 +20,29 @@ namespace CheckIn.Web.Controllers.WebApiControllers
     {
         private readonly IChannelBusiness channelBusiness;
 
+        private readonly IApplicationBusiness applicationBusiness;
+
+        private readonly IWebClipBusiness webClipBusiness;
+
+        private readonly IContactBusiness contactBusiness;
+
+        private readonly IProfileBusiness profileBusiness;
+
+        private readonly ILocationBusiness locationBusiness;
+
+        private readonly IChatBusiness chatBusiness;
+
+
+
         public ChannelController()
         {
             this.channelBusiness = new ChannelBusiness();
+            this.applicationBusiness = new ApplicationBusiness();
+            this.chatBusiness = new ChatBusiness();
+            this.contactBusiness = new ContactBusiness();
+            this.profileBusiness = new ProfileBusiness();
+            this.webClipBusiness = new WebClipBusiness();
+            this.locationBusiness = new LocationBusiness();
         }
 
         [HttpPost]
@@ -54,7 +74,7 @@ namespace CheckIn.Web.Controllers.WebApiControllers
         }
 
         [HttpPost]
-        [Route("AddChannel")]
+        [Route("RetrieveChannelsByLocationAndUser")]
         public async Task<string> RetrieveChannelsByLocationAndUser()
         {
             try
@@ -72,6 +92,34 @@ namespace CheckIn.Web.Controllers.WebApiControllers
                 }
                 status = new Status() { Code = 0, Message = "Got channels" };
                 return JsonConvert.SerializeObject(new ResponseMessage() { Data = channels, Status = status });
+
+            }
+            catch (Exception ex)
+            {
+                var status = new Status() { Code = 1, Message = ex.Message };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+            }
+        }
+
+        [HttpGet]
+        [Route("SearchChannel")]
+        public async Task<string> GetChannelOnText(string searchText)
+        {
+            try
+            {
+                Status status;
+                var stream = await this.Request.Content.ReadAsStringAsync();
+                var model = JsonConvert.DeserializeObject<RetireveChannelByLocationAndUserModel>(stream);
+
+                var channel = this.channelBusiness.GetChannelOnText(searchText);
+
+                if (channel == null)
+                {
+                    status = new Status() { Code = 1, Message = "No channel found" };
+                    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+                }
+                status = new Status() { Code = 0, Message = "Got channel" };
+                return JsonConvert.SerializeObject(new ResponseMessage() { Data = channel, Status = status });
 
             }
             catch (Exception ex)

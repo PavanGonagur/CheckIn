@@ -10,6 +10,7 @@ namespace CheckIn.Handler.HandlerImpl
 
     using CheckIn.Data;
     using CheckIn.Data.Entities;
+    using CheckIn.Handler.CustomEntities;
     using CheckIn.Handler.Handler;
     public class UserHandler:IUserHandler
     {
@@ -73,9 +74,9 @@ namespace CheckIn.Handler.HandlerImpl
             return null;
         }
 
-        public User RetrieveUserOnEmail(string emailId)
+        public User RetrieveUserOnEmailUserName(string emailUserName)
         {
-            var query = this.checkInDb.Users.Where(x => x.Email.Equals(emailId));
+            var query = this.checkInDb.Users.Where(x => x.EmailUserName.Equals(emailUserName));
             if (query.Any())
             {
                 var currentUser = query.FirstOrDefault();
@@ -87,6 +88,28 @@ namespace CheckIn.Handler.HandlerImpl
             return null;
         }
 
+        public List<CustomUserEntity> RetrieveUsersByChannel(int channelId)
+        {
+            var query = from u in this.checkInDb.Users
+                        join uc in this.checkInDb.UserChannelMaps
+                        on u.UserId equals uc.UserId
+                        where uc.ChannelId == channelId
+                        select new CustomUserEntity()
+                                   {
+                                       EmailUserName = u.EmailUserName,
+                                       Email = uc.EmailId,
+                                       PhoneNumber = u.PhoneNumber,
+                                       FirstName = u.FirstName,
+                                       LastName = u.LastName,
+                                       Name = u.Name,
+                                       Status = uc.Otp == null
+                                   };
+            if (query.Any())
+            {
+                return query.ToList();
+            }
+            return null;
+        }
         public void DeleteUser(User user)
         {
             this.checkInDb.Users.Remove(user);

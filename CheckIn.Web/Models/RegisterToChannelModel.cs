@@ -20,5 +20,8 @@ namespace CheckIn.Web.Models
 
         [JsonProperty("UserID")]
         public int CheckInServerUserId { get; set; }
+
+        [JsonProperty("ChannelId")]
+        public int ChannelId { get; set; }
     }
 }

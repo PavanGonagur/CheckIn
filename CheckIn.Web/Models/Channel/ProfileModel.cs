@@ -18,7 +18,12 @@ namespace CheckIn.Web.Models.Channel
         
         public ICollection<ProfileKeyValueModel> Data { get; set; }
 
-        public ProfileModel(CheckIn.Data.Entities.Profile profileEntity)
+        public ProfileModel()
+        {
+            
+        }
+
+        public ProfileModel(Profile profileEntity)
         {
             ProfileId = profileEntity.ProfileId;
             Type = profileEntity.Type;

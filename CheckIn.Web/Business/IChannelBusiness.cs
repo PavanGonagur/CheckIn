@@ -13,6 +13,7 @@ namespace CheckIn.Web.Business
     {
         int AddChannel(ChannelModel channelModel);
 
+        ChannelModel GetChannelOnText(string searchText);
         ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);
     }
 }

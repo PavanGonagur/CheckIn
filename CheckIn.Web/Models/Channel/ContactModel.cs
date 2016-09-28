@@ -9,6 +9,7 @@ namespace CheckIn.Web.Models.Channel
 
     public class ContactModel
     {
+        public int ContactId { get; set; }
         public string ContactName { get; set; }
         
         public string ContactNumber { get; set; }
@@ -25,6 +26,7 @@ namespace CheckIn.Web.Models.Channel
             this.ContactName = contact.ContactName;
             this.ContactNumber = contact.ContactNumber;
             this.Title = contact.Title;
+            this.ContactId = contact.ContactId;
         }
 
         public CheckIn.Data.Entities.Contact ToEntity()

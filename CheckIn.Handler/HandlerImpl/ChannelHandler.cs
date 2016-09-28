@@ -96,13 +96,74 @@ namespace CheckIn.Handler.HandlerImpl
             return null;
         }
 
+        public List<Channel> RetrieveChannelsOnAdmin(int adminId)
+        {
+            var query = from ch in this.checkInDb.Channels
+                        join ach in this.checkInDb.AdminChannelMaps
+                        on ch.ChannelId equals ach.ChannelId
+                        where ach.AdminId == adminId
+                        select ch;
+            if (query.Any())
+            {
+                return query.ToList();
+            }
+            return null;
+        }
+
         public List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
+        {
+            var channels = new List<Channel>();
+            channels.Concat(this.GetPublicChannels(latitude, longitude));
+            channels.Concat(this.GetPrivateChannelsForUserNotLocationBased(userId));
+            channels.Concat(this.GetPrivateChannelsForUserLocationBased(userId, latitude, longitude));
+            return channels;
+        }
+
+        private List<Channel> GetPublicChannels(float latitude, float longitude)
+        {
+            var query = from channel in this.checkInDb.Channels
+                        where channel.IsPublic && 
+                            ((channel.Latitude >= (latitude - AssignmentLength))
+                                && (channel.Longitude >= (longitude - AssignmentLength))
+                                && (channel.Latitude <= (latitude + AssignmentLength))
+                                && (channel.Longitude <= (longitude + AssignmentLength)))
+                        select channel;
+
+            if (query.Any())
+            {
+                var channels = query.ToList();
+                return channels;
+            }
+            return new List<Channel>();
+        }
+
+        private List<Channel> GetPrivateChannelsForUserNotLocationBased(int userId)
         {
             var query = from uc in this.checkInDb.UserChannelMaps
                         join ch in this.checkInDb.Channels on uc.ChannelId equals ch.ChannelId
                         where
-                            uc.UserId == userId
-                            && ((ch.Latitude >= (latitude - AssignmentLength))
+                            uc.UserId == userId &&
+                            !ch.IsLocationBased &&
+                            !ch.IsPublic
+                        select ch;
+
+            if (query.Any())
+            {
+                var channels = query.ToList();
+                return channels;
+            }
+            return new List<Channel>();
+        }
+
+        private List<Channel> GetPrivateChannelsForUserLocationBased(int userId, float latitude, float longitude)
+        {
+            var query = from uc in this.checkInDb.UserChannelMaps
+                        join ch in this.checkInDb.Channels on uc.ChannelId equals ch.ChannelId
+                        where
+                            uc.UserId == userId &&
+                            ch.IsLocationBased &&
+                            !ch.IsPublic &&
+                            ((ch.Latitude >= (latitude - AssignmentLength))
                                 && (ch.Longitude >= (longitude - AssignmentLength))
                                 && (ch.Latitude <= (latitude + AssignmentLength))
                                 && (ch.Longitude <= (longitude + AssignmentLength)))
@@ -112,6 +173,17 @@ namespace CheckIn.Handler.HandlerImpl
             {
                 var channels = query.ToList();
                 return channels;
+            }
+            return new List<Channel>();
+        }
+
+        public Channel GetChannelOnText(string searchText)
+        {
+            var query = from ch in this.checkInDb.Channels
+                        where ch.Name.ToLower() == searchText.ToLower() select ch;
+            if (query.Any())
+            {
+                return query.FirstOrDefault();
             }
             return null;
         }

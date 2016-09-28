@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Handler.Handler
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Handler.CustomEntities;
 
     public interface IUserHandler
     {
@@ -22,6 +23,8 @@ namespace CheckIn.Handler.Handler
 
         void DeleteUser(User user);
 
-        User RetrieveUserOnEmail(string emailId);
+        User RetrieveUserOnEmailUserName(string emailId);
+
+        List<CustomUserEntity> RetrieveUsersByChannel(int channelId);
     }
 }

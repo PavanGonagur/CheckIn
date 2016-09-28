@@ -23,6 +23,11 @@ namespace CheckIn.Web.Models.Channel
 
         public string TimeOfGeneration { get; set; }
 
+        public ChatMessageModel()
+        {
+            
+        }
+
         public ChatMessageModel(ChatMessage chatMessage)
         {
             this.ChatMessageId = chatMessage.ChatMessageId;

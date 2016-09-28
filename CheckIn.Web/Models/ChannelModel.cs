@@ -9,6 +9,7 @@ namespace CheckIn.Web.Models
 
     public class ChannelModel
     {
+        public int ChannelId { get; set; }
         [JsonProperty("ChannelName")]
         public string Name { get; set; }
 
@@ -23,5 +24,20 @@ namespace CheckIn.Web.Models
 
         [JsonProperty("Longitude")]
         public float Longitude { get; set; }
+
+        public ChannelModel()
+        {
+            
+        }
+
+        public ChannelModel(CheckIn.Data.Entities.Channel channel)
+        {
+            this.Longitude = channel.Longitude;
+            this.Latitude = channel.Latitude;
+            this.IsLocationBased = channel.IsLocationBased;
+            this.IsPublic = channel.IsPublic;
+            this.Name = channel.Name;
+            this.ChannelId = channel.ChannelId;
+        }
     }
 }

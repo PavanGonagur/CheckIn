@@ -22,7 +22,7 @@ namespace CheckIn.Handler.HandlerImpl
         }
         public UserChannelMap RegisterToChannel(UserChannelMap userChannelMap)
         {
-            var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == userChannelMap.Otp && x.UserId == userChannelMap.UserId);
+            var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == userChannelMap.Otp && x.UserId == userChannelMap.UserId && x.ChannelId == userChannelMap.ChannelId);
             if (query.Any())
             {
                 var currentChannel = query.FirstOrDefault();

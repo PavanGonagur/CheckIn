@@ -10,8 +10,9 @@ namespace CheckIn.Handler.HandlerImpl
 
     using CheckIn.Data;
     using CheckIn.Data.Entities;
+    using CheckIn.Handler.Handler;
 
-    public class LocationHandler
+    public class LocationHandler : ILocationHandler
     {
         private readonly CheckInDb checkInDb;
         public LocationHandler()

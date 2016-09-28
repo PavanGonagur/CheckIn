@@ -20,7 +20,7 @@ namespace CheckIn.Web.Models
         public bool IsLocationBased { get; set; }
 
         [JsonProperty("Co-ordinates")]
-        public CoordinatesModel CoordinatesModel { get; set; }
+        public List<CoordinatesModel> CoordinatesModel { get; set; }
         public ResourceModel Resources { get; set; }
     }
 }

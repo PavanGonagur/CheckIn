@@ -1,4 +1,5 @@
-﻿@model CheckIn.Web.Models.Channel.ChannelListModel
+﻿@using CheckIn.Data
+@model CheckIn.Web.Models.Channel.ChannelListModel
 
 <p>
     @Html.ActionLink("Add", "Create", "Channel", null, new {@class = "modal-link btn btn-success"})
@@ -7,16 +8,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().Name)
+            @Html.DisplayNameFor(model => model.ChannelCardModels.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsPublic)
+            @Html.DisplayNameFor(model => model.ChannelCardModels.FirstOrDefault().IsPublic)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsLocationBased)
+            @Html.DisplayNameFor(model => model.ChannelCardModels.FirstOrDefault().IsLocationBased)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().Users)
+            @Html.DisplayNameFor(model => model.ChannelCardModels.FirstOrDefault().Users)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsSuperAdmin)
@@ -24,7 +25,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Channels)
+    @foreach (var item in Model.ChannelCardModels)
     {
         <tr>
             <td>
@@ -45,6 +46,12 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", "Channel", new { id = item.ChannelId }, new { @class = "modal-link btn btn-warning" }) |
                 @Html.ActionLink("Users", "Users", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Configure WiFi", "AddProfile", "Channel", new { id = item.ChannelId, profileType = ProfileType.WiFi }, new { @class = "modal-link btn btn-success" })  |
+                @Html.ActionLink("Configure Ringer", "AddProfile", "Channel", new { id = item.ChannelId, profileType = ProfileType.WiFi }, new { @class = "modal-link btn btn-success" })  |
+                @Html.ActionLink("WebClips", "WebClips", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Applications", "Applications", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Locations", "Locations", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Contacts", "Contacts", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
                 @Html.ActionLink("Delete", "Delete", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-danger" })
             </td>
         </tr>

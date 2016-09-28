@@ -1,0 +1,26 @@
+﻿@model CheckIn.Web.Models.Channel.ChannelWebClipListModel
+
+<p>
+    @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddWebClips", "Channel", new { id = Model.ChannelId }, new { @class = "modal-link btn btn-success" })
+</p>
+
+@Html.HiddenFor(x => x.ChannelId)
+<div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Open In Browser</th>
+        </tr>
+        @foreach (var item in Model.WebClips)
+            {
+            <tr>
+                <td>@item.WebClipName</td>
+                <td>@item.WebClipUrl</td>
+                <td>@item.OpenInBrowser</td>
+                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.WebClipId }, new { @class = "btn btn-danger" })
+            </tr>
+        }
+    </table>
+</div>

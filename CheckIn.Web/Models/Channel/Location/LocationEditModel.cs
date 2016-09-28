@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CheckIn.Web.Models.Channel
+namespace CheckIn.Web.Models.Channel.Location
 {
-    using CheckIn.Data.Entities;
-
-    public class LocationModel
+    public class LocationEditModel
     {
+        public int ChannelId { get; set; }
+
         public int LocationId { get; set; }
 
         public string LocationName { get; set; }
@@ -17,28 +17,30 @@ namespace CheckIn.Web.Models.Channel
 
         public float Longitude { get; set; }
 
-        public LocationModel()
+        public LocationEditModel()
         {
             
         }
 
-        public LocationModel(CheckIn.Data.Entities.Location location)
+        public LocationEditModel ToModel(CheckIn.Data.Entities.Location location)
         {
             this.Longitude = location.Longitude;
             this.Latitude = location.Latitude;
             this.LocationName = location.LocationName;
             this.LocationId = location.LocationId;
+            this.ChannelId = location.ChannelId;
+            return this;
         }
 
         public CheckIn.Data.Entities.Location ToEntity()
         {
             var location = new CheckIn.Data.Entities.Location()
-                               {
-                                   LocationId = this.LocationId,
-                                   Longitude = this.Longitude,
-                                   Latitude = this.Latitude,
-                                   LocationName = this.LocationName
-                               };
+            {
+                LocationId = this.LocationId,
+                Longitude = this.Longitude,
+                Latitude = this.Latitude,
+                LocationName = this.LocationName
+            };
             return location;
         }
     }

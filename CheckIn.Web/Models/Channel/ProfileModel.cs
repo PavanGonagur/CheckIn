@@ -18,16 +18,16 @@ namespace CheckIn.Web.Models.Channel
         
         public ICollection<ProfileKeyValueModel> Data { get; set; }
 
-        public ProfileModel(Profile profileEntity)
+        public ProfileModel(CheckIn.Data.Entities.Profile profileEntity)
         {
             ProfileId = profileEntity.ProfileId;
             Type = profileEntity.Type;
             Data = profileEntity.Data.Select(x => new ProfileKeyValueModel(x)).ToList();
         }
 
-        public Profile ToEntity()
+        public CheckIn.Data.Entities.Profile ToEntity()
         {
-            var profile = new Profile()
+            var profile = new CheckIn.Data.Entities.Profile()
                               {
                                   ProfileId = this.ProfileId,
                                   Type = this.Type,

@@ -15,8 +15,6 @@ namespace CheckIn.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapHttpRoute("DefaultApi", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
@@ -30,6 +28,9 @@ namespace CheckIn.Web
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "CheckIn.Web.Controllers.WebApiControllers" }
             );
+
+            routes.MapHttpRoute("DefaultApi", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
+
         }
     }
 }

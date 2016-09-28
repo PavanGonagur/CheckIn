@@ -37,26 +37,26 @@ namespace CheckIn.Web.BusinessImpl
             this.userChannelMapHandler = new UserChannelMapHandler();
 
         }
-        public void AddChatMessage(ChatMessageModel chatMessageMessageModel)
+        public void AddChatMessage(ChatMessageModel chatMessageModel)
         {
-            if (chatMessageMessageModel.IsImage)
+            if (chatMessageModel.IsImage)
             {
                 //Image Handling
             }
             var chatMessage = new ChatMessage()
                                   {
-                                      ChatRoomId = chatMessageMessageModel.ChatRoomId,
-                                      IsImage = chatMessageMessageModel.IsImage,
-                                      Message = chatMessageMessageModel.Message,
-                                      IsAdminMessage = chatMessageMessageModel.IsAdminMessage,
-                                      TimeOfGeneration = chatMessageMessageModel.TimeOfGeneration,
-                                      UserId = chatMessageMessageModel.UserId
+                                      ChatRoomId = chatMessageModel.ChatRoomId,
+                                      IsImage = chatMessageModel.IsImage,
+                                      Message = chatMessageModel.Message,
+                                      IsAdminMessage = chatMessageModel.IsAdminMessage,
+                                      TimeOfGeneration = chatMessageModel.TimeOfGeneration,
+                                      UserId = chatMessageModel.UserId
                                   };
            
             var chatMessageId = this.chatHandler.AddChatMessage(chatMessage);
-            var registrationIds = this.chatHandler.RetrieveRegistrationIds(chatMessageMessageModel.ChatRoomId, chatMessageMessageModel.UserId);
-            chatMessageMessageModel.ChatMessageId = chatMessageId;
-            var fcmPayload = new FcmPayload() { Data = chatMessageMessageModel, RegistrationIds = registrationIds };
+            var registrationIds = this.chatHandler.RetrieveRegistrationIds(chatMessageModel.ChatRoomId, chatMessageModel.UserId);
+            chatMessageModel.ChatMessageId = chatMessageId;
+            var fcmPayload = new FcmPayload() { Data = chatMessageModel, RegistrationIds = registrationIds };
             var json = JsonConvert.SerializeObject(fcmPayload);
             this.fcmNotification.SendNotification(json);
         }

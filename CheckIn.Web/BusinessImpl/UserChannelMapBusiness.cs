@@ -45,7 +45,7 @@ namespace CheckIn.Web.BusinessImpl
             var userChannelMap = new UserChannelMap()
                                                 {
                                                     UserId = registerToChannelModel.Otp.CheckInServerUserId,
-                                                    Otp = hashedOtp,
+                                                    Otp = registerToChannelModel.Otp.Token,//hashedOtp,
                                                     ChannelId = registerToChannelModel.Otp.ChannelId
                                                 };
             var userMapChannel = this.userChannelMapHandler.RegisterToChannel(userChannelMap);

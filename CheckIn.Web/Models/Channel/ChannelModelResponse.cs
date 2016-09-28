@@ -22,6 +22,8 @@ namespace CheckIn.Web.Models.Channel
         [JsonProperty("Co-ordinates")]
         public List<CoordinatesModel> CoordinatesModel { get; set; }
 
+        public bool IsAuthenticated { get; set; }
+
         public ChannelModelResponse()
         {
             

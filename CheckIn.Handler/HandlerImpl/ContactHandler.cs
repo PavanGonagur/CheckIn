@@ -10,8 +10,9 @@ namespace CheckIn.Handler.HandlerImpl
 
     using CheckIn.Data;
     using CheckIn.Data.Entities;
+    using CheckIn.Handler.Handler;
 
-    public class ContactHandler
+    public class ContactHandler:IContactHandler
     {
         private readonly CheckInDb checkInDb;
         public ContactHandler()

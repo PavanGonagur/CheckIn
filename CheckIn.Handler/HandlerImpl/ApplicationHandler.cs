@@ -10,8 +10,9 @@ namespace CheckIn.Handler.HandlerImpl
 
     using CheckIn.Data;
     using CheckIn.Data.Entities;
+    using CheckIn.Handler.Handler;
 
-    public class ApplicationHandler
+    public class ApplicationHandler : IApplicationHandler
     {
         private readonly CheckInDb checkInDb;
         public ApplicationHandler()
@@ -47,10 +48,10 @@ namespace CheckIn.Handler.HandlerImpl
             var query = this.checkInDb.Applications.Where(x => x.ApplicationId == applicationId);
             if (query.Any())
             {
-                var currentWebClip = query.FirstOrDefault();
-                if (currentWebClip != null)
+                var currentApp = query.FirstOrDefault();
+                if (currentApp != null)
                 {
-                    return currentWebClip;
+                    return currentApp;
                 }
             }
             return null;

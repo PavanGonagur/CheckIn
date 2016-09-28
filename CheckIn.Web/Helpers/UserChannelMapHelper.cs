@@ -27,7 +27,7 @@ namespace CheckIn.Web.Helpers
             {
                 UserId = user.UserId,
                 ChannelId = channel.ChannelId,
-                Otp = HashUtility.GetHash(otp),
+                Otp = otp, //HashUtility.GetHash(otp),
                 EmailId = emailId
             };
             this.userChannelMapHandler.AddUserChannelMap(userChannelEntity);

@@ -23,7 +23,7 @@ namespace CheckIn.Web.Models.Channel
             
         }
 
-        public ProfileModel(Profile profileEntity)
+        public ProfileModel(CheckIn.Data.Entities.Profile profileEntity)
         {
             ProfileId = profileEntity.ProfileId;
             Type = profileEntity.Type;

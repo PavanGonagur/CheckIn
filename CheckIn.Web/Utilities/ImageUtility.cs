@@ -37,7 +37,7 @@ namespace CheckIn.Web.Utilities
 
         public static string UploadAndGetImageUrl(byte[] imageArray)
         {
-            var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/Chat/") + Guid.NewGuid()+ ".jpg";
+            var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/ChatMessage/") + Guid.NewGuid()+ ".jpg";
             try
             {
                 if (System.IO.File.Exists(filePath))
@@ -50,7 +50,7 @@ namespace CheckIn.Web.Utilities
                 
                 return "success";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return "ERROR";
             }

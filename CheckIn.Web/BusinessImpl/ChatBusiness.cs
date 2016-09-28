@@ -41,7 +41,8 @@ namespace CheckIn.Web.BusinessImpl
         {
             if (chatMessageModel.IsImage)
             {
-                //Image Handling
+                var imageUrl = ImageUtility.UploadAndGetImageUrl(chatMessageModel.ImageArray);
+                chatMessageModel.Message = imageUrl;
             }
             var chatMessage = new ChatMessage()
                                   {

@@ -274,6 +274,7 @@
     <Compile Include="Models\Channel\Contact\ContactEditModel.cs" />
     <Compile Include="Models\Channel\CoordinatesModel.cs" />
     <Compile Include="Models\Channel\ContactModel.cs" />
+    <Compile Include="Models\Channel\GetPublicChannelModel.cs" />
     <Compile Include="Models\Channel\LocationModel.cs" />
     <Compile Include="Models\Channel\Location\LocationEditModel.cs" />
     <Compile Include="Models\Channel\ProfileKeyValueModel.cs" />

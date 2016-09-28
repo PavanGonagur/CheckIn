@@ -8,6 +8,7 @@ namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
     using CheckIn.Web.Models;
+    using CheckIn.Web.Models.Channel;
 
     public interface IUserChannelMapBusiness
     {
@@ -16,5 +17,7 @@ namespace CheckIn.Web.Business
         void AddUserChannelMap(UserChannelMapModel userChannelMapModel);
 
         void ResendOtp(ResendOtpModel resendOtpModel);
+
+        RegisterToChannelResponseModel GetPublicChannel(GetPublicChannelModel registerToChannelModel);
     }
 }

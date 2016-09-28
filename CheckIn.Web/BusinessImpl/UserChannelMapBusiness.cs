@@ -122,5 +122,40 @@ namespace CheckIn.Web.BusinessImpl
                 this.userChannelMapHelper.AddUserChannelMap(user,channel, userChannelMap.EmailId);
             }
         }
+
+        public RegisterToChannelResponseModel GetPublicChannel(GetPublicChannelModel registerToChannelModel)
+        {
+            
+                var channel = this.channelHandler.RetrieveChannel(registerToChannelModel.ChannelId);
+            if (channel != null)
+            {
+                var registerToChannel = new RegisterToChannelResponseModel()
+                {
+                    Name = channel.Name,
+                    ChannelId = channel.ChannelId,
+                    IsLocationBased = channel.IsLocationBased,
+                    IsPublic = channel.IsPublic,
+                    CoordinatesModel = new CoordinatesModel()
+                    {
+                        Latitude = channel.Latitude,
+                        Longitude = channel.Longitude
+                    },
+
+                    Resources = new ResourceModel()
+                    {
+                        Profiles = channel.Profiles.Select(x => new ProfileModel(x)).ToList(),
+                        Applications = channel.Applications.Select(x => new ApplicationModel(x)).ToList(),
+                        ChatRooms = channel.ChatRooms.Select(x => new ChatRoomModel(x)).ToList(),
+                        Contacts = channel.Contacts.Select(x => new ContactModel(x)).ToList(),
+                        WebClips = channel.WebClips.Select(x => new WebClipModel(x)).ToList(),
+                        Locations = channel.Locations.Select(x => new LocationModel(x)).ToList()
+                    }
+
+                };
+                return registerToChannel;
+            }
+                
+            return null;
+        }
     }
 }

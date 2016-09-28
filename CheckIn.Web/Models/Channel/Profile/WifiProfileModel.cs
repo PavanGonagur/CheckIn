@@ -45,7 +45,7 @@ namespace CheckIn.Web.Models.Channel.Profile
             return securityTypeDropDown;
         }
 
-        public CheckIn.Data.Entities.Profile ToEntity()
+        public override CheckIn.Data.Entities.Profile ToEntity()
         {
             return new CheckIn.Data.Entities.Profile
             {
@@ -81,6 +81,21 @@ namespace CheckIn.Web.Models.Channel.Profile
                     },
                 }
             };
+        }
+
+        public BaseProfileModel ToModel(CheckIn.Data.Entities.Profile wifiProfile)
+        {
+            if (wifiProfile != null)
+            {
+                ProfileId = wifiProfile.ProfileId;
+                ChannelId = wifiProfile.ChannelId;
+                ServiceSetIdentifier = wifiProfile.Data.First(x => x.Key == "ServiceSetIdentifier").Value;
+                AutoJoin = Convert.ToBoolean(wifiProfile.Data.First(x => x.Key == "AutoJoin").Value);
+                HiddenNetwork = Convert.ToBoolean(wifiProfile.Data.First(x => x.Key == "HiddenNetwork").Value);
+                SecurityType = Convert.ToInt16(wifiProfile.Data.First(x => x.Key == "SecurityType").Value);
+                Password = wifiProfile.Data.First(x => x.Key == "Password").Value;
+            }
+            return this;
         }
     }
 }

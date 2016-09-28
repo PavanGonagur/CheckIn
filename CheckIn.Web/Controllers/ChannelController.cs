@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CheckIn.Data;
+using CheckIn.Web.Business;
+using CheckIn.Web.BusinessImpl;
 using CheckIn.Web.Models;
 using CheckIn.Web.Models.Channel;
 using CheckIn.Web.Models.Channel.Application;
@@ -17,6 +19,39 @@ namespace CheckIn.Web.Controllers
 {
     public class ChannelController : Controller
     {
+        private readonly IUserBusiness userBusiness;
+
+        private readonly IUserChannelMapBusiness userChannelMapBusiness;
+
+        private readonly IChannelBusiness channelBusiness;
+
+        private readonly IApplicationBusiness applicationBusiness;
+
+        private readonly IWebClipBusiness webClipBusiness;
+
+        private readonly IContactBusiness contactBusiness;
+
+        private readonly IProfileBusiness profileBusiness;
+
+        private readonly ILocationBusiness locationBusiness;
+
+        private readonly IChatBusiness chatBusiness;
+
+
+
+        public ChannelController()
+        {
+            this.userBusiness = new UserBusiness();
+            this.userChannelMapBusiness = new UserChannelMapBusiness();
+            this.channelBusiness = new ChannelBusiness();
+            this.applicationBusiness = new ApplicationBusiness();
+            this.chatBusiness = new ChatBusiness();
+            this.contactBusiness = new ContactBusiness();
+            this.profileBusiness = new ProfileBusiness();
+            this.webClipBusiness = new WebClipBusiness();
+            this.locationBusiness = new LocationBusiness();
+        }
+
         // GET: Channel
         public ActionResult Index()
         {
@@ -29,13 +64,21 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult Users(int id)
         {
-            return View(new ChannelUserModel(id));
+            var model = new ChannelUserModel(id)
+            {
+                AddedUsers = userBusiness.RetrieveUsersByChannel(id)
+            };
+            return View(model);
         }
 
         // GET: Admin/Details/5
         public ActionResult AddUsers(int id)
         {
-            return PartialView("_ChannelUsers", new ChannelUserModel(id));
+            var model = new ChannelUserModel(id)
+            {
+                AddedUsers = userBusiness.RetrieveUsersByChannel(id)
+            };
+            return PartialView("_ChannelUsers", model);
         }
 
         // POST: Channel/Create
@@ -46,6 +89,7 @@ namespace CheckIn.Web.Controllers
             {
                 //TODO Add Users To Channel
                 model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim()}).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                userChannelMapBusiness.AddUserChannelMap(new UserChannelMapModel {ChannelId = model.ChannelId, Emails = model.AddedUsers.Select(x => x.Email).ToList()});
                 return RedirectToAction("Users", new {id = model.ChannelId});
             }
             catch
@@ -61,7 +105,11 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult Applications(int id)
         {
-            return View(new ChannelApplicationListModel(id));
+            var model = new ChannelApplicationListModel(id)
+            {
+                Applications = applicationBusiness.RetrieveApplicationsByChannelId(id) ?? new List<ApplicationModel>()
+            };
+            return View(model);
         }
 
         // GET: Admin/Details/5
@@ -77,7 +125,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                //model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim() }).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                applicationBusiness.AddApplication(model.ToEntity());
                 return RedirectToAction("Applications", new { id = model.ChannelId });
             }
             catch
@@ -99,7 +147,11 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult WebClips(int id)
         {
-            return View(new ChannelWebClipListModel(id));
+            var model = new ChannelWebClipListModel(id)
+            {
+                WebClips = webClipBusiness.RetrieveWebClipsByChannelId(id) ?? new List<WebClipModel>()
+            };
+            return View(model);
         }
 
         // GET: Admin/Details/5
@@ -115,7 +167,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                //model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim() }).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                webClipBusiness.AddWebClip(model.ToEntity());
                 return RedirectToAction("WebClips", new { id = model.ChannelId });
             }
             catch
@@ -131,7 +183,11 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult Locations(int id)
         {
-            return View(new ChannelLocationListModel(id));
+            var model = new ChannelLocationListModel(id)
+            {
+                Locations = locationBusiness.RetrieveLocationsByChannelId(id) ?? new List<LocationModel>()
+            };
+            return View(model);
         }
 
         // GET: Admin/Details/5
@@ -147,7 +203,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                //model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim() }).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                locationBusiness.AddLocation(model.ToEntity());
                 return RedirectToAction("Locations", new { id = model.ChannelId });
             }
             catch
@@ -163,7 +219,11 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult Contacts(int id)
         {
-            return View(new ChannelContactListModel(id));
+            var model = new ChannelContactListModel(id)
+            {
+                Contacts = contactBusiness.RetrieveContactsByChannelId(id) ?? new List<ContactModel>()
+            };
+            return View(model);
         }
 
         // GET: Admin/Details/5
@@ -179,7 +239,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                //model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim() }).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                contactBusiness.AddContact(model.ToEntity());
                 return RedirectToAction("Contacts", new { id = model.ChannelId });
             }
             catch
@@ -200,7 +260,7 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult AddProfile(int id, ProfileType profileType)
         {
-            return PartialView("_EditProfile", new WifiProfileModel(id, profileType));
+            return PartialView("_EditProfile", profileBusiness.BuildProfileModel(id, profileType));
         }
 
         // POST: Channel/Create
@@ -210,7 +270,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                //model.AddedUsers = model.UserEmailIds.Split(',').Select(x => new ChannelUser { Email = x.Trim() }).Where(x => !string.IsNullOrEmpty(x.Email)).ToList();
+                profileBusiness.AddProfile(model.ToEntity());
                 return RedirectToAction("Index");
             }
             catch
@@ -234,7 +294,7 @@ namespace CheckIn.Web.Controllers
             try
             {
                 // TODO: Add new channel
-
+                channelBusiness.AddChannel(model);
                 return RedirectToAction("Index");
             }
             catch

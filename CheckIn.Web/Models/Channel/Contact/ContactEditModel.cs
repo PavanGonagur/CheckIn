@@ -36,6 +36,8 @@ namespace CheckIn.Web.Models.Channel.Contact
         {
             var contact = new CheckIn.Data.Entities.Contact()
             {
+                ChannelId = ChannelId,
+                ContactId = ContactId,
                 ContactName = this.ContactName,
                 ContactNumber = this.ContactNumber,
                 Title = this.Title

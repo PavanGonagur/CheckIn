@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CheckIn.Data;
 
 namespace CheckIn.Web.Models.Channel
 {
@@ -17,7 +18,9 @@ namespace CheckIn.Web.Models.Channel
 
         public int Users { get; set; }
 
-        public int Profiles { get; set; }
+        public bool WifiProfile { get; set; }
+
+        public bool RingerProfile { get; set; }
 
         public int Applications { get; set; }
 
@@ -32,7 +35,8 @@ namespace CheckIn.Web.Models.Channel
             IsPublic = channel.IsPublic;
             IsLocationBased = channel.IsLocationBased;
             Users = channel.UserChannelMaps.Count + channel.UserEmailChannels.Count;
-            Profiles = channel.Profiles.Count;
+            WifiProfile = channel.Profiles.ToList().Exists(x => x.Type == ProfileType.WiFi);
+            RingerProfile = channel.Profiles.ToList().Exists(x => x.Type == ProfileType.Silent);
             Applications = channel.Applications.Count;
             WebClips = channel.WebClips.Count;
             Contacts = channel.Contacts.Count;

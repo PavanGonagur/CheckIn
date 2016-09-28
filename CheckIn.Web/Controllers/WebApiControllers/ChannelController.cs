@@ -33,7 +33,7 @@ namespace CheckIn.Web.Controllers.WebApiControllers
             {
                 Status status;
                 var stream = await this.Request.Content.ReadAsStringAsync();
-                var channel = JsonConvert.DeserializeObject<ChannelModel>(stream);
+                var channel = JsonConvert.DeserializeObject<ChannelViewModel>(stream);
 
                 var channelId = this.channelBusiness.AddChannel(channel).ToString();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckIn.Web.Models.Channel;
 
 namespace CheckIn.Web.Business
 {
@@ -21,6 +22,6 @@ namespace CheckIn.Web.Business
 
         void UpdateUserPhoneNumber(AddPhoneNumberModel addPhoneNumberModel);
 
-        List<CustomUserModel> RetrieveUsersByChannel(int channelId);
+        List<ChannelUser> RetrieveUsersByChannel(int channelId);
     }
 }

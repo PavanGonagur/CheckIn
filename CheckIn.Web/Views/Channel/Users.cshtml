@@ -7,14 +7,16 @@
 </p>
 
 <div class="added-users-list">
-    <table>
+    <table class="table">
         <tr>
             <th>Added Users</th>
+            <th>Status</th>
         </tr>
         @foreach (var addedUser in Model.AddedUsers)
             {
             <tr>
                 <td>@addedUser.Email</td>
+                <td>@addedUser.Status</td>
             </tr>
         }
     </table>

@@ -22,15 +22,19 @@ namespace CheckIn.Web.BusinessImpl
         {
             this.channelHandler = new ChannelHandler();
         }
-        public int AddChannel(ChannelModel channelModel)
+        public int AddChannel(ChannelViewModel channelModel)
         {
             var channel = new Channel()
                               {
                                   IsLocationBased = channelModel.IsLocationBased,
                                   IsPublic = channelModel.IsPublic,
                                   Name = channelModel.Name,
+                                  ChannelId = channelModel.ChannelId,
+                                  Description = channelModel.Description,
                                   Latitude = channelModel.Latitude,
-                                  Longitude = channelModel.Longitude
+                                  Longitude = channelModel.Longitude,
+                                  TimeOfActivation = channelModel.TimeOfActivation.ToString(),
+                                  TimeOfDeactivation = channelModel.TimeOfDeactivation.ToString(),
                               };
             return this.channelHandler.AddChannel(channel);
         }
@@ -90,7 +94,7 @@ namespace CheckIn.Web.BusinessImpl
             else
             {
                 //TODO Channels For Admin
-                return channelHandler.RetrieveAllChannels();
+                return channelHandler.RetrieveChannelsOnAdmin(adminId);
             }
         }
     }

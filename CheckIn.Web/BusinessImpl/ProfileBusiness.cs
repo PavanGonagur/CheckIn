@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CheckIn.Data;
+using CheckIn.Web.Models.Channel.Profile;
 
 namespace CheckIn.Web.BusinessImpl
 {
@@ -41,15 +43,27 @@ namespace CheckIn.Web.BusinessImpl
             return this.profileHandler.RetrieveProfileById(profileId);
         }
 
-        public List<ProfileModel> RetrieveProfilesByChannelId(int channelId)
+        public List<Profile> RetrieveProfilesByChannelId(int channelId)
         {
             var profiles = this.profileHandler.RetrieveProfilesByChannelId(channelId);
-            if (profiles != null)
+            /*if (profiles != null)
             {
                 var profileModelList = profiles.Select(x => new ProfileModel(x)).ToList();
                 return profileModelList;
+            }*/
+            return profiles;
+        }
+
+        public BaseProfileModel BuildProfileModel(int channelId, ProfileType type)
+        {
+            if (type == ProfileType.WiFi)
+            {
+                var profiles = RetrieveProfilesByChannelId(channelId);
+                var wifiProfile = profiles?.FirstOrDefault(x => x.Type == ProfileType.WiFi);
+                
+                return new WifiProfileModel(channelId, type).ToModel(wifiProfile);
             }
-            return null;
+            return new WifiProfileModel(channelId, type);
         }
     }
 }

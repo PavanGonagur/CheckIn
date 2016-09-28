@@ -41,7 +41,7 @@ namespace CheckIn.Web.BusinessImpl
             return this.webClipHandler.RetrieveWebClipById(webClipId);
         }
 
-        public List<WebClipModel> RetrieveProfilesByChannelId(int channelId)
+        public List<WebClipModel> RetrieveWebClipsByChannelId(int channelId)
         {
             var webclips = this.webClipHandler.RetrieveWebClipsByChannelId(channelId);
             if (webclips != null)

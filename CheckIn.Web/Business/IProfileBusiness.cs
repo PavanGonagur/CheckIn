@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Models.Channel;
 
     public interface IProfileBusiness
     {
@@ -15,5 +16,7 @@ namespace CheckIn.Web.Business
         void DeleteProfile(Profile application);
 
         Profile RetrieveProfileById(int profileId);
+
+        List<ProfileModel> RetrieveProfilesByChannelId(int channelId);
     }
 }

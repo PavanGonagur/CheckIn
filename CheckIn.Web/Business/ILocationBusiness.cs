@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Models.Channel;
 
     public interface ILocationBusiness
     {
@@ -15,5 +16,7 @@ namespace CheckIn.Web.Business
         void DeleteLocationn(Location location);
 
         Location RetrieveLocationById(int locationId);
+
+        List<LocationModel> RetrieveLocationsByChannelId(int channelId);
     }
 }

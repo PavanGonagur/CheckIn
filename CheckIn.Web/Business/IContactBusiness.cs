@@ -6,6 +6,7 @@ using System.Web;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Models.Channel;
 
     public interface IContactBusiness
     {
@@ -14,5 +15,7 @@ namespace CheckIn.Web.Business
         void DeleteContact(Contact contact);
 
         Contact RetrieveContactById(int contactId);
+
+        List<ContactModel> RetrieveContactsByChannelId(int channelId);
     }
 }

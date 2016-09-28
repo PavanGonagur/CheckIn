@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Models.Channel;
 
     public interface IWebClipBusiness
     {
@@ -15,5 +16,7 @@ namespace CheckIn.Web.Business
         void DeleteWebClip(WebClip webClip);
 
         WebClip RetrieveWebClipById(int webClipId);
+
+        List<WebClipModel> RetrieveWebClipsByChannelId(int channelId);
     }
 }

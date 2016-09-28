@@ -19,6 +19,12 @@ namespace CheckIn.Web.Models.Channel
 
         public bool IsLocationBased { get; set; }
 
+        public string TimeOfActivation { get; set; }
+
+        public string TimeOfDeactivation { get; set; }
+
+        public string Description { get; set; }
+
         [JsonProperty("Co-ordinates")]
         public List<CoordinatesModel> CoordinatesModel { get; set; }
 
@@ -35,6 +41,9 @@ namespace CheckIn.Web.Models.Channel
             this.Name = channel.Name;
             this.IsLocationBased = channel.IsLocationBased;
             this.IsPublic = channel.IsPublic;
+            this.Description = channel.Description;
+            this.TimeOfActivation = channel.TimeOfActivation;
+            this.TimeOfDeactivation = channel.TimeOfDeactivation;
             this.CoordinatesModel = new List<CoordinatesModel>()
                                         {
                                             new CoordinatesModel()

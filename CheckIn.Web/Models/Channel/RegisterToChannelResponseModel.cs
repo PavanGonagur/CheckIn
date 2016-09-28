@@ -19,6 +19,12 @@ namespace CheckIn.Web.Models
 
         public bool IsLocationBased { get; set; }
 
+        public string TimeOfActivation { get; set; }
+
+        public string TimeOfDeactivation { get; set; }
+
+        public string Description { get; set; }
+
         [JsonProperty("Co-ordinates")]
         public List<CoordinatesModel> CoordinatesModel { get; set; }
         public ResourceModel Resources { get; set; }

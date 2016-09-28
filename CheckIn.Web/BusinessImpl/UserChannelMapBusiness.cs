@@ -59,6 +59,9 @@ namespace CheckIn.Web.BusinessImpl
                                                ChannelId = channel.ChannelId,
                                                IsLocationBased = channel.IsLocationBased,
                                                IsPublic = channel.IsPublic,
+                                               Description = channel.Description,
+                                               TimeOfActivation = channel.TimeOfActivation,
+                                               TimeOfDeactivation = channel.TimeOfDeactivation,
                                                CoordinatesModel = new List<CoordinatesModel>()
                     {
                         new CoordinatesModel()
@@ -139,6 +142,9 @@ namespace CheckIn.Web.BusinessImpl
                     ChannelId = channel.ChannelId,
                     IsLocationBased = channel.IsLocationBased,
                     IsPublic = channel.IsPublic,
+                    TimeOfActivation = channel.TimeOfActivation,
+                    TimeOfDeactivation = channel.TimeOfDeactivation,
+                    Description = channel.Description,
                     CoordinatesModel = new List<CoordinatesModel>()
                     {
                         new CoordinatesModel()

@@ -113,9 +113,9 @@ namespace CheckIn.Handler.HandlerImpl
         public List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
         {
             var channels = new List<Channel>();
-            channels.Concat(this.GetPublicChannels(latitude, longitude));
-            channels.Concat(this.GetPrivateChannelsForUserNotLocationBased(userId));
-            channels.Concat(this.GetPrivateChannelsForUserLocationBased(userId, latitude, longitude));
+            channels.AddRange(this.GetPublicChannels(latitude, longitude));
+            channels.AddRange(this.GetPrivateChannelsForUserNotLocationBased(userId));
+            channels.AddRange(this.GetPrivateChannelsForUserLocationBased(userId, latitude, longitude));
             return channels;
         }
 

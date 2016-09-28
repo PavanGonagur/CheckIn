@@ -21,6 +21,8 @@ namespace CheckIn.Web.Models.Channel
 
         public bool IsImage { get; set; }
 
+        public byte[] ImageArray { get; set; }
+
         public string TimeOfGeneration { get; set; }
 
         public ChatMessageModel()

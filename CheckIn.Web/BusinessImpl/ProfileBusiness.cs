@@ -9,6 +9,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Models.Channel;
 
     public class ProfileBusiness : IProfileBusiness
     {
@@ -38,6 +39,17 @@ namespace CheckIn.Web.BusinessImpl
         public Profile RetrieveProfileById(int profileId)
         {
             return this.profileHandler.RetrieveProfileById(profileId);
+        }
+
+        public List<ProfileModel> RetrieveProfilesByChannelId(int channelId)
+        {
+            var profiles = this.profileHandler.RetrieveProfilesByChannelId(channelId);
+            if (profiles != null)
+            {
+                var profileModelList = profiles.Select(x => new ProfileModel(x)).ToList();
+                return profileModelList;
+            }
+            return null;
         }
     }
 }

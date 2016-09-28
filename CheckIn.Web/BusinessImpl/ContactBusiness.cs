@@ -9,6 +9,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Models.Channel;
 
     public class ContactBusiness : IContactBusiness
     {
@@ -38,6 +39,17 @@ namespace CheckIn.Web.BusinessImpl
         public Contact RetrieveContactById(int contactId)
         {
             return this.contactHandler.RetrieveContactById(contactId);
+        }
+
+        public List<ContactModel> RetrieveContactsByChannelId(int channelId)
+        {
+            var contacts = this.contactHandler.RetrieveContactsByChannelId(channelId);
+            if (contacts != null)
+            {
+                var contactModelList = contacts.Select(x => new ContactModel(x)).ToList();
+                return contactModelList;
+            }
+            return null;
         }
     }
 }

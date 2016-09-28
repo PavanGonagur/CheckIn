@@ -142,43 +142,49 @@
             }
         }
 
-        //[HttpPost]
-        //public async Task<string> TestApi()
-        //{
-        //    try
-        //    {
-        //        Status status;
-        //        var stream = await this.Request.Content.ReadAsStringAsync();
-        //        var channel = JsonConvert.DeserializeObject<ChannelId>(stream);
-        //        this.userBusiness.RetrieveUsersByChannel(channel.channelId);
+        [HttpPost]
+        public async Task<string> TestApi()
+        {
+            try
+            {
+                //Status status;
+                //var stream = await this.Request.Content.ReadAsStringAsync();
+                //var image = JsonConvert.DeserializeObject<Image>(stream);
+                var imageArray = ImageUtility.ReadImageFile("");
+                ImageUtility.UploadAndGetImageUrl(imageArray);
 
-        //        //var userId = this.userBusiness.AddUser(user).ToString();
-        //        //if (userId.Equals("0"))
-        //        //{
-        //        //    status = new Status() { Code = 1, Message = "Failed to add user" };
-        //        //    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
-        //        //}
+                //var userId = this.userBusiness.AddUser(user).ToString();
+                //if (userId.Equals("0"))
+                //{
+                //    status = new Status() { Code = 1, Message = "Failed to add user" };
+                //    return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });
+                //}
 
-        //        //var addUserResponse = new AddUserResponse() { UserId = userId };
-        //        //status = new Status() { Code = 0, Message = "Added User" };
-        //        //var test = JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
-        //        //var b = test.Replace("\\", "");
-        //        //var revert = JsonConvert.DeserializeObject<ResponseMessage>(b);
+                //var addUserResponse = new AddUserResponse() { UserId = userId };
+                //status = new Status() { Code = 0, Message = "Added User" };
+                //var test = JsonConvert.SerializeObject(new ResponseMessage() { Data = addUserResponse, Status = status });
+                //var b = test.Replace("\\", "");
+                //var revert = JsonConvert.DeserializeObject<ResponseMessage>(b);
 
-        //        //EmailGateway.SendMail(new EmailModel());
-        //        //SMSGateway.SendSms("Hello sede","9738131081");
-        //        //return OTPUtility.GenerateOTP();
-        //        return "success";
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return "fail";
-        //    }
-        //}
+                //EmailGateway.SendMail(new EmailModel());
+                //SMSGateway.SendSms("Hello sede","9738131081");
+                //return OTPUtility.GenerateOTP();
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return "fail";
+            }
+        }
 
         //public class ChannelId
         //{
         //    public int channelId { get; set; }
         //}
+
+        public class Image
+        {
+            public byte[] ImageArray { get; set; }
+        }
     }
 }

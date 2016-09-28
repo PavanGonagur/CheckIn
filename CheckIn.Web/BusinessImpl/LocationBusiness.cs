@@ -9,6 +9,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Models.Channel;
 
     public class LocationBusiness : ILocationBusiness
     {
@@ -38,6 +39,17 @@ namespace CheckIn.Web.BusinessImpl
         public Location RetrieveLocationById(int locationId)
         {
             return this.locationHandler.RetrieveLocationById(locationId);
+        }
+
+        public List<LocationModel> RetrieveLocationsByChannelId(int channelId)
+        {
+            var locations = this.locationHandler.RetrieveLocationsByChannelId(channelId);
+            if (locations != null)
+            {
+                var locationModelList = locations.Select(x => new LocationModel(x)).ToList();
+                return locationModelList;
+            }
+            return null;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Models.Channel;
+
     public class WebClipBusiness : IWebClipBusiness
     {
         private readonly IWebClipHandler webClipHandler;
@@ -37,6 +39,17 @@ namespace CheckIn.Web.BusinessImpl
         public WebClip RetrieveWebClipById(int webClipId)
         {
             return this.webClipHandler.RetrieveWebClipById(webClipId);
+        }
+
+        public List<WebClipModel> RetrieveProfilesByChannelId(int channelId)
+        {
+            var webclips = this.webClipHandler.RetrieveWebClipsByChannelId(channelId);
+            if (webclips != null)
+            {
+                var webclipModelList = webclips.Select(x => new WebClipModel(x)).ToList();
+                return webclipModelList;
+            }
+            return null;
         }
     }
 }

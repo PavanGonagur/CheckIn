@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CheckIn.Web.Business
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Models.Channel;
 
     public interface IApplicationBusiness
     {
@@ -14,5 +15,7 @@ namespace CheckIn.Web.Business
 
         Application RetrieveApplicationById(int applicationId);
         int AddApplication(Application application);
+
+        List<ApplicationModel> RetrieveApplicationsByChannelId(int channelId);
     }
 }

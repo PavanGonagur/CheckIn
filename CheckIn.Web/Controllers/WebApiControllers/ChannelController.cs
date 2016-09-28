@@ -20,29 +20,9 @@ namespace CheckIn.Web.Controllers.WebApiControllers
     {
         private readonly IChannelBusiness channelBusiness;
 
-        private readonly IApplicationBusiness applicationBusiness;
-
-        private readonly IWebClipBusiness webClipBusiness;
-
-        private readonly IContactBusiness contactBusiness;
-
-        private readonly IProfileBusiness profileBusiness;
-
-        private readonly ILocationBusiness locationBusiness;
-
-        private readonly IChatBusiness chatBusiness;
-
-
-
         public ChannelController()
         {
             this.channelBusiness = new ChannelBusiness();
-            this.applicationBusiness = new ApplicationBusiness();
-            this.chatBusiness = new ChatBusiness();
-            this.contactBusiness = new ContactBusiness();
-            this.profileBusiness = new ProfileBusiness();
-            this.webClipBusiness = new WebClipBusiness();
-            this.locationBusiness = new LocationBusiness();
         }
 
         [HttpPost]

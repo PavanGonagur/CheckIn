@@ -30,6 +30,17 @@ namespace CheckIn.Web.BusinessImpl
             return exsitingUserId;
         }
 
+        public List<ApplicationModel> RetrieveApplicationsByChannelId(int channelId)
+        {
+            var applications = this.applicationHandler.RetrieveApplicationsByChannelId(channelId);
+            if (applications != null)
+            {
+                var applicationModelList = applications.Select(x => new ApplicationModel(x)).ToList();
+                return applicationModelList;
+            }
+            return null;
+        }
+
         public void DeleteApplication(Application application)
         {
             this.applicationHandler.DeleteApplication(application);
@@ -40,5 +51,7 @@ namespace CheckIn.Web.BusinessImpl
         {
             return this.applicationHandler.RetrieveApplicationById(applicationId);
         }
+
+
     }
 }

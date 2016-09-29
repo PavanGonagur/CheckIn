@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -11,12 +12,16 @@ namespace CheckIn.Web.Models.Channel.WebClip
 
         public int WebClipId { get; set; }
 
+        [DisplayName("Web Clip Name")]
         public string WebClipName { get; set; }
 
+        [DisplayName("Web Clip Link")]
         public string WebClipUrl { get; set; }
 
+        [DisplayName("Icon URL")]
         public string IconUrl { get; set; }
 
+        [DisplayName("Open In Browser")]
         public bool OpenInBrowser { get; set; }
 
         public WebClipEditModel()

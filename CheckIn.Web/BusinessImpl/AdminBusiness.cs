@@ -48,6 +48,8 @@ namespace CheckIn.Web.BusinessImpl
             var adminEntity = model.ToEntity();
             if (model.AdminId > 0)
             {
+                var admin = RetrieveAdmin(model.AdminId);
+                adminEntity.Password = admin.Password;
                 this.adminHandler.UpdateAdmin(adminEntity);
                 return model.AdminId;
             }

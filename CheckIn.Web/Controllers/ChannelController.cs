@@ -17,6 +17,7 @@ using CheckIn.Web.Utilities;
 
 namespace CheckIn.Web.Controllers
 {
+    [AuthenticationFilter]
     public class ChannelController : Controller
     {
         private readonly IUserBusiness userBusiness;
@@ -96,6 +97,11 @@ namespace CheckIn.Web.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult DeleteUser(string email)
+        {
+            return RedirectToAction("Users");
         }
 
         #endregion
@@ -297,26 +303,35 @@ namespace CheckIn.Web.Controllers
                 channelBusiness.AddChannel(model);
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 
         // GET: Channel/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                // TODO: Add new channel
+                var model = channelBusiness.GetChannel(id);
+                return PartialView("_Create", model);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: Channel/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ChannelViewModel model)
         {
             try
             {
                 // TODO: Add update logic here
-
+                channelBusiness.AddChannel(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -346,5 +361,7 @@ namespace CheckIn.Web.Controllers
                 return View();
             }
         }
+
+        
     }
 }

@@ -1,23 +1,43 @@
 ﻿@using CheckIn.Web.Utilities
 @model CheckIn.Web.Models.Channel.ChannelUserModel
 
+<br/>
+
 <p>
     @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Add", "AddUsers", "Channel", new {id = Model.ChannelId}, new {@class = "modal-link btn btn-success"})
 </p>
 
 <div class="added-users-list">
-    <table class="table">
-        <tr>
-            <th>Added Users</th>
-            <th>Status</th>
-        </tr>
-        @foreach (var addedUser in Model.AddedUsers)
-            {
+    <table class="table table-striped table-hover">
+        <thead class="">
             <tr>
-                <td>@addedUser.Email</td>
-                <td>@addedUser.Status</td>
+                <th class="col-lg-6">Added Users</th>
+                <th class="col-lg-4">Status</th>
+                <th class="col-lg-2"></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var addedUser in Model.AddedUsers)
+            {
+                <tr>
+                    <td class="col-lg-6">@addedUser.Email</td>
+                    <td class="col-lg-4">
+                        @if (addedUser.Status)
+                        {
+                            <p class="green-icon"><span class="glyphicon glyphicon-ok-sign"></span></p>
+                        }
+                        else
+                        {
+                            <p class="red-icon"><span class="glyphicon glyphicon-minus-sign"></span></p>
+                        }
+                    </td>
+                    <td class="col-lg-2"><a class="btn btn-default btn-tile" href="@Url.Action("DeleteUser", "Channel", new {email = addedUser.Email})"> <span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
+
+@*<thead></thead>
+<tbody></tbody>*@

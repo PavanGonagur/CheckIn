@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CheckIn.Web.Business;
 using CheckIn.Web.BusinessImpl;
 using CheckIn.Web.Models;
+using CheckIn.Web.Models.Login;
 using CheckIn.Web.Utilities;
 
 namespace CheckIn.Web.Controllers
@@ -30,13 +31,13 @@ namespace CheckIn.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AdminModel model)
+        public ActionResult Index(LoginModel model)
         {
             var admin = new AuthenticationUtility().AuthenticateUser(model.Password, model.Email);
             if (admin.AdminId != 0)
             {
                 SessionUtility.CurrentAdmin = admin;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Channel");
                 //                return RedirectToAction("Index", new {id = id});
             }
             else

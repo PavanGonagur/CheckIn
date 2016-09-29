@@ -1,5 +1,7 @@
 ﻿@model CheckIn.Web.Models.Channel.ChannelLocationListModel
 
+<br/>
+
 <p>
     @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Add", "AddLocations", "Channel", new { id = Model.ChannelId }, new { @class = "modal-link btn btn-success" })
@@ -9,17 +11,18 @@
 <div>
     <table class="table">
         <tr>
-            <th>Location Name</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
+            <th class="col-lg-4">Location Name</th>
+            <th class="col-lg-3">Latitude</th>
+            <th class="col-lg-3">Longitude</th>
+            <th class="col-lg-2"></th>
         </tr>
         @foreach (var item in Model.Locations)
             {
             <tr>
-                <td>@item.LocationName</td>
-                <td>@item.Latitude</td>
-                <td>@item.Longitude</td>
-                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.LocationId }, new { @class = "btn btn-danger" })
+                <td class="col-lg-4">@item.LocationName</td>
+                <td class="col-lg-3">@item.Latitude</td>
+                <td class="col-lg-3">@item.Longitude</td>
+                <td class="col-lg-2">@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.LocationId }, new { @class = "btn btn-danger" })</td>
             </tr>
         }
     </table>

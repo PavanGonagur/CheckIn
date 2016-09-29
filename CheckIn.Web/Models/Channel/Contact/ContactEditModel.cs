@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -11,10 +12,13 @@ namespace CheckIn.Web.Models.Channel.Contact
 
         public int ChannelId { get; set; }
 
+        [DisplayName("Contact Name")]
         public string ContactName { get; set; }
 
+        [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
 
+        [DisplayName("Title")]
         public string Title { get; set; }
 
         public ContactEditModel()

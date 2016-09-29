@@ -1,51 +1,93 @@
 ﻿@model CheckIn.Web.Models.Channel.Profile.WifiProfileModel
-
+@{
+    
+}
 
 <div class="form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
     <div class="form-group">
-        @Html.LabelFor(model => model.ServiceSetIdentifier, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ServiceSetIdentifier, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ServiceSetIdentifier, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.ServiceSetIdentifier, htmlAttributes: new {@class = "control-label col-md-4"})
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.ServiceSetIdentifier, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.ServiceSetIdentifier, "", new {@class = "text-danger"})
         </div>
     </div>
-    
+
     <div class="form-group">
-        @Html.LabelFor(model => model.AutoJoin, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.AutoJoin)
-                @Html.ValidationMessageFor(model => model.AutoJoin, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.AutoJoin, htmlAttributes: new {@class = "control-label col-md-4"})
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="material-switch">
+                <input class="form-control check-box" data-val="true" data-val-required="The AutoJoin field is required." id="AutoJoin" name="AutoJoin" type="checkbox" value="true">
+                <label for="AutoJoin" class="label-success"></label>
             </div>
+            @Html.ValidationMessageFor(model => model.AutoJoin, "", new { @class = "text-danger" })
         </div>
     </div>
-    
+
     <div class="form-group">
-        @Html.LabelFor(model => model.HiddenNetwork, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.HiddenNetwork)
-                @Html.ValidationMessageFor(model => model.HiddenNetwork, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.HiddenNetwork, htmlAttributes: new {@class = "control-label col-md-4"})
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="material-switch">
+                <input class="form-control check-box" data-val="true" data-val-required="The HiddenNetwork field is required." id="HiddenNetwork" name="HiddenNetwork" type="checkbox" value="true">
+                <label for="HiddenNetwork" class="label-success"></label>
             </div>
+            @Html.ValidationMessageFor(model => model.HiddenNetwork, "", new { @class = "text-danger" })
         </div>
     </div>
-    
+
     <div class="form-group">
-        @Html.LabelFor(model => model.SecurityType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SecurityType, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SecurityType, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.SecurityType, htmlAttributes: new {@class = "control-label col-md-4"})
+        <div class="col-md-7">
+            @Html.DropDownListFor(model => model.SecurityType, new SelectList(Model.SecurityTypeValues(), "Key", "Value", "WEP"), htmlAttributes : new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.SecurityType, "", new {@class = "text-danger"})
         </div>
     </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+    <div class="form-group password-section">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new {@class = "control-label col-md-4"})
+        <div class="col-md-7">
+            @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
         </div>
     </div>
-    
+
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        //TODO: Enable client-side validation for WEP Password
+        var securityTypeValue = $("select#SecurityType").val();
+        var passwordSection = $(".password-section");
+        var passwordInput = passwordSection.find('input[type="password"]');
+        /*passwordInput.setPassword({ enableTextBoxButtonValue: "Change" });*/
+        if (securityTypeValue == 2) {
+            passwordSection.hide();
+        } else if (securityTypeValue == 0) {
+            passwordSection.show();
+            passwordSection.addClass('required');
+        } else {
+            passwordSection.show();
+            passwordSection.removeClass('required');
+        }
+
+        $("select#SecurityType").change(function() {
+            var securityTypeValue = $("select#SecurityType").val();
+            if (securityTypeValue == 2) {
+                passwordSection.hide();
+                passwordSection.removeClass('required');
+            } else if (securityTypeValue == 0) {
+                passwordSection.show();
+                passwordSection.addClass('required');
+                passwordInput.addClass('short');
+            } else {
+                passwordSection.show();
+                passwordSection.removeClass('required');
+                passwordInput.addClass('short');
+            }
+        });
+    });
+</script>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,10 @@ namespace CheckIn.Web.Models.Channel.Application
 
         public int ApplicationId { get; set; }
 
+        [DisplayName("Application Description")]
         public string ApplicationName { get; set; }
 
+        [DisplayName("Application Store Link")]
         public string ApplicationUrl { get; set; }
 
         public ApplicationEditModel()

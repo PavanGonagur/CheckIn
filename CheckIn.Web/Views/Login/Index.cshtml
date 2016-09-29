@@ -1,4 +1,4 @@
-﻿@model CheckIn.Web.Models.AdminModel
+﻿@model CheckIn.Web.Models.Login.LoginModel
 
 @{
     Layout = "";
@@ -16,28 +16,37 @@
 </head>
 <body>
     <section id="loginForm" class="login-panel">
-        @*<hgroup class="title">
-            <h2>Check In</h2>
-        </hgroup>*@
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
             <div class="panel panel-default">
+                <h3 class="panel-heading u-no-margin"><span class="brand-logo">Check In</span></h3>
                 <div class="panel-body">
-                    <h3 class="u-no-margin"><span class="brand-logo">Check In</span></h3>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email)
-                        @Html.ValidationMessageFor(m => m.Email)
+                    @**@
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(x => x.Email, new {placeholder = @"Email", @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                        <div class="col-md-2">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password)
-                        @Html.ValidationMessageFor(m => m.Password)
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+                            @Html.PasswordFor(x => x.Password, new {placeholder = @"Password", @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        <div class="col-md-2">
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group row">
                         <button class="btn btn-default btn-lg" type="submit">Login</button>
                     </div>
                 </div>
@@ -48,28 +57,38 @@
     @Scripts.Render("~/bundles/bootstrap")
 <style>
     .login-panel {
-        width: 600px;
+        width: 425px;
         display: block;
         position: absolute;
         top: 50%;
         height: 400px;
         margin-top: -200px;
         left: 50%;
-        margin-left: -300px;
+        margin-left: -222px;
         text-align: center;
+        
     }
-    .login-panel .form-group {
+
+    .login-panel .panel {
+        border-color: #bce8f1;
+    }
+
+    /*.login-panel .form-group {
         margin-bottom: 25px
     }
 
     .login-panel .form-group:last-child {
         margin-bottom: 15px
-    }
-    .login-panel .panel-body {
+    }*/
+    /*.login-panel .panel-body {
         padding-top: 25px
+    }*/
+    .login-panel .panel-heading {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
     }
-
-    .login-panel .form-group input {
+    /*.login-panel .form-group input {
         border: none;
         outline: 0;
         border-bottom: 1px solid #ccc;
@@ -79,6 +98,9 @@
 
     .login-panel .form-group input:focus {
         outline: 0
+    }*/
+    h3 {
+        margin-top: 0;
     }
 </style>
 </body>

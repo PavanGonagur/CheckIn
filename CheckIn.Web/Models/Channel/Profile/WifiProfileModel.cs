@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using CheckIn.Data;
 using CheckIn.Data.Entities;
+using CheckIn.Web.BusinessImpl;
 
 namespace CheckIn.Web.Models.Channel.Profile
 {
@@ -23,36 +24,85 @@ namespace CheckIn.Web.Models.Channel.Profile
         }
 
         [Required]
-        [DisplayName("ServiceSetIdentifierSsid")]
+        [DisplayName("SSID")]
         public string ServiceSetIdentifier { get; set; }
 
+        [DisplayName("Auto Join")]
         public bool AutoJoin { get; set; }
 
+        [DisplayName("Hidden Network")]
         public bool HiddenNetwork { get; set; }
 
+        [DisplayName("Security Type")]
         public int SecurityType { get; set; }
 
+        [DisplayName("Password")]
         public string Password { get; set; }
 
         public Dictionary<int, string> SecurityTypeValues()
         {
             Dictionary<int, string> securityTypeDropDown = new Dictionary<int, string>
             {
-                { 0, "None" },
-                { 1, "WEP" },
-                { 2, "WPA" }
+                { 0, "WEP" },
+                { 1, "WPA" },
+                { 2, "Open" }
             };
             return securityTypeDropDown;
         }
 
         public override CheckIn.Data.Entities.Profile ToEntity()
         {
-            return new CheckIn.Data.Entities.Profile
+            var profile = new CheckIn.Data.Entities.Profile
             {
                 ProfileId = ProfileId,
                 ChannelId = ChannelId,
-                Type = ProfileType.WiFi,
-                Data = new List<ProfileKeyValue>
+                Type = ProfileType.WiFi
+            };
+            if (profile.ProfileId > 0)
+            {
+                var existingProfile = new ProfileBusiness().RetrieveProfileById(profile.ProfileId);
+                profile.Data = new List<ProfileKeyValue>
+                {
+                    new ProfileKeyValue
+                    {
+                        Key = "ServiceSetIdentifier",
+                        Value = ServiceSetIdentifier,
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "ServiceSetIdentifier").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "AutoJoin",
+                        Value = AutoJoin.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "AutoJoin").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "HiddenNetwork",
+                        Value = HiddenNetwork.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "HiddenNetwork").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "SecurityType",
+                        Value = SecurityType.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "SecurityType").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "Password",
+                        Value = String.IsNullOrEmpty(Password) ? existingProfile.Data.First(x => x.Key == "Password").Value : Password,
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "Password").ProfileKeyValueId
+                    },
+                };
+            }
+            else
+            {
+                profile.Data = new List<ProfileKeyValue>
                 {
                     new ProfileKeyValue
                     {
@@ -79,8 +129,10 @@ namespace CheckIn.Web.Models.Channel.Profile
                         Key = "Password",
                         Value = Password
                     },
-                }
-            };
+                };
+            }
+            
+            return profile;
         }
 
         public BaseProfileModel ToModel(CheckIn.Data.Entities.Profile wifiProfile)

@@ -1,5 +1,7 @@
 ﻿@model CheckIn.Web.Models.Channel.ChannelWebClipListModel
 
+<br/>
+
 <p>
     @Html.ActionLink("Back", "Index", "Channel", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Add", "AddWebClips", "Channel", new { id = Model.ChannelId }, new { @class = "modal-link btn btn-success" })
@@ -9,17 +11,27 @@
 <div>
     <table class="table">
         <tr>
-            <th>Name</th>
-            <th>URL</th>
-            <th>Open In Browser</th>
+            <th class="col-lg-4">Name</th>
+            <th class="col-lg-3">URL</th>
+            <th class="col-lg-3">Open In Browser</th>
+            <th class="col-lg-2"></th>
         </tr>
         @foreach (var item in Model.WebClips)
             {
             <tr>
-                <td>@item.WebClipName</td>
-                <td>@item.WebClipUrl</td>
-                <td>@item.OpenInBrowser</td>
-                @Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.WebClipId }, new { @class = "btn btn-danger" })
+                <td class="col-lg-4">@item.WebClipName</td>
+                <td class="col-lg-3">@item.WebClipUrl</td>
+                <td class="col-lg-3">
+                    @if (item.OpenInBrowser)
+                    {
+                        <p class="green-icon"><span class="glyphicon glyphicon-ok-sign"></span></p>
+                    }
+                    else
+                    {
+                        <p class="red-icon"><span class="glyphicon glyphicon-minus-sign"></span></p>
+                    }
+                </td>
+                <td class="col-lg-2">@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.WebClipId }, new { @class = "btn btn-danger" })</td>
             </tr>
         }
     </table>

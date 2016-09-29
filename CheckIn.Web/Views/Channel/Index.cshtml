@@ -1,10 +1,18 @@
 ﻿@using CheckIn.Data
+@using CheckIn.Web.Utilities
 @model CheckIn.Web.Models.Channel.ChannelListModel
 
-<p>
-    @Html.ActionLink("Add", "Create", "Channel", null, new {@class = "modal-link btn btn-success"})
-</p>
+<br/>
 
+@if (SessionUtility.CurrentAdmin.IsSuperAdmin)
+{
+    <p>
+
+        @Html.ActionLink("Add", "Create", "Channel", null, new { @class = "modal-link btn btn-success" })
+    </p>
+}
+
+@*
 <table class="table">
     <tr>
         <th>
@@ -19,15 +27,126 @@
         <th>
             @Html.DisplayNameFor(model => model.ChannelCardModels.FirstOrDefault().Users)
         </th>
-        @*<th>
+        $1$<th>
             @Html.DisplayNameFor(model => model.Channels.FirstOrDefault().IsSuperAdmin)
-        </th>*@
+        </th>#1#
         <th></th>
     </tr>
+*@
 
     @foreach (var item in Model.ChannelCardModels)
     {
-        <tr>
+        <div class="panel grid-row">
+            <div class="row details-row">
+                <div class="channel-title col-lg-4">
+                    @if (!item.IsPublic)
+                    {
+                        <span class="glyphicon glyphicon-lock"></span>
+                    }
+                    @if (item.IsLocationBased)
+                    {
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                    }
+                    <span class="">@Html.DisplayFor(modelItem => item.Name)</span>
+                </div>
+                <div class="col-lg-2">
+                    
+                </div>
+                <div class="col-lg-2">
+                    
+                </div>
+                <div class="actions col-lg-2">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-3">
+                        <a class="modal-link btn btn-default" href="@Url.Action("Edit", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-pencil"></span></a>
+                        @*@Html.ActionLink("Edit", "Edit", "Channel", new {id = item.ChannelId}, new {@class = "modal-link btn btn-warning"})*@
+                    </div>
+                    <div class="col-lg-1"></div>
+                    @if (SessionUtility.CurrentAdmin.IsSuperAdmin)
+                    {
+                        <div class="col-lg-3">
+                            <a class="modal-link btn btn-default" href="@Url.Action("Delete", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-remove"></span></a>
+                            @*@Html.ActionLink("Delete", "Delete", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-danger"})*@
+                        </div>
+                    }
+                </div>
+                
+            </div>
+            <div class="tile-row row">
+                <div class="panel tile col-lg-2">
+                    @*@Html.ActionLink("Users", "Users", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" })*@
+                    <div class="row tile-title">
+                        <span>Users</span>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-default btn-tile" href="@Url.Action("Users", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-user"></span></a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="panel tile col-lg-2">
+                    <div class="row tile-title">
+                        <span>Profiles</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-signal"></span></a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-bell"></span></a>
+                            @*@Html.ActionLink("Ringer", "AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi}, new {@class = "modal-link btn btn-success"})*@
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="panel tile col-lg-2">
+                    <div class="row tile-title">
+                        <span>Web Clips</span>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-default btn-tile" href="@Url.Action("WebClips", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-link"></span></a>
+                    </div>
+                    
+                    
+                    @*@Html.ActionLink("WebClips", "WebClips", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
+                </div>
+                <div class="panel tile col-lg-2">
+                    <div class="row tile-title">
+                        <span>Applications</span>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-default btn-tile" href="@Url.Action("Applications", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-th"></span></a>
+                    </div>
+                    
+                    
+                    @*@Html.ActionLink("Applications", "Applications", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
+                </div>
+                <div class="panel tile col-lg-2">
+                    <div class="row tile-title">
+                        <span>Locations</span>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-default btn-tile" href="@Url.Action("Locations", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-map-marker"></span></a>
+                    </div>
+                    
+                    
+                    @*@Html.ActionLink("Locations", "Locations", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
+                </div>
+                <div class="panel tile col-lg-2">
+                    <div class="row tile-title">
+                        <span>Contacts</span>
+                    </div>
+                    <div class="row">
+                        <a class="btn btn-default btn-tile" href="@Url.Action("Contacts", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-credit-card"></span></a>
+                    </div>
+                    
+                    
+                    @*@Html.ActionLink("Contacts", "Contacts", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
+                </div>
+            </div>
+        </div>
+@*        <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -40,9 +159,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Users)
             </td>
-            @*<td>
+            $1$<td>
                 @Html.DisplayFor(modelItem => item.IsSuperAdmin)
-            </td>*@
+            </td>#1#
             <td>
                 @Html.ActionLink("Edit", "Edit", "Channel", new { id = item.ChannelId }, new { @class = "modal-link btn btn-warning" }) |
                 @Html.ActionLink("Users", "Users", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
@@ -54,7 +173,48 @@
                 @Html.ActionLink("Contacts", "Contacts", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" }) |
                 @Html.ActionLink("Delete", "Delete", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-danger" })
             </td>
-        </tr>
+        </tr>*@
     }
 
-</table>
+@*</table>*@
+
+<style>
+    .panel {
+        border-radius: 0px;
+    }
+    .tile {
+        display: inline-block;
+        min-height: 100px;
+        max-width: 200px;
+        padding: 20px 0;
+        margin-left: 20px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #eee;
+    }
+    .tile-row {
+        margin-top: 20px;
+    }
+    .grid-row {
+        min-height: 150px;
+        border-top: 1px solid black;
+    }
+    .btn-tile {
+        padding: 20px;
+        color: green;
+        font-size: 1.8em;
+    }
+    .channel-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        
+    }
+    .details-row {
+        padding-top: 10px;
+    }
+
+    .tile-title {
+        font-size: 1.2em;
+        font-weight:500;
+    }
+</style>

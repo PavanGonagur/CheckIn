@@ -23,6 +23,13 @@ namespace CheckIn.Handler.HandlerImpl
         public int AddOrUpdateProfile(Profile profile)
         {
             this.checkInDb.Profiles.AddOrUpdate(profile);
+            if (profile.ProfileId > 0)
+            {
+                foreach (var profileKeyValue in profile.Data)
+                {
+                    AddOrUpdateProfileKeyValue(profileKeyValue);
+                }
+            }
             this.checkInDb.SaveChanges();
             var query = from r in this.checkInDb.Profiles
                         orderby r.ProfileId descending

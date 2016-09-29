@@ -59,11 +59,18 @@ namespace CheckIn.Web.BusinessImpl
                                                ChannelId = channel.ChannelId,
                                                IsLocationBased = channel.IsLocationBased,
                                                IsPublic = channel.IsPublic,
-                                               CoordinatesModel = new CoordinatesModel()
-                                                                      {
-                                                   Latitude = channel.Latitude,
-                                                   Longitude = channel.Longitude
-                                               },
+                                               Description = channel.Description,
+                                               TimeOfActivation = channel.TimeOfActivation,
+                                               TimeOfDeactivation = channel.TimeOfDeactivation,
+                                               CoordinatesModel = new List<CoordinatesModel>()
+                    {
+                        new CoordinatesModel()
+                            {
+                                Latitude = channel.Latitude,
+                        Longitude = channel.Longitude
+                            }
+
+                    },
                                                
                                                Resources = new ResourceModel()
                                                                {
@@ -135,10 +142,17 @@ namespace CheckIn.Web.BusinessImpl
                     ChannelId = channel.ChannelId,
                     IsLocationBased = channel.IsLocationBased,
                     IsPublic = channel.IsPublic,
-                    CoordinatesModel = new CoordinatesModel()
+                    TimeOfActivation = channel.TimeOfActivation,
+                    TimeOfDeactivation = channel.TimeOfDeactivation,
+                    Description = channel.Description,
+                    CoordinatesModel = new List<CoordinatesModel>()
                     {
-                        Latitude = channel.Latitude,
+                        new CoordinatesModel()
+                            {
+                                Latitude = channel.Latitude,
                         Longitude = channel.Longitude
+                            }
+                        
                     },
 
                     Resources = new ResourceModel()

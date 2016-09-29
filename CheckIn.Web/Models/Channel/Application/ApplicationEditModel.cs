@@ -12,7 +12,7 @@ namespace CheckIn.Web.Models.Channel.Application
 
         public int ApplicationId { get; set; }
 
-        [DisplayName("Application Description")]
+        [DisplayName("Application Name")]
         public string ApplicationName { get; set; }
 
         [DisplayName("Application Store Link")]

@@ -45,7 +45,7 @@ namespace CheckIn.Web.BusinessImpl
             if (channels != null && channels.Count > 0)
             {
                 var channelListModel = new ChannelListModel();
-                var channelsDummy = channels.Select(channel => new ChannelModelResponse(channel) { IsAuthenticated = channel.UserChannelMaps.Single(x => x.UserId == userId).Otp == null }).ToList();
+                var channelsDummy = channels.Select(channel => new ChannelModelResponse(channel) { IsAuthenticated = channel.IsPublic ? true : channel.UserChannelMaps.Single(x => x.UserId == userId).Otp == null }).ToList();
                 channelListModel.Channels = channelsDummy;
                 return channelListModel;
                 /*return new ChannelListModel()

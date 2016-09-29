@@ -9,6 +9,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Common;
     using CheckIn.Web.Models.Channel;
     using CheckIn.Web.Models.Chat;
     using CheckIn.Web.Utilities;
@@ -41,8 +42,8 @@ namespace CheckIn.Web.BusinessImpl
         {
             if (chatMessageModel.IsImage)
             {
-                var imageUrl = ImageUtility.UploadAndGetImageUrl(chatMessageModel.ImageArray);
-                chatMessageModel.Message = imageUrl;
+                var fileName = ImageUtility.UploadAndGetFileName(chatMessageModel.ImageArray);
+                chatMessageModel.Message = Constants.ServerUrl + "MyImages/ChatMessage/" + fileName;
             }
             var chatMessage = new ChatMessage()
                                   {
@@ -61,6 +62,12 @@ namespace CheckIn.Web.BusinessImpl
             var json = JsonConvert.SerializeObject(fcmPayload);
             this.fcmNotification.SendNotification(json);
         }
-        
+
+        public int AddChatRoom(ChatRoomModel chatRoomModel)
+        {
+            var chatRoom = chatRoomModel.ToEntity();
+            var chatRoomId = this.chatHandler.AddChatRoom(chatRoom);
+            return chatRoomId;
+        }
     }
 }

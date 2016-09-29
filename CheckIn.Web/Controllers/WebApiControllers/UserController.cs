@@ -11,6 +11,7 @@
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
     using CheckIn.Web.BusinessImpl;
+    using CheckIn.Web.Common;
     using CheckIn.Web.Models;
     using CheckIn.Web.Utilities;
 
@@ -150,8 +151,9 @@
                 //Status status;
                 //var stream = await this.Request.Content.ReadAsStringAsync();
                 //var image = JsonConvert.DeserializeObject<Image>(stream);
-                var imageArray = ImageUtility.ReadImageFile("");
-                ImageUtility.UploadAndGetImageUrl(imageArray);
+                //var imageArray = ImageUtility.ReadImageFile("D:\\Calc\\Id.jpg");
+                //var filename = ImageUtility.UploadAndGetImageUrl(imageArray);
+                //return Constants.ServerUrl + "MyImages/ChatMessage/" + filename;
 
                 //var userId = this.userBusiness.AddUser(user).ToString();
                 //if (userId.Equals("0"))

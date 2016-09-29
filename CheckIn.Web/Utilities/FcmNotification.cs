@@ -11,7 +11,7 @@ namespace CheckIn.Web.Utilities
 {
     public class FcmNotification : INotification
     {
-        private const string GoogleAppID = "AIzaSyB0WE4H1y7wb9Q-S-psJTiLxR7tG7r7S6g";
+        private const string GoogleAppID = "AIzaSyCupX5MIWo_kEJnX-f6C9HMHvyVSCkwA_w";
         
         public bool SendNotification(string value)
         {
@@ -46,6 +46,21 @@ namespace CheckIn.Web.Utilities
             {
                 return false;
             }
+        }
+
+        public enum ResourceType
+        {
+            Profiles,
+
+            Url,
+
+            Application,
+
+            Contact,
+
+            Venue,
+
+            ChatRoom
         }
     }
 }

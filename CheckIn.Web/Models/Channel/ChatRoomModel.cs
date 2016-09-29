@@ -9,6 +9,7 @@ namespace CheckIn.Web.Models.Channel
 
     public class ChatRoomModel
     {
+        public int ChannelId { get; set; }
         public int ChatRoomId { get; set; }
 
         public string Name { get; set; }
@@ -33,8 +34,9 @@ namespace CheckIn.Web.Models.Channel
                                {
                                    ChatRoomId = this.ChatRoomId,
                                    ChatMessage = this.ChatMessages.Select(x => x.ToEntity()).ToList(),
-                                   Name = this.Name
-                               };
+                                   Name = this.Name,
+                                   ChannelId = this.ChannelId
+            };
             return chatRoom;
         }
     }

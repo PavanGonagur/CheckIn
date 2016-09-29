@@ -20,5 +20,11 @@ namespace CheckIn.Web.Common
         public const string PrivateChannelNoGeoBasedRestrictionBody = 
             "Hi you have been invited to attend {0} via CheckIn. Your OTP to login to channel is {1}";
 
+        public const string AdminPasswordBody = "Hi {0}, your password to login CheckIn Console {1}. Link to CheckIn console {2}";
+
+        public const string AdminPasswordSubject = "CheckIn console Password Information";
+
+        public const string ServerUrl = "http://10.5.83.73/CheckIn/";
+
     }
 }

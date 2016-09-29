@@ -9,6 +9,8 @@ using CheckIn.Data.Entities;
 
 namespace CheckIn.Web.Models.Channel.Profile
 {
+    using CheckIn.Web.BusinessImpl;
+
     public class WifiProfileModel : BaseProfileModel
     {
         public WifiProfileModel()
@@ -47,12 +49,57 @@ namespace CheckIn.Web.Models.Channel.Profile
 
         public override CheckIn.Data.Entities.Profile ToEntity()
         {
-            return new CheckIn.Data.Entities.Profile
+            var profile = new CheckIn.Data.Entities.Profile
             {
                 ProfileId = ProfileId,
                 ChannelId = ChannelId,
-                Type = ProfileType.WiFi,
-                Data = new List<ProfileKeyValue>
+                Type = ProfileType.WiFi
+            };
+            if (profile.ProfileId > 0)
+            {
+                var existingProfile = new ProfileBusiness().RetrieveProfileById(profile.ProfileId);
+                profile.Data = new List<ProfileKeyValue>
+                {
+                    new ProfileKeyValue
+                    {
+                        Key = "ServiceSetIdentifier",
+                        Value = ServiceSetIdentifier,
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "ServiceSetIdentifier").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "AutoJoin",
+                        Value = AutoJoin.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "AutoJoin").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "HiddenNetwork",
+                        Value = HiddenNetwork.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "HiddenNetwork").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "SecurityType",
+                        Value = SecurityType.ToString(),
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "SecurityType").ProfileKeyValueId
+                    },
+                    new ProfileKeyValue
+                    {
+                        Key = "Password",
+                        Value = Password,
+                        ProfileId = profile.ProfileId,
+                        ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "Password").ProfileKeyValueId
+                    },
+                };
+            }
+            else
+            {
+                profile.Data = new List<ProfileKeyValue>
                 {
                     new ProfileKeyValue
                     {
@@ -79,8 +126,10 @@ namespace CheckIn.Web.Models.Channel.Profile
                         Key = "Password",
                         Value = Password
                     },
-                }
-            };
+                };
+            }
+
+            return profile;
         }
 
         public BaseProfileModel ToModel(CheckIn.Data.Entities.Profile wifiProfile)

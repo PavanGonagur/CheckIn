@@ -20,10 +20,14 @@ namespace CheckIn.Web.Models.Channel
         public ChannelListModel Fetch(int id, string searchText = "")
         {
             var channels = new ChannelBusiness().GetChannelsForAdmin(id);
-            foreach (var channel in channels)
+            if (channels != null)
             {
-                ChannelCardModels.Add(new ChannelCardModel().ToModel(channel));
+                foreach (var channel in channels)
+                {
+                    ChannelCardModels.Add(new ChannelCardModel().ToModel(channel));
+                }
             }
+            
             return this;
         }
     }

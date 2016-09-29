@@ -32,7 +32,7 @@ namespace CheckIn.Web.Utilities
             }
             catch (Exception ex)
             {
-                throw;
+                //throw;
             }
         }
     }

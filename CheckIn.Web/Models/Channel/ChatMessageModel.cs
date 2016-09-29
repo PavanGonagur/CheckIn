@@ -6,6 +6,7 @@ using System.Web;
 namespace CheckIn.Web.Models.Channel
 {
     using CheckIn.Data.Entities;
+    using CheckIn.Web.Utilities;
 
     public class ChatMessageModel
     {
@@ -25,6 +26,8 @@ namespace CheckIn.Web.Models.Channel
 
         public string TimeOfGeneration { get; set; }
 
+        public string UserName { get; set; }
+
         public ChatMessageModel()
         {
             
@@ -39,6 +42,7 @@ namespace CheckIn.Web.Models.Channel
             this.Message = chatMessage.Message;
             this.TimeOfGeneration = chatMessage.TimeOfGeneration;
             this.IsImage = chatMessage.IsImage;
+            this.UserName = chatMessage.User.Name;
         }
 
         public ChatMessage ToEntity()

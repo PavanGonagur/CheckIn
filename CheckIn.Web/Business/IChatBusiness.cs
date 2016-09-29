@@ -10,5 +10,7 @@ namespace CheckIn.Web.Business
     public interface IChatBusiness
     {
         void AddChatMessage(ChatMessageModel chatMessage);
+
+        int AddChatRoom(ChatRoomModel chatRoomModel);
     }
 }

@@ -115,7 +115,9 @@ namespace CheckIn.Handler.HandlerImpl
             {
                 if (tempUsers.Any())
                 {
-                    query.ToList().AddRange(tempUsers.ToList());
+                    var users = query.ToList();
+                    users.AddRange(tempUsers.ToList());
+                    return users;
                 }
                 return query.OrderBy(x => x.Email).ToList();
             }

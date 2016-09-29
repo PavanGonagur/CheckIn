@@ -9,6 +9,7 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Handler.Handler;
     using CheckIn.Handler.HandlerImpl;
     using CheckIn.Web.Business;
+    using CheckIn.Web.Common;
     using CheckIn.Web.Models;
     using CheckIn.Web.Utilities;
 
@@ -42,7 +43,7 @@ namespace CheckIn.Web.BusinessImpl
 
             return this.adminHandler.AddAdmin(userEntity);
         }
-
+         
         public int Save(AdminModel model)
         {
             var adminEntity = model.ToEntity();
@@ -51,6 +52,12 @@ namespace CheckIn.Web.BusinessImpl
                 this.adminHandler.UpdateAdmin(adminEntity);
                 return model.AdminId;
             }
+            EmailGateway.SendMail(new EmailModel()
+                                      {
+                                          Body = string.Format(Constants.AdminPasswordBody,adminEntity.Name,adminEntity.Password,Constants.ServerUrl),
+                                          Subject = Constants.AdminPasswordSubject,
+                                          To = adminEntity.Email
+                                      });
             return this.adminHandler.AddAdmin(adminEntity);
         }
 

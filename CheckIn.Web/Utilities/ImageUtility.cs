@@ -27,28 +27,29 @@ namespace CheckIn.Web.Utilities
         public static byte[] ReadImageFile(string imageLocation)
         {
             byte[] imageData = null;
-            FileInfo fileInfo = new FileInfo("D:\\Calc\\Id.jpg");
+            FileInfo fileInfo = new FileInfo(imageLocation);
             long imageFileLength = fileInfo.Length;
-            FileStream fs = new FileStream("D:\\Calc\\Id.jpg", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(imageLocation, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(fs);
             imageData = br.ReadBytes((int)imageFileLength);
             return imageData;
         }
 
-        public static string UploadAndGetImageUrl(byte[] imageArray)
+        public static string UploadAndGetFileName(byte[] imageArray)
         {
-            var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/ChatMessage/") + Guid.NewGuid()+ ".jpg";
+            var filename = Guid.NewGuid() + ".jpg";
+            var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/ChatMessage/") + filename;
             try
             {
                 if (System.IO.File.Exists(filePath))
                 {
                     System.IO.File.Delete(filePath);
                     System.IO.File.WriteAllBytes(filePath, imageArray);
-                    return "success";
+                    return filename;
                 }
                 System.IO.File.WriteAllBytes(filePath, imageArray);
                 
-                return "success";
+                return filename;
             }
             catch (Exception ex)
             {

@@ -18,6 +18,6 @@ namespace CheckIn.Web.Business
 
         void ResendOtp(ResendOtpModel resendOtpModel);
 
-        RegisterToChannelResponseModel GetPublicChannel(GetPublicChannelModel registerToChannelModel);
+        RegisterToChannelResponseModel GetChannel(GetChannelModel registerToChannelModel);
     }
 }

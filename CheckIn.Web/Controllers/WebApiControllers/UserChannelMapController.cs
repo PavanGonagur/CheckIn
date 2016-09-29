@@ -50,15 +50,15 @@ namespace CheckIn.Web.Controllers.WebApiControllers
         }
 
         [HttpPost]
-        [Route("GetPublicChannel")]
-        public async Task<string> GetPublicChannel()
+        [Route("GetChannel")]
+        public async Task<string> GetChannel()
         {
             try
             {
                 var stream = await this.Request.Content.ReadAsStringAsync();
-                var registerToChannel = JsonConvert.DeserializeObject<GetPublicChannelModel>(stream);
+                var registerToChannel = JsonConvert.DeserializeObject<GetChannelModel>(stream);
                 Status status;
-                var channel = this.channelBusiness.GetPublicChannel(registerToChannel);
+                var channel = this.channelBusiness.GetChannel(registerToChannel);
                 if (channel != null)
                 {
                     status = new Status() { Code = 0, Message = "Got Channel details" };

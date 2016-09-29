@@ -56,9 +56,9 @@ namespace CheckIn.Web.Controllers.WebApiControllers
             {
                 Status status;
                 var stream = await this.Request.Content.ReadAsStringAsync();
-                var chatMessage = JsonConvert.DeserializeObject<ChatMessageModel>(stream);
+                var chatRoom = JsonConvert.DeserializeObject<ChatRoomModel>(stream);
 
-                this.chatBusiness.AddChatMessage(chatMessage);
+                this.chatBusiness.AddChatRoom(chatRoom);
 
                 status = new Status() { Code = 0, Message = "Message sent" };
                 return JsonConvert.SerializeObject(new ResponseMessage() { Status = status });

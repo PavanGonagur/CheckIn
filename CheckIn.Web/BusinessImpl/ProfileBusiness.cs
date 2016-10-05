@@ -63,6 +63,13 @@ namespace CheckIn.Web.BusinessImpl
                 
                 return new WifiProfileModel(channelId, type).ToModel(wifiProfile);
             }
+            if (type == ProfileType.Silent)
+            {
+                var profiles = RetrieveProfilesByChannelId(channelId);
+                var ringerProfile = profiles?.FirstOrDefault(x => x.Type == ProfileType.Silent);
+
+                return new RingerProfileModel(channelId, type).ToModel(ringerProfile);
+            }
             return new WifiProfileModel(channelId, type);
         }
     }

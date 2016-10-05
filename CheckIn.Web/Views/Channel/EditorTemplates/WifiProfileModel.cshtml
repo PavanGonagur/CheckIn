@@ -58,7 +58,12 @@
 
 <script>
     $(document).ready(function () {
-
+        if ('@Model.AutoJoin' == 'True') {
+            $("input#AutoJoin").prop('checked', true);
+        }
+        if ('@Model.HiddenNetwork' == 'True') {
+            $("input#HiddenNetwork").prop('checked', true);
+        }
         //TODO: Enable client-side validation for WEP Password
         var securityTypeValue = $("select#SecurityType").val();
         var passwordSection = $(".password-section");

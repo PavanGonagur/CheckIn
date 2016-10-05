@@ -141,9 +141,19 @@ namespace CheckIn.Web.Controllers
         }
 
         // GET: Channel/Delete/5
+        [HttpGet]
         public ActionResult DeleteApplication(int id)
         {
-            return View();
+            return PartialView("_DeleteConfirmation", new DeleteModel {Id = id});
+        }
+
+        // GET: Channel/Delete/5
+        [HttpPost]
+        public ActionResult DeleteApplication(DeleteModel model)
+        {
+            var application = applicationBusiness.RetrieveApplicationById(model.Id);
+            applicationBusiness.DeleteApplication(application);
+            return RedirectToAction("Applications", new { id = application.ChannelId });
         }
 
         #endregion
@@ -276,7 +286,10 @@ namespace CheckIn.Web.Controllers
             try
             {
                 //TODO Add Users To Channel
-                profileBusiness.AddProfile(model.ToEntity());
+                if (model.ProfileType == ProfileType.WiFi)
+                {
+                    profileBusiness.AddProfile(model.ToEntity());
+                }
                 return RedirectToAction("Index");
             }
             catch
@@ -318,7 +331,7 @@ namespace CheckIn.Web.Controllers
                 var model = channelBusiness.GetChannel(id);
                 return PartialView("_Create", model);
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

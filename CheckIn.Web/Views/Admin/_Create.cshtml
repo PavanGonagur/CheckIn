@@ -98,6 +98,9 @@
 
 <script type="text/javascript">
     $(function () {
+        if ('@Model.IsSuperAdmin' == 'True') {
+            $("input#IsSuperAdmin").prop('checked', true);
+        }
         $('#approve-btn').click(function () {
             $('#modal-container').modal('hide');
         });

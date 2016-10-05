@@ -92,8 +92,8 @@
                         <div class="col-md-6">
                             <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-signal"></span></a>
                         </div>
-                        <div class="col-md-6">
-                            <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-bell"></span></a>
+                        <div class="col-lg-6">
+                            <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.Silent})"><span class="glyphicon glyphicon-bell"></span></a>
                             @*@Html.ActionLink("Ringer", "AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi}, new {@class = "modal-link btn btn-success"})*@
                         </div>
                     </div>

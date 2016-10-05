@@ -25,7 +25,7 @@
                 <tr>
                     <td class="col-lg-4">@item.ApplicationName</td>
                     <td class="col-lg-6">@item.ApplicationUrl</td>
-                    <td class="col-lg-2">@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })</td>
+                    <td class="col-lg-2">@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "modal-link btn btn-danger" })</td>
                 </tr>
             }
         </tbody>

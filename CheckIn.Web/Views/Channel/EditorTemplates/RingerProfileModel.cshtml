@@ -1,0 +1,17 @@
+﻿@model CheckIn.Web.Models.Channel.Profile.RingerProfileModel
+@{
+
+}
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SoundSetting, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-7">
+            @Html.DropDownListFor(model => model.SoundSetting, new SelectList(Model.SoundSettingValues(), "Key", "Value", 0), htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SoundSetting, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+

@@ -117,9 +117,15 @@
 
 <script type="text/javascript">
     $(function () {
-        /*$('#approve-btn').click(function () {
+        if ('@Model.IsLocationBased' == 'True') {
+            $("input#IsLocationBased").prop('checked', true);
+        }
+        if ('@Model.IsPublic' == 'True') {
+            $("input#IsPublic").prop('checked', true);
+        }
+        $('#approve-btn').click(function () {
             $('#modal-container').modal('hide');
-        });*/
+        });
         $('#datetimepicker1').datetimepicker();
         $('#datetimepicker2').datetimepicker({
             useCurrent: false //Important! See issue #1075

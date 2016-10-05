@@ -282,6 +282,7 @@
     <Compile Include="Models\Channel\ProfileModel.cs" />
     <Compile Include="Models\Channel\Profile\BaseProfileModel.cs" />
     <Compile Include="Models\Channel\Profile\ProfileViewModel.cs" />
+    <Compile Include="Models\Channel\Profile\RingerProfileModel.cs" />
     <Compile Include="Models\Channel\Profile\WifiProfileModel.cs" />
     <Compile Include="Models\Channel\ResourceModel.cs" />
     <Compile Include="Models\Channel\RetireveChannelByLocationAndUserModel.cs" />
@@ -292,6 +293,7 @@
     <Compile Include="Models\Channel\ChannelUser.cs" />
     <Compile Include="Models\Channel\ChannelUserModel.cs" />
     <Compile Include="Models\Channel\ChannelViewModel.cs" />
+    <Compile Include="Models\DeleteModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -403,6 +405,7 @@
     <Content Include="Views\Channel\Applications.cshtml" />
     <Content Include="Views\Channel\Contacts.cshtml" />
     <Content Include="Views\Admin\Channels.cshtml" />
+    <Content Include="Views\Channel\EditorTemplates\RingerProfileModel.cshtml" />
     <None Include="Views\Channel\Index.cshtml" />
     <Content Include="Views\Channel\Locations.cshtml" />
     <None Include="Views\Channel\Users.cshtml" />
@@ -415,6 +418,7 @@
     <Content Include="Views\Channel\_ChannelWebClips.cshtml" />
     <None Include="Views\Channel\_Create.cshtml" />
     <Content Include="Views\Channel\_EditProfile.cshtml" />
+    <Content Include="Views\Shared\_DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

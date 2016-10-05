@@ -62,6 +62,9 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        if ('@Model.OpenInBrowser' == 'True') {
+            $("input#OpenInBrowser").prop('checked', true);
+        }
         $('.approve-btn').click(function () {
             $('#modal-container').modal('hide');
         });

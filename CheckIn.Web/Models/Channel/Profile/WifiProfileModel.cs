@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using CheckIn.Data;
 using CheckIn.Data.Entities;
+using CheckIn.Web.BusinessImpl;
 
 namespace CheckIn.Web.Models.Channel.Profile
 {
@@ -25,24 +26,28 @@ namespace CheckIn.Web.Models.Channel.Profile
         }
 
         [Required]
-        [DisplayName("ServiceSetIdentifierSsid")]
+        [DisplayName("SSID")]
         public string ServiceSetIdentifier { get; set; }
 
+        [DisplayName("Auto Join")]
         public bool AutoJoin { get; set; }
 
+        [DisplayName("Hidden Network")]
         public bool HiddenNetwork { get; set; }
 
+        [DisplayName("Security Type")]
         public int SecurityType { get; set; }
 
+        [DisplayName("Password")]
         public string Password { get; set; }
 
         public Dictionary<int, string> SecurityTypeValues()
         {
             Dictionary<int, string> securityTypeDropDown = new Dictionary<int, string>
             {
-                { 0, "None" },
-                { 1, "WEP" },
-                { 2, "WPA" }
+                { 0, "WEP" },
+                { 1, "WPA" },
+                { 2, "Open" }
             };
             return securityTypeDropDown;
         }
@@ -91,7 +96,7 @@ namespace CheckIn.Web.Models.Channel.Profile
                     new ProfileKeyValue
                     {
                         Key = "Password",
-                        Value = Password,
+                        Value = String.IsNullOrEmpty(Password) ? existingProfile.Data.First(x => x.Key == "Password").Value : Password,
                         ProfileId = profile.ProfileId,
                         ProfileKeyValueId = existingProfile.Data.First(x => x.Key == "Password").ProfileKeyValueId
                     },
@@ -128,7 +133,7 @@ namespace CheckIn.Web.Models.Channel.Profile
                     },
                 };
             }
-
+            
             return profile;
         }
 

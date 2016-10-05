@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CheckIn.Web.Utilities
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -28,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Check In", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Check In", "Index", "Channel", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="navbar-collapse collapse">
                     @*<ul class="nav navbar-nav">
@@ -48,9 +49,12 @@
                         <li>
                             @Html.ActionLink("Channels", "Index", "Channel")
                         </li>
-                        <li>
-                            @Html.ActionLink("Admins", "Index", "Admin")
-                        </li>
+                        @if (SessionUtility.CurrentAdmin?.IsSuperAdmin ?? false)
+                        {
+                            <li>
+                                @Html.ActionLink("Admins", "Index", "Admin")
+                            </li>
+                        }
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -71,6 +75,7 @@
         </div>
     </div>
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
     <script type="text/javascript">

@@ -143,13 +143,13 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +256,7 @@
     <Compile Include="Models\AddPhoneNumberModel.cs" />
     <Compile Include="Models\AddUserResponse.cs" />
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\Admin\AdminChannelListModel.cs" />
     <Compile Include="Models\Admin\AdminChannelMapModel.cs" />
     <Compile Include="Models\Admin\AdminChannelModel.cs" />
     <Compile Include="Models\Admin\AdminListModel.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Channel\RegisterToChannelResponseModel.cs" />
     <Compile Include="Models\ResendOtpModel.cs" />
@@ -321,6 +323,8 @@
     <Compile Include="Utilities\OTPUtility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap1.css" />
@@ -331,9 +335,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap1.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -343,6 +350,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -390,6 +402,7 @@
     <Content Include="Views\Channel\EditorTemplates\WifiProfileModel.cshtml" />
     <Content Include="Views\Channel\Applications.cshtml" />
     <Content Include="Views\Channel\Contacts.cshtml" />
+    <Content Include="Views\Admin\Channels.cshtml" />
     <None Include="Views\Channel\Index.cshtml" />
     <Content Include="Views\Channel\Locations.cshtml" />
     <None Include="Views\Channel\Users.cshtml" />

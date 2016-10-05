@@ -3,7 +3,14 @@
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel">Add new Admin</h4>
+    @if (Model.AdminId > 0)
+    {
+        <h4 class="modal-title" id="myModalLabel">Edit</h4>
+    }
+    else
+    {
+        <h4 class="modal-title" id="myModalLabel">Add new Admin</h4>
+    }
 </div>
 
 
@@ -16,22 +23,17 @@
             @Html.ValidationSummary(true, "", new {@class = "text-danger"})
             @Html.HiddenFor(model => model.AdminId)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Channels, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Channels, new {htmlAttributes = new {@class = "form-control"}})
-                </div>
-            </div>
-
             @if (SessionUtility.CurrentAdmin.IsSuperAdmin)
             {
                 <div class="form-group">
-                    @Html.LabelFor(model => model.IsSuperAdmin, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.IsSuperAdmin, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.IsSuperAdmin, "", new {@class = "text-danger"})
+                    @Html.LabelFor(model => model.IsSuperAdmin, htmlAttributes: new {@class = "control-label col-md-4"})
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        <div class="material-switch">
+                            <input class="form-control check-box" data-val="true" data-val-required="The IsSuperAdmin field is required." id="IsSuperAdmin" name="IsSuperAdmin" type="checkbox" value="true">
+                            <label for="IsSuperAdmin" class="label-success"></label>
                         </div>
+                        @Html.ValidationMessageFor(model => model.IsSuperAdmin, "", new { @class = "text-danger" })
                     </div>
                 </div>
             }
@@ -42,8 +44,8 @@
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-7">
                     @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
                 </div>
@@ -58,41 +60,27 @@
             </div>*@
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-7">
                     @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-7">
                     @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
                 </div>
             </div>
-            @if (Model.AdminId == 0)
-            {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-10">
-                        @Html.PasswordFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-7">
+                    @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
                 </div>
-            }
-            else
-            {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        Read-Only
-                        @Html.PasswordFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
-                    </div>
-                </div>
-            }
+            </div>
             <hr/>
             <div class="modal-footer">
                 @*<div class="col-md-10">*@

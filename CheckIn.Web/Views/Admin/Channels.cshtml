@@ -1,0 +1,32 @@
+﻿@model CheckIn.Web.Models.Admin.AdminChannelListModel
+
+<br/>
+
+<p>
+    @Html.ActionLink("Back", "Index", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddChannel", "Admin", new { id = Model.AdminId }, new { @class = "modal-link btn btn-success" })
+</p>
+
+<hr/>
+
+<div class="added-users-list">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th class="col-lg-4">Channel Name</th>
+            <th class="col-lg-6">Channel Description</th>
+            <th class="col-lg-2"></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var addedUser in Model.ChannelModels)
+            {
+                <tr>
+                    <td class="col-lg-4">@addedUser.ChannelName</td>
+                    <td class="col-lg-6">@addedUser.ChannelDescription</td>
+                    <td class="col-lg-2"><a class="btn btn-default btn-tile" href="@Url.Action("Delete", "Admin", new {id = addedUser.AdminId})"> <span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

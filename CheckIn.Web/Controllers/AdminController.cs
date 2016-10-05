@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CheckIn.Data.Entities;
 using CheckIn.Web.Business;
 using CheckIn.Web.BusinessImpl;
 using CheckIn.Web.Models;
@@ -16,11 +17,17 @@ namespace CheckIn.Web.Controllers
     {
         private readonly IAdminBusiness adminBusiness;
 
+        private readonly IAdminChannelMapBusiness adminChannelMapBusiness;
+
+        private readonly IChannelBusiness channelBusiness;
+
         private readonly IAuthenticationBusiness authenticationBusiness;
 
         public AdminController()
         {
             this.adminBusiness = new AdminBusiness();
+            this.adminChannelMapBusiness = new AdminChannelMapBusiness();
+            this.channelBusiness = new ChannelBusiness();
             this.authenticationBusiness = new AuthenticationBusiness();
         }
  
@@ -34,7 +41,39 @@ namespace CheckIn.Web.Controllers
         // GET: Admin/Details/5
         public ActionResult Channels(int id)
         {
-            return PartialView("_AdminChannels", new AdminChannelModel());
+            var channels = channelBusiness.GetChannelsForAdmin(id) ?? new List<Channel>();
+            var model = new AdminChannelListModel(id)
+            {
+                ChannelModels = channels.Select(x => new AdminChannelModel(id) {ChannelName = x.Name, ChannelDescription = x.Description}).ToList()
+            };
+            return View(model);
+        }
+
+        // GET: Admin/Details/5
+        public ActionResult AddChannel(int id)
+        {
+            var model = new AdminChannelModel(id);
+            return PartialView("_AdminChannels", model);
+        }
+
+        // POST: Channel/Create
+        [HttpPost]
+        public ActionResult AddChannel(AdminChannelModel model)
+        {
+            try
+            {
+                //TODO Add Users To Channel
+                var channel = channelBusiness.GetChannelOnText(model.ChannelName);
+                if (channel != null)
+                {
+                    adminChannelMapBusiness.AddAdminChannelMap(new AdminChannelMapModel {AdminId = model.AdminId, ChannelId = channel.ChannelId});
+                }
+                return RedirectToAction("Channels", new { id = model.AdminId });
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Admin/Create

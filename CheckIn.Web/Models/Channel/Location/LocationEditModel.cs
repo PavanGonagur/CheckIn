@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -11,10 +12,13 @@ namespace CheckIn.Web.Models.Channel.Location
 
         public int LocationId { get; set; }
 
+        [DisplayName("Location Name")]
         public string LocationName { get; set; }
 
+        [DisplayName("Latitude")]
         public float Latitude { get; set; }
 
+        [DisplayName("Longitude")]
         public float Longitude { get; set; }
 
         public LocationEditModel()

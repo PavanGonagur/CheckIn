@@ -1,24 +1,33 @@
 ﻿@model CheckIn.Web.Models.Channel.Application.ChannelApplicationListModel
 
+<br/>
+
 <p>
     @Html.ActionLink("Back", "Index", "Channel", null, new {@class = "btn btn-default"})
     @Html.ActionLink("Add", "AddApplications", "Channel", new {id = Model.ChannelId}, new {@class = "modal-link btn btn-success"})
 </p>
 
+<hr/>
+
 @Html.HiddenFor(x => x.ChannelId)
 <div>
-    <table class="table">
-        <tr>
-            <th>Application Name</th>
-            <th>Application Url</th>
-        </tr>
-        @foreach (var item in Model.Applications)
-            {
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>@item.ApplicationName</td>
-                <td>@item.ApplicationUrl</td>
-                <td>@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })</td>
+                <th class="col-lg-4">Application Name</th>
+                <th class="col-lg-6">Application Url</th>
+                <th class="col-lg-2"></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Applications)
+            {
+                <tr>
+                    <td class="col-lg-4">@item.ApplicationName</td>
+                    <td class="col-lg-6">@item.ApplicationUrl</td>
+                    <td class="col-lg-2">@Html.ActionLink("Delete", "DeleteApplication", "Channel", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })</td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

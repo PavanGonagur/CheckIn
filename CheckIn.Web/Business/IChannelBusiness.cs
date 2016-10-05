@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CheckIn.Data.Entities;
 
 namespace CheckIn.Web.Business
 {
@@ -15,5 +16,9 @@ namespace CheckIn.Web.Business
 
         ChannelModel GetChannelOnText(string searchText);
         ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);
+
+        ChannelViewModel GetChannel(int channelId);
+
+        List<Channel> GetChannelsForAdmin(int adminId);
     }
 }

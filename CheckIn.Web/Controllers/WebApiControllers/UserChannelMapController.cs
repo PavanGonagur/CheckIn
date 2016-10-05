@@ -60,7 +60,7 @@ namespace CheckIn.Web.Controllers.WebApiControllers
                 Status status;
                 var channel = this.channelBusiness.GetChannel(registerToChannel);
                 if (channel != null)
-                {
+                { 
                     status = new Status() { Code = 0, Message = "Got Channel details" };
                     return JsonConvert.SerializeObject(new ResponseMessage() { Data = channel, Status = status });
                 }

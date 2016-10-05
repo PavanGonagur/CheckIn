@@ -31,7 +31,7 @@ namespace CheckIn.Data.Migrations
             context.Admins.AddOrUpdate(
                   //new Person { FullName = "Andrew Peters" },
                   //new Person { FullName = "Brice Lambson" },
-                  new Admin { AdminId = 1, Name = "Pavan Gonagur", Email = "p@v.com", Password = "p", IsSuperAdmin = true, PhoneNumber = "1234567890" }
+                  new Admin { AdminId = 1, Name = "Pavan Gonagur", Email = "pavan@gmail.com", Password = "pavan", IsSuperAdmin = true, PhoneNumber = "8884444866" }
                 );
         }
     }

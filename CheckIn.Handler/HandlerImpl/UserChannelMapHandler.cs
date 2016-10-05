@@ -31,6 +31,7 @@ namespace CheckIn.Handler.HandlerImpl
                     //Once otp authentication is successful set otp to null
                     userChannelMap.ChannelId = currentChannel.ChannelId;
                     userChannelMap.Otp = null;
+                    userChannelMap.EmailId = currentChannel.EmailId;
                     this.AddUserChannelMap(userChannelMap);
                     return currentChannel;
                 }

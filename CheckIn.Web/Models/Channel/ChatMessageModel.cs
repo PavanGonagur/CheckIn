@@ -36,13 +36,13 @@ namespace CheckIn.Web.Models.Channel
         public ChatMessageModel(ChatMessage chatMessage)
         {
             this.ChatMessageId = chatMessage.ChatMessageId;
-            this.UserId = chatMessage.UserId;
+            this.UserId = chatMessage.IsAdminMessage ? 0 : chatMessage.UserId;
             this.ChatRoomId = chatMessage.ChatRoomId;
             this.IsAdminMessage = chatMessage.IsAdminMessage;
             this.Message = chatMessage.Message;
             this.TimeOfGeneration = chatMessage.TimeOfGeneration;
             this.IsImage = chatMessage.IsImage;
-            this.UserName = chatMessage.User.Name;
+            this.UserName = chatMessage.IsAdminMessage ? "Admin" : chatMessage.User?.Name ?? "Bot";
         }
 
         public ChatMessage ToEntity()

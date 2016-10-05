@@ -38,7 +38,7 @@
     {
         <div class="panel grid-row">
             <div class="row details-row">
-                <div class="channel-title col-lg-4">
+                <div class="channel-title col-md-4">
                     @if (!item.IsPublic)
                     {
                         <span class="glyphicon glyphicon-lock"></span>
@@ -49,22 +49,22 @@
                     }
                     <span class="">@Html.DisplayFor(modelItem => item.Name)</span>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-md-2">
                     
                 </div>
-                <div class="col-lg-2">
+                <div class="col-md-2">
                     
                 </div>
-                <div class="actions col-lg-2">
-                    <div class="col-lg-5"></div>
-                    <div class="col-lg-3">
+                <div class="actions col-md-2">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
                         <a class="modal-link btn btn-default" href="@Url.Action("Edit", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-pencil"></span></a>
                         @*@Html.ActionLink("Edit", "Edit", "Channel", new {id = item.ChannelId}, new {@class = "modal-link btn btn-warning"})*@
                     </div>
-                    <div class="col-lg-1"></div>
+                    <div class="col-md-1"></div>
                     @if (SessionUtility.CurrentAdmin.IsSuperAdmin)
                     {
-                        <div class="col-lg-3">
+                        <div class="col-md-3">
                             <a class="modal-link btn btn-default" href="@Url.Action("Delete", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-remove"></span></a>
                             @*@Html.ActionLink("Delete", "Delete", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-danger"})*@
                         </div>
@@ -73,7 +73,7 @@
                 
             </div>
             <div class="tile-row row">
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     @*@Html.ActionLink("Users", "Users", "Channel", new { id = item.ChannelId }, new { @class = "btn btn-success" })*@
                     <div class="row tile-title">
                         <span>Users</span>
@@ -84,15 +84,15 @@
                     </div>
                     
                 </div>
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     <div class="row tile-title">
                         <span>Profiles</span>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-signal"></span></a>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <a class="modal-link btn btn-default btn-tile" href="@Url.Action("AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi})"><span class="glyphicon glyphicon-bell"></span></a>
                             @*@Html.ActionLink("Ringer", "AddProfile", "Channel", new {id = item.ChannelId, profileType = ProfileType.WiFi}, new {@class = "modal-link btn btn-success"})*@
                         </div>
@@ -100,7 +100,7 @@
                     
                     
                 </div>
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     <div class="row tile-title">
                         <span>Web Clips</span>
                     </div>
@@ -111,7 +111,7 @@
                     
                     @*@Html.ActionLink("WebClips", "WebClips", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
                 </div>
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     <div class="row tile-title">
                         <span>Applications</span>
                     </div>
@@ -122,7 +122,7 @@
                     
                     @*@Html.ActionLink("Applications", "Applications", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
                 </div>
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     <div class="row tile-title">
                         <span>Locations</span>
                     </div>
@@ -133,7 +133,7 @@
                     
                     @*@Html.ActionLink("Locations", "Locations", "Channel", new {id = item.ChannelId}, new {@class = "btn btn-success"})*@
                 </div>
-                <div class="panel tile col-lg-2">
+                <div class="panel tile col-md-2">
                     <div class="row tile-title">
                         <span>Contacts</span>
                     </div>

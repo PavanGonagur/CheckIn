@@ -14,7 +14,7 @@ namespace CheckIn.Handler.HandlerImpl
     public class ChannelHandler: IChannelHandler
     {
         private readonly CheckInDb checkInDb;
-        private const float AssignmentLength = (float).05;
+        private const float AssignmentLength = (float).5;
         public ChannelHandler()
         {
             this.checkInDb = new CheckInDb();

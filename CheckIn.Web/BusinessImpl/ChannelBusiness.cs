@@ -13,15 +13,44 @@ namespace CheckIn.Web.BusinessImpl
     using CheckIn.Web.Business;
     using CheckIn.Web.Models.Channel;
 
+    using Microsoft.Ajax.Utilities;
+
     using ChannelModel = CheckIn.Web.Models.ChannelModel;
 
     public class ChannelBusiness : IChannelBusiness
     {
         private IChannelHandler channelHandler;
 
+        private IUserChannelMapHandler userChannelMapHandler;
+
+        private IAdminChannelMapHandler adminChannelMapHandler;
+
+        private IProfileHandler profileHandler;
+
+        private IApplicationHandler applicationHandler;
+
+        private ILocationHandler locationHandler;
+
+        private IContactHandler contactHandler;
+
+        private IWebClipHandler webClipHandler;
+
+        private IChatHandler chatHandler;
+
+        private IUserEmailChannelHandler userEmailChannelHandler;
+
         public ChannelBusiness()
         {
             this.channelHandler = new ChannelHandler();
+            this.adminChannelMapHandler = new AdminChannelMapHandler();
+            this.userChannelMapHandler = new UserChannelMapHandler();
+            this.profileHandler = new ProfileHandler();
+            this.applicationHandler = new ApplicationHandler();
+            this.locationHandler = new LocationHandler();
+            this.contactHandler = new ContactHandler();
+            this.webClipHandler = new WebClipHandler();
+            this.chatHandler = new ChatHandler();
+            this.userEmailChannelHandler = new UserEmailChannelHandler();
         }
         public int AddChannel(ChannelViewModel channelModel)
         {
@@ -60,6 +89,89 @@ namespace CheckIn.Web.BusinessImpl
             }
             this.channelHandler.UpdateChannel(channel);
             return channel.ChannelId;
+        }
+
+        public Channel RetrieveChannelById(int channelId)
+        {
+            return this.channelHandler.RetrieveChannel(channelId);
+        }
+
+        public void DeleteChannel(Channel channel)
+        {
+            var apps = this.applicationHandler.RetrieveApplicationsByChannelId(channel.ChannelId);
+            if (apps != null)
+            {
+                apps.ForEach(
+                x =>
+                {
+                    this.applicationHandler.DeleteApplication(x);
+                });
+            }
+            
+            var webs = this.webClipHandler.RetrieveWebClipsByChannelId(channel.ChannelId);
+            if (webs != null)
+            {
+                webs.ForEach(
+                x =>
+                {
+                    this.webClipHandler.DeleteWebClip(x);
+                });
+            }
+            
+            var conts = this.contactHandler.RetrieveContactsByChannelId(channel.ChannelId);
+            if (conts != null)
+            {
+                conts.ForEach(
+                x =>
+                {
+                    this.contactHandler.DeleteContact(x);
+                });
+            }
+            
+            var locs = this.locationHandler.RetrieveLocationsByChannelId(channel.ChannelId);
+            if (locs != null)
+            {
+                locs.ForEach(x => this.locationHandler.DeleteLocation(x));
+            }
+            
+            var chatMessages = this.chatHandler.RetrieveChatMessagesByChannelId(channel.ChannelId);
+            if (chatMessages != null)
+            {
+                chatMessages.ForEach(
+                x =>
+                {
+                    this.chatHandler.DeleteChatMessage(x);
+                });
+            }
+            var chatRoom = this.chatHandler.RetrieveChatRoomByChannelId(channel.ChannelId);
+            if(chatRoom != null)
+           this.chatHandler.DeleteChatRoom(chatRoom);
+            
+            //var profileKeyValues = this.profileHandler.
+            var profiles = this.profileHandler.RetrieveProfilesByChannelId(channel.ChannelId);
+            if (profiles != null)
+            {
+
+                profiles.ForEach(
+                    x =>
+                        {
+                            var profileKeyValues = this.profileHandler.RetrieveProfileKeyValuesByProfileId(x.ProfileId);
+                            profileKeyValues.ForEach(y => this.profileHandler.DeleteProfileKeyValue(y));
+                            this.profileHandler.DeleteProfile(x);
+                        });
+
+            }
+            
+            channel.UserChannelMaps.ForEach(x => this.userChannelMapHandler.DeleteUserChannelMap(x));
+            channel.AdminChannelMaps.ForEach(x => this.adminChannelMapHandler.DeleteAdminChannelMap(x));
+            var userEmailChannelMaps = this.userEmailChannelHandler.RetrieveUserEmailChannelOnChannelId(
+                channel.ChannelId);
+            if (userEmailChannelMaps != null)
+            {
+                userEmailChannelMaps.ForEach(x => this.userEmailChannelHandler.DeleteUserEmailChannel(x));
+            }
+            
+            this.channelHandler.DeleteChannel(channel);
         }
 
         public ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)

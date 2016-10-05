@@ -17,5 +17,7 @@ namespace CheckIn.Handler.Handler
         List<UserChannelMap> RetrieveUserChannelMapByChannelId(int channelId);
 
         UserChannelMap RetrieveUserChannelMapOnUserChannel(int userId, int channelId);
+
+        void DeleteUserChannelMap(UserChannelMap userChannelMap);
     }
 }

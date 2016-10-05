@@ -99,10 +99,23 @@ namespace CheckIn.Web.Controllers
             }
         }
 
-        public ActionResult DeleteUser(string email)
+        [HttpGet]
+        public ActionResult DeleteUser(string email, int channelId)
         {
-            return RedirectToAction("Users");
+            var formattedUserName = EmailUtility.GetFormattedEmailUserName(email.Split('@')[0]);
+            var user = this.userBusiness.RetrieveUserOnEmail(formattedUserName);
+            if (user != null)
+            {
+                this.userBusiness.UnassignUserForChannel(user, channelId);
+            }
+            else
+            {
+                this.userBusiness.DeleteUserEmailChannel(formattedUserName, channelId);
+            }
+            
+            return RedirectToAction("Users", new { id = channelId });
         }
+        
 
         #endregion
 
@@ -192,6 +205,22 @@ namespace CheckIn.Web.Controllers
             }
         }
 
+        // GET: Channel/Delete/5
+        [HttpGet]
+        public ActionResult DeleteWebClip(int id)
+        {
+            return PartialView("_DeleteConfirmation", new DeleteModel { Id = id });
+        }
+
+        // GET: Channel/Delete/5
+        [HttpPost]
+        public ActionResult DeleteWebClip(DeleteModel model)
+        {
+            var webClip = this.webClipBusiness.RetrieveWebClipById(model.Id);
+            this.webClipBusiness.DeleteWebClip(webClip);
+            return RedirectToAction("WebClips", new { id = webClip.ChannelId });
+        }
+
         #endregion
 
         #region Locations
@@ -226,6 +255,21 @@ namespace CheckIn.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteLocation(int id)
+        {
+            return PartialView("_DeleteConfirmation", new DeleteModel { Id = id });
+        }
+
+        // GET: Channel/Delete/5
+        [HttpPost]
+        public ActionResult DeleteLocation(DeleteModel model)
+        {
+            var loction = this.locationBusiness.RetrieveLocationById(model.Id);
+            this.locationBusiness.DeleteLocationn(loction);
+            return RedirectToAction("Locations", new { id = loction.ChannelId });
         }
 
         #endregion
@@ -264,6 +308,21 @@ namespace CheckIn.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DeleteContact(int id)
+        {
+            return PartialView("_DeleteConfirmation", new DeleteModel { Id = id });
+        }
+
+        // GET: Channel/Delete/5
+        [HttpPost]
+        public ActionResult DeleteContact(DeleteModel model)
+        {
+            var contact = this.contactBusiness.RetrieveContactById(model.Id);
+            this.contactBusiness.DeleteContact(contact);
+            return RedirectToAction("Contacts", new { id = contact.ChannelId });
+        }
+
         #endregion
 
         #region Profiles
@@ -297,7 +356,7 @@ namespace CheckIn.Web.Controllers
                 return View();
             }
         }
-
+        
         #endregion
 
         // GET: Channel/Create
@@ -353,28 +412,28 @@ namespace CheckIn.Web.Controllers
             }
         }
 
+        [HttpGet]
         // GET: Channel/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return PartialView("_DeleteConfirmation", new DeleteModel { Id = id });
         }
 
         // POST: Channel/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(DeleteModel model)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                var channel = this.channelBusiness.RetrieveChannelById(model.Id);
+                this.channelBusiness.DeleteChannel(channel);
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
         }
-
-        
     }
 }

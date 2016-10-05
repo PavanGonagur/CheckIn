@@ -30,9 +30,9 @@ namespace CheckIn.Handler.HandlerImpl
             return 0;
         }
 
-        public ChatRoom RetrieveChatRoom(int chatRoomId)
+        public ChatRoom RetrieveChatRoomByChannelId(int channelId)
         {
-            var query = this.checkInDb.ChatRooms.Where(x => x.ChannelId == chatRoomId);
+            var query = this.checkInDb.ChatRooms.Where(x => x.ChannelId == channelId);
             if (query.Any())
             {
                 var currentUser = query.FirstOrDefault();
@@ -56,6 +56,18 @@ namespace CheckIn.Handler.HandlerImpl
                 return query.First().ChatMessageId;
             }
             return 0;
+        }
+
+        public void DeleteChatRoom(ChatRoom chatRoom)
+        {
+            this.checkInDb.ChatRooms.Remove(chatRoom);
+            this.checkInDb.SaveChanges();
+        }
+
+        public void DeleteChatMessage(ChatMessage chatMessage)
+        {
+            this.checkInDb.ChatMessages.Remove(chatMessage);
+            this.checkInDb.SaveChanges();
         }
 
         public List<ChatMessage> RetrieveChatMessagesByChannelId(int channelId)

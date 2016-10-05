@@ -12,12 +12,16 @@ namespace CheckIn.Handler.Handler
     {
         int AddChatRoom(ChatRoom chatRoom);
 
-        ChatRoom RetrieveChatRoom(int chatRoomId);
+        ChatRoom RetrieveChatRoomByChannelId(int chatRoomId);
 
         int AddChatMessage(ChatMessage chatMessage);
 
         List<ChatMessage> RetrieveChatMessagesByChannelId(int channelId);
 
         List<string> RetrieveRegistrationIds(int chatRoomId,int? userId);
+
+        void DeleteChatRoom(ChatRoom chatRoom);
+
+        void DeleteChatMessage(ChatMessage chatMessage);
     }
 }

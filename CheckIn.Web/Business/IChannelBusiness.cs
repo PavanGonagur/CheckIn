@@ -20,5 +20,9 @@ namespace CheckIn.Web.Business
         ChannelViewModel GetChannel(int channelId);
 
         List<Channel> GetChannelsForAdmin(int adminId);
+
+        Channel RetrieveChannelById(int channelId);
+
+        void DeleteChannel(Channel channel);
     }
 }

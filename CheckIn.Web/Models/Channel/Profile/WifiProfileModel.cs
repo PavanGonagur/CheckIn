@@ -38,6 +38,7 @@ namespace CheckIn.Web.Models.Channel.Profile
         [DisplayName("Security Type")]
         public int SecurityType { get; set; }
 
+        [Required]
         [DisplayName("Password")]
         public string Password { get; set; }
 

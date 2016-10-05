@@ -6,15 +6,19 @@ using System.Web;
 
 namespace CheckIn.Web.Models.Channel.WebClip
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class WebClipEditModel
     {
         public int ChannelId { get; set; }
 
         public int WebClipId { get; set; }
 
+        [Required]
         [DisplayName("Web Clip Name")]
         public string WebClipName { get; set; }
 
+        [Required]
         [DisplayName("Web Clip Link")]
         public string WebClipUrl { get; set; }
 

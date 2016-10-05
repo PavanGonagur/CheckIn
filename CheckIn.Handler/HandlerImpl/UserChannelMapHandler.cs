@@ -68,5 +68,12 @@ namespace CheckIn.Handler.HandlerImpl
             }
             return null;
         }
+
+        public void DeleteUserChannelMap(UserChannelMap userChannelMap)
+        {
+           
+           this.checkInDb.UserChannelMaps.Remove(userChannelMap);
+           this.checkInDb.SaveChanges();
+        }
     }
 }

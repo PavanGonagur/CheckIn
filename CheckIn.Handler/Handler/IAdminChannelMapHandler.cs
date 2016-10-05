@@ -11,5 +11,7 @@ namespace CheckIn.Handler.Handler
     public interface IAdminChannelMapHandler
     {
         void AddAdminChannelMap(AdminChannelMap adminChannelMap);
+
+        void DeleteAdminChannelMap(AdminChannelMap adminChannelMap);
     }
 }

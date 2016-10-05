@@ -15,5 +15,9 @@ namespace CheckIn.Handler.Handler
         List<UserEmailChannel> RetrieveUserEmailChannelOnUserEmail(string userEmail);
 
         void DeleteUserEmailChannel(UserEmailChannel userEmail);
+
+        UserEmailChannel RetrieveUserEmailChannelOnUserEmailAndChannelId(string email, int channelId);
+
+        List<UserEmailChannel> RetrieveUserEmailChannelOnChannelId(int channelId);
     }
 }

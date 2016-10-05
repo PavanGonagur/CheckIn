@@ -6,15 +6,19 @@ using System.Web;
 
 namespace CheckIn.Web.Models.Channel.Application
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ApplicationEditModel
     {
         public int ChannelId { get; set; }
 
         public int ApplicationId { get; set; }
 
+        [Required]
         [DisplayName("Application Name")]
         public string ApplicationName { get; set; }
 
+        [Required]
         [DisplayName("Application Store Link")]
         public string ApplicationUrl { get; set; }
 

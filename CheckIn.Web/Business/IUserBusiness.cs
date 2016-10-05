@@ -7,6 +7,7 @@ using CheckIn.Web.Models.Channel;
 
 namespace CheckIn.Web.Business
 {
+    using CheckIn.Data.Entities;
     using CheckIn.Web.Models;
     using CheckIn.Web.Models.User;
 
@@ -23,5 +24,11 @@ namespace CheckIn.Web.Business
         void UpdateUserPhoneNumber(AddPhoneNumberModel addPhoneNumberModel);
 
         List<ChannelUser> RetrieveUsersByChannel(int channelId);
+
+        User RetrieveUserOnEmail(string email);
+
+        void UnassignUserForChannel(User user, int channelId);
+
+        void DeleteUserEmailChannel(string email, int channelId);
     }
 }

@@ -6,18 +6,23 @@ using System.Web;
 
 namespace CheckIn.Web.Models.Channel.Contact
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ContactEditModel
     {
         public int ContactId { get; set; }
 
         public int ChannelId { get; set; }
 
+        [Required]
         [DisplayName("Contact Name")]
         public string ContactName { get; set; }
 
+        [Required]
         [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
 
+        [Required]
         [DisplayName("Title")]
         public string Title { get; set; }
 

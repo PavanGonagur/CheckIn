@@ -65,6 +65,7 @@
         if ('@Model.OpenInBrowser' == 'True') {
             $("input#OpenInBrowser").prop('checked', true);
         }
+        $.validator.unobtrusive.parse($("form"));
         $('.approve-btn').click(function () {
             $('#modal-container').modal('hide');
         });

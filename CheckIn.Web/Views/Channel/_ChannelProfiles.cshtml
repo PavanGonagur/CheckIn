@@ -26,6 +26,7 @@
 
 <script type="text/javascript">
     $(function () {
+        $.validator.unobtrusive.parse($("form"));
         $('.approve-btn').click(function () {
             $('#modal-container').modal('hide');
         });

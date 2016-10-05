@@ -26,5 +26,7 @@ namespace CheckIn.Handler.Handler
         User RetrieveUserOnEmailUserName(string emailId);
 
         List<CustomUserEntity> RetrieveUsersByChannel(int channelId);
+
+        User RetrieveUserOnEmail(string email);
     }
 }

@@ -27,12 +27,15 @@ namespace CheckIn.Web.BusinessImpl
 
         private readonly IChannelHandler channelHandler;
 
+        private readonly IUserChannelMapHandler userChannelMapHandler;
+
         public UserBusiness()
         {
             this.userHandler = new UserHandler();
             this.userEmailChannelHandler = new UserEmailChannelHandler();
             this.userChannelMapHelper = new UserChannelMapHelper();
             this.channelHandler = new ChannelHandler();
+            this.userChannelMapHandler = new UserChannelMapHandler();
         }
         public string RetrieveUser(int userId)
         {
@@ -40,6 +43,16 @@ namespace CheckIn.Web.BusinessImpl
             if (user != null)
             {
                 return JsonConvert.SerializeObject(user);
+            }
+            return null;
+        }
+
+        public User RetrieveUserOnEmail(string email)
+        {
+            var user = this.userHandler.RetrieveUserOnEmailUserName(email);
+            if (user != null)
+            {
+                return user;
             }
             return null;
         }
@@ -112,6 +125,29 @@ namespace CheckIn.Web.BusinessImpl
                 return customUsers;
             }
             return new List<ChannelUser>();
+        }
+
+        public void UnassignUserForChannel(User user, int channelId)
+        {
+            if (user != null)
+            {
+                var userChannelMap = this.userChannelMapHandler.RetrieveUserChannelMapOnUserChannel(
+                    user.UserId,
+                    channelId);
+                if (userChannelMap != null)
+                {
+                  this.userChannelMapHandler.DeleteUserChannelMap(userChannelMap);
+                }
+            }
+        }
+
+        public void DeleteUserEmailChannel(string email, int channelId)
+        {
+            var userEmailChannelMap = this.userEmailChannelHandler.RetrieveUserEmailChannelOnUserEmailAndChannelId(email, channelId);
+            if (userEmailChannelMap != null)
+            {
+                this.userEmailChannelHandler.DeleteUserEmailChannel(userEmailChannelMap);
+            }
         }
     }
 }

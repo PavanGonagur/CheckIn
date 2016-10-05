@@ -25,5 +25,11 @@ namespace CheckIn.Handler.HandlerImpl
             this.checkInDb.AdminChannelMaps.AddOrUpdate(adminChannelMap);
             this.checkInDb.SaveChanges();
         }
+
+        public void DeleteAdminChannelMap(AdminChannelMap adminChannelMap)
+        {
+            this.checkInDb.AdminChannelMaps.Remove(adminChannelMap);
+            this.checkInDb.SaveChanges();
+        }
     }
 }

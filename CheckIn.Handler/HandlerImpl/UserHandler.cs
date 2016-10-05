@@ -127,6 +127,12 @@ namespace CheckIn.Handler.HandlerImpl
             }
             return null;
         }
+
+        public User RetrieveUserOnEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteUser(User user)
         {
             this.checkInDb.Users.Remove(user);

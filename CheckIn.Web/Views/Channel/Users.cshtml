@@ -33,7 +33,7 @@
                             <p class="red-icon"><span class="glyphicon glyphicon-minus-sign"></span></p>
                         }
                     </td>
-                    <td class="col-lg-2"><a class="btn btn-default btn-tile" href="@Url.Action("DeleteUser", "Channel", new {email = addedUser.Email})"> <span class="glyphicon glyphicon-remove"></span></a></td>
+                    <td class="col-lg-2"><a class="btn btn-default btn-tile" href="@Url.Action("DeleteUser", "Channel", new {email = addedUser.Email,channelId = Model.ChannelId})"> <span class="glyphicon glyphicon-remove"></span></a></td>
                 </tr>
             }
         </tbody>

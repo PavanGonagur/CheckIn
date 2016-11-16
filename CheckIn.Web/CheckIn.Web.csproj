@@ -242,6 +242,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\WebApiControllers\AdminController.cs" />
     <Compile Include="Controllers\WebApiControllers\ChatController.cs" />
     <Compile Include="Controllers\WebApiControllers\UserController.cs" />
@@ -308,6 +309,7 @@
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Channel\RegisterToChannelResponseModel.cs" />
+    <Compile Include="Models\Purchase\PurchaseChannelModel.cs" />
     <Compile Include="Models\ResendOtpModel.cs" />
     <Compile Include="Models\UserDeleteModel.cs" />
     <Compile Include="Models\User\CustomUserModel.cs" />
@@ -430,6 +432,7 @@
     <Content Include="Views\Channel\_EditProfile.cshtml" />
     <Content Include="Views\Shared\_DeleteConfirmation.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

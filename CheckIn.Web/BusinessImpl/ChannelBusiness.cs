@@ -180,6 +180,11 @@ namespace CheckIn.Web.BusinessImpl
             {
                 userEmailChannelMaps.ForEach(x => this.userEmailChannelHandler.DeleteUserEmailChannel(x));
             }
+            var channelBranding = this.channelHandler.RetrieveChannelBrandingByChannelId(channel.ChannelId);
+            if (channelBranding != null)
+            {
+                this.channelHandler.DeleteChannelBranding(channelBranding);
+            }
             
             this.channelHandler.DeleteChannel(channel);
         }
@@ -189,7 +194,7 @@ namespace CheckIn.Web.BusinessImpl
             var channelBranding =
                 new ChannelBranding
                 {
-                    IconUrl = channelBrandingModel.IconUrl ?? Constants.ServerUrl + "/icons/default.png",
+                    IconUrl = channelBrandingModel.IconUrl ?? Constants.ServerUrl + "icons/default.png",
                     PrimaryColor = channelBrandingModel.PrimaryColor,
                     SecondaryColor = channelBrandingModel.SecondaryColor,
                     TertiaryColor = channelBrandingModel.TertiaryColor,

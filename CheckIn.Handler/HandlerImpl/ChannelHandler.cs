@@ -86,6 +86,12 @@ namespace CheckIn.Handler.HandlerImpl
             this.checkInDb.SaveChanges();
         }
 
+        public void DeleteChannelBranding(ChannelBranding channelBranding)
+        {
+            this.checkInDb.ChannelBrandings.Remove(channelBranding);
+            this.checkInDb.SaveChanges();
+        }
+
         public Channel RegisterToChannel(string otp)
         {
             var query = this.checkInDb.UserChannelMaps.Where(x => x.Otp == otp);

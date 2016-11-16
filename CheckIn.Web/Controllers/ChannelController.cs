@@ -7,6 +7,7 @@ using CheckIn.Data;
 using CheckIn.Data.Entities;
 using CheckIn.Web.Business;
 using CheckIn.Web.BusinessImpl;
+using CheckIn.Web.Common;
 using CheckIn.Web.Models;
 using CheckIn.Web.Models.Channel;
 using CheckIn.Web.Models.Channel.Application;
@@ -464,8 +465,8 @@ namespace CheckIn.Web.Controllers
                 // TODO: Add update logic here
                 if (icon != null && icon.ContentLength > 0)
                 {
-                    var filename = model.ChannelBrandingId + ".jpg";
-                    var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/Icons/") + filename;
+                    var fileName = model.ChannelBrandingId + ".jpg";
+                    var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/Icons/") + fileName;
 
                     using (var reader = new System.IO.BinaryReader(icon.InputStream))
                     {
@@ -477,7 +478,7 @@ namespace CheckIn.Web.Controllers
                         }
                         System.IO.File.WriteAllBytes(filePath, fileStream);
                     }
-                    model.IconUrl = filePath;
+                    model.IconUrl = Constants.ServerUrl + "MyImages/Icons/" + fileName; ;
                 }
                 channelBusiness.AddBrandingForChannel(model);
                 return RedirectToAction("Index");

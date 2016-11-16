@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using CheckIn.Web.Common;
 using CheckIn.Web.Utilities;
 
 namespace CheckIn.Web.BusinessImpl
@@ -83,6 +84,15 @@ namespace CheckIn.Web.BusinessImpl
                                 TimeOfGeneration = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
                             }
                         }
+                    }
+                };
+                channel.Branding = new List<ChannelBranding> {
+                    new ChannelBranding
+                    {
+                        IconUrl = Constants.ServerUrl + "/branding/default.jpg",
+                        PrimaryColor = "#333",
+                        SecondaryColor = "#666",
+                        TertiaryColor = "#fff"
                     }
                 };
                 return this.channelHandler.AddChannel(channel);

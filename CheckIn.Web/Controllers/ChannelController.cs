@@ -435,5 +435,48 @@ namespace CheckIn.Web.Controllers
                 return View();
             }
         }
+
+        public ActionResult Branding(int id)
+        {
+            try
+            {
+                // TODO: Add new channel
+                var model = new ChannelBrandingModel {ChannelId = id};
+                return PartialView("_ChannelBranding", model);
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Branding(ChannelBrandingModel model, HttpPostedFileBase icon)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                if (icon != null && icon.ContentLength > 0)
+                {
+                    /*var avatar = new File
+                    {
+                        FileName = System.IO.Path.GetFileName(icon.FileName),
+                        FileType = FileType.Avatar,
+                        ContentType = icon.ContentType
+                    };*/
+                    using (var reader = new System.IO.BinaryReader(icon.InputStream))
+                    {
+                        var fileStream = reader.ReadBytes(icon.ContentLength);
+                    }
+                    //student.Files = new List<File> { avatar };
+                }
+                //channelBusiness.AddChannel(model);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

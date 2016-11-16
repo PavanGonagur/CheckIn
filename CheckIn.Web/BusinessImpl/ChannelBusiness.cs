@@ -89,10 +89,10 @@ namespace CheckIn.Web.BusinessImpl
                 channel.Branding = new List<ChannelBranding> {
                     new ChannelBranding
                     {
-                        IconUrl = Constants.ServerUrl + "/branding/default.jpg",
-                        PrimaryColor = "#333",
-                        SecondaryColor = "#666",
-                        TertiaryColor = "#fff"
+                        IconUrl = Constants.ServerUrl + "/icons/default.png",
+                        PrimaryColor = "#237869",
+                        SecondaryColor = "#34A68D",
+                        TertiaryColor = "#FFFFFF"
                     }
                 };
                 return this.channelHandler.AddChannel(channel);

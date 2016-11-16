@@ -434,6 +434,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="MyImages\Admin\" />
     <Folder Include="MyImages\ChatMessage\" />
+    <Folder Include="MyImages\Icons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

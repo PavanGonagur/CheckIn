@@ -24,5 +24,9 @@ namespace CheckIn.Web.Business
         Channel RetrieveChannelById(int channelId);
 
         void DeleteChannel(Channel channel);
+
+        int AddBrandingForChannel(ChannelBrandingModel channelBrandingModel);
+
+        ChannelBrandingModel RetrieveChannelBrandingByChannelId(int id);
     }
 }

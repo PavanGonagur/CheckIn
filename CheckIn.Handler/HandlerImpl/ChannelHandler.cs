@@ -54,6 +54,26 @@ namespace CheckIn.Handler.HandlerImpl
             this.checkInDb.SaveChanges();
         }
 
+        public void UpdateChannelBranding(ChannelBranding channelBranding)
+        {
+            this.checkInDb.ChannelBrandings.AddOrUpdate(channelBranding);
+            this.checkInDb.SaveChanges();
+        }
+
+        public ChannelBranding RetrieveChannelBrandingByChannelId(int channelid)
+        {
+            var query = this.checkInDb.ChannelBrandings.Where(x => x.ChannelId == channelid);
+            if (query.Any())
+            {
+                var currentChannelBranding = query.FirstOrDefault();
+                if (currentChannelBranding != null)
+                {
+                    return currentChannelBranding;
+                }
+            }
+            return null;
+        }
+
         public List<Channel> RetrieveAllChannels()
         {
             var channels = this.checkInDb.Channels;

@@ -184,6 +184,43 @@ namespace CheckIn.Web.BusinessImpl
             this.channelHandler.DeleteChannel(channel);
         }
 
+        public int AddBrandingForChannel(ChannelBrandingModel channelBrandingModel)
+        {
+            var channelBranding =
+                new ChannelBranding
+                {
+                    IconUrl = channelBrandingModel.IconUrl,
+                    //Constants.ServerUrl + "/branding/" + channelBrandingModel.,
+                    PrimaryColor = channelBrandingModel.PrimaryColor,
+                    SecondaryColor = channelBrandingModel.SecondaryColor,
+                    TertiaryColor = channelBrandingModel.TertiaryColor,
+                    ChannelId = channelBrandingModel.ChannelId,
+                    ChannelBrandingId = channelBrandingModel.ChannelBrandingId
+                };
+                
+            this.channelHandler.UpdateChannelBranding(channelBranding);
+            return channelBrandingModel.ChannelId;
+        }
+
+        public ChannelBrandingModel RetrieveChannelBrandingByChannelId(int channelId)
+        {
+            var channelBranding = this.channelHandler.RetrieveChannelBrandingByChannelId(channelId);
+            if (channelBranding != null)
+            {
+                var channelBrandingModel = new ChannelBrandingModel()
+                {
+                    ChannelId = channelBranding.ChannelId,
+                    ChannelBrandingId = channelBranding.ChannelBrandingId,
+                    TertiaryColor = channelBranding.TertiaryColor,
+                    PrimaryColor = channelBranding.PrimaryColor,
+                    SecondaryColor = channelBranding.SecondaryColor,
+                    IconUrl = channelBranding.IconUrl
+                };
+                return channelBrandingModel;
+            }
+            return null;
+        }
+
         public ChannelListModel RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId)
         {
             var channels = this.channelHandler.RetrieveChannelsByLocationAndUser(latitude, longitude, userId);

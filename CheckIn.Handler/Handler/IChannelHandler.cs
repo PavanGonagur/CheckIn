@@ -28,5 +28,9 @@ namespace CheckIn.Handler.Handler
         Channel GetChannelOnText(string searchText);
 
         List<Channel> RetrieveChannelsByLocationAndUser(float latitude, float longitude, int userId);
+
+        void UpdateChannelBranding(ChannelBranding channelBranding);
+
+        ChannelBranding RetrieveChannelBrandingByChannelId(int id);
     }
 }

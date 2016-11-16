@@ -441,7 +441,12 @@ namespace CheckIn.Web.Controllers
             try
             {
                 // TODO: Add new channel
-                var model = new ChannelBrandingModel {ChannelId = id};
+                var channelBranding = this.channelBusiness.RetrieveChannelBrandingByChannelId(id);
+                if (channelBranding != null)
+                {
+                    return PartialView("_ChannelBranding", channelBranding);
+                }
+                var model = new ChannelBrandingModel { ChannelId = id };
                 return PartialView("_ChannelBranding", model);
             }
             catch (Exception ex)
@@ -470,7 +475,7 @@ namespace CheckIn.Web.Controllers
                     }
                     //student.Files = new List<File> { avatar };
                 }
-                //channelBusiness.AddChannel(model);
+                channelBusiness.AddBrandingForChannel(model);
                 return RedirectToAction("Index");
             }
             catch

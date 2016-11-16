@@ -22,6 +22,8 @@ namespace CheckIn.Data.Entities
 
         public bool IsSuperAdmin { get; set; }
 
+        public bool PasswordResetNeeded { get; set; }
+
         public virtual ICollection<AdminChannelMap> AdminChannelMaps { get; set; }
     }
 }

@@ -56,7 +56,12 @@
                     
                 </div>
                 <div class="actions col-md-2">
-                    <div class="col-md-5"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                        <a class="modal-link btn btn-default" href="@Url.Action("Branding", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-font"></span></a>
+                        @*@Html.ActionLink("Edit", "Edit", "Channel", new {id = item.ChannelId}, new {@class = "modal-link btn btn-warning"})*@
+                    </div>
+                    <div class="col-md-1"></div>
                     <div class="col-md-3">
                         <a class="modal-link btn btn-default" href="@Url.Action("Edit", "Channel", new {id = item.ChannelId})"> <span class="glyphicon glyphicon-pencil"></span></a>
                         @*@Html.ActionLink("Edit", "Edit", "Channel", new {id = item.ChannelId}, new {@class = "modal-link btn btn-warning"})*@

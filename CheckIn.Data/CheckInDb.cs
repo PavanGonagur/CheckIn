@@ -45,6 +45,8 @@ namespace CheckIn.Data
 
         public DbSet<WebClip> WebClips { get; set; }
 
+        public DbSet<ChannelBranding> ChannelBrandings { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

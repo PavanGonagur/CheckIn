@@ -43,5 +43,7 @@ namespace CheckIn.Data.Entities
         public virtual ICollection<Location> Locations { get; set; }
 
         public virtual ICollection<Contact> Contacts { get; set; }
+
+        public virtual ICollection<ChannelBranding> Branding { get; set; }
     }
 }

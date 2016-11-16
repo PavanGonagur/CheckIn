@@ -58,6 +58,7 @@
     <Compile Include="Entities\AdminChannelMap.cs" />
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\Channel.cs" />
+    <Compile Include="Entities\ChannelBranding.cs" />
     <Compile Include="Entities\ChatMessage.cs" />
     <Compile Include="Entities\ChatRoom.cs" />
     <Compile Include="Entities\Contact.cs" />

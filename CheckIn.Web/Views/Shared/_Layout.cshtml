@@ -47,6 +47,9 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
+                            @Html.ActionLink("Rules", "Index", "Dashboard")
+                        </li>
+                        <li>
                             @Html.ActionLink("Channels", "Index", "Channel")
                         </li>
                         @if (SessionUtility.CurrentAdmin?.IsSuperAdmin ?? false)

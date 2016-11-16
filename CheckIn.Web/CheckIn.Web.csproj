@@ -237,6 +237,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChannelController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Models\Channel\ApplicationModel.cs" />
     <Compile Include="Models\Channel\Application\ApplicationEditModel.cs" />
     <Compile Include="Models\Channel\Application\ChannelApplicationListModel.cs" />
+    <Compile Include="Models\Channel\ChannelBrandingModel.cs" />
     <Compile Include="Models\Channel\ChannelContactListModel.cs" />
     <Compile Include="Models\Channel\ChannelLocationListModel.cs" />
     <Compile Include="Models\Channel\ChannelModelResponse.cs" />
@@ -293,6 +295,11 @@
     <Compile Include="Models\Channel\ChannelUser.cs" />
     <Compile Include="Models\Channel\ChannelUserModel.cs" />
     <Compile Include="Models\Channel\ChannelViewModel.cs" />
+    <Compile Include="Models\Dashboard\AppRulesModel.cs" />
+    <Compile Include="Models\Dashboard\DeviceRulesModel.cs" />
+    <Compile Include="Models\Dashboard\EmailRulesModel.cs" />
+    <Compile Include="Models\Dashboard\NetworkRulesModel.cs" />
+    <Compile Include="Models\Dashboard\RulesModel.cs" />
     <Compile Include="Models\DeleteModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Data.cs" />
@@ -415,11 +422,13 @@
     <Content Include="Views\Channel\_ChannelApplications.cshtml" />
     <Content Include="Views\Channel\_ChannelLocations.cshtml" />
     <Content Include="Views\Channel\_ChannelContacts.cshtml" />
+    <Content Include="Views\Channel\_ChannelBranding.cshtml" />
     <None Include="Views\Channel\_ChannelUsers.cshtml" />
     <Content Include="Views\Channel\_ChannelWebClips.cshtml" />
     <None Include="Views\Channel\_Create.cshtml" />
     <Content Include="Views\Channel\_EditProfile.cshtml" />
     <Content Include="Views\Shared\_DeleteConfirmation.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

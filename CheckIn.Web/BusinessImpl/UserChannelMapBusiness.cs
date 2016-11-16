@@ -80,7 +80,8 @@ namespace CheckIn.Web.BusinessImpl
                                                    Contacts = channel.Contacts.Select(x => new ContactModel(x)).ToList(),
                                                    WebClips = channel.WebClips.Select(x => new WebClipModel(x)).ToList(),
                                                    Locations = channel.Locations.Select(x => new LocationModel(x)).ToList()
-                                               }
+                                               },
+                                               ChannelBranding = new ChannelBrandingModel(channel.Branding.FirstOrDefault())
                                               
                 };
                 return registerToChannel;
@@ -175,7 +176,8 @@ namespace CheckIn.Web.BusinessImpl
                             Contacts = channel.Contacts.Select(x => new ContactModel(x)).ToList(),
                             WebClips = channel.WebClips.Select(x => new WebClipModel(x)).ToList(),
                             Locations = channel.Locations.Select(x => new LocationModel(x)).ToList()
-                        }
+                        },
+                        ChannelBranding = new ChannelBrandingModel(channel.Branding.FirstOrDefault())
 
                     };
                     return registerToChannel;

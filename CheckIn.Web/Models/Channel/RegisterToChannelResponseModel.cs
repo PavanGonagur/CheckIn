@@ -28,5 +28,7 @@ namespace CheckIn.Web.Models
         [JsonProperty("Co-ordinates")]
         public List<CoordinatesModel> CoordinatesModel { get; set; }
         public ResourceModel Resources { get; set; }
+
+        public ChannelBrandingModel ChannelBranding { get; set; }
     }
 }

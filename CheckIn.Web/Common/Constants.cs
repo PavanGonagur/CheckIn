@@ -24,7 +24,7 @@ namespace CheckIn.Web.Common
 
         public const string AdminPasswordSubject = "CheckIn console Password Information";
 
-        public const string ServerUrl = "http://10.5.83.73/CheckIn/";
+        public const string ServerUrl = "http://10.85.193.92/CheckIn/";
 
     }
 }

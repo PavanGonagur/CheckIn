@@ -189,8 +189,7 @@ namespace CheckIn.Web.BusinessImpl
             var channelBranding =
                 new ChannelBranding
                 {
-                    IconUrl = channelBrandingModel.IconUrl,
-                    //Constants.ServerUrl + "/branding/" + channelBrandingModel.,
+                    IconUrl = channelBrandingModel.IconUrl ?? Constants.ServerUrl + "/icons/default.png",
                     PrimaryColor = channelBrandingModel.PrimaryColor,
                     SecondaryColor = channelBrandingModel.SecondaryColor,
                     TertiaryColor = channelBrandingModel.TertiaryColor,
@@ -207,15 +206,7 @@ namespace CheckIn.Web.BusinessImpl
             var channelBranding = this.channelHandler.RetrieveChannelBrandingByChannelId(channelId);
             if (channelBranding != null)
             {
-                var channelBrandingModel = new ChannelBrandingModel()
-                {
-                    ChannelId = channelBranding.ChannelId,
-                    ChannelBrandingId = channelBranding.ChannelBrandingId,
-                    TertiaryColor = channelBranding.TertiaryColor,
-                    PrimaryColor = channelBranding.PrimaryColor,
-                    SecondaryColor = channelBranding.SecondaryColor,
-                    IconUrl = channelBranding.IconUrl
-                };
+                var channelBrandingModel = new ChannelBrandingModel(channelBranding);
                 return channelBrandingModel;
             }
             return null;

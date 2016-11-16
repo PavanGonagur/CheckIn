@@ -33,18 +33,21 @@ namespace CheckIn.Web.BusinessImpl
             var channelModel = new ChannelViewModel()
             {
                 Name = purchaseChannelModel.ChannelName,
-                Description = purchaseChannelModel.Description
+                Description = purchaseChannelModel.ChannelDescription
             };
             int channelId = this.channelBusiness.AddChannel(channelModel);
             var admin = this.adminBusiness.RetrieveAdminOnEmail(purchaseChannelModel.Email);
             if (channelId > 0)
             {
+                string adminPass = AutoGeneratePasswordUtility.GeneratePassword();
                 if (admin == null)
                 {
                     var adminModel = new AdminModel()
                     {
                         Email = purchaseChannelModel.Email,
-                        Name = purchaseChannelModel.AdminName
+                        Name = purchaseChannelModel.AdminName,
+                        Password = adminPass
+                        //TOdo: set flag to true
                     };
                     int adminId = this.adminBusiness.AddAdmin(adminModel);
                     if (adminId > 0)
@@ -66,7 +69,7 @@ namespace CheckIn.Web.BusinessImpl
                 }
                 EmailGateway.SendMail(new EmailModel()
                 {
-                    Body = string.Format(Constants.AutoProvisionAdminChannelBody, purchaseChannelModel.AdminName, purchaseChannelModel.ChannelName, AutoGeneratePasswordUtility.GeneratePassword() ,Constants.ServerUrl),
+                    Body = string.Format(Constants.AutoProvisionAdminChannelBody, purchaseChannelModel.AdminName, purchaseChannelModel.ChannelName, admin == null ? adminPass : admin.Password, Constants.ServerUrl),
                     Subject = Constants.AutoProvisionAdminChannelSubject,
                     To = purchaseChannelModel.Email
                 });

@@ -13,6 +13,6 @@ namespace CheckIn.Web.Models.Purchase
 
         public string ChannelName { get; set; }
 
-        public bool IsPublic { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CheckIn.Data;
+using CheckIn.Data.Entities;
 using CheckIn.Web.Business;
 using CheckIn.Web.BusinessImpl;
 using CheckIn.Web.Models;
@@ -463,17 +464,20 @@ namespace CheckIn.Web.Controllers
                 // TODO: Add update logic here
                 if (icon != null && icon.ContentLength > 0)
                 {
-                    /*var avatar = new File
-                    {
-                        FileName = System.IO.Path.GetFileName(icon.FileName),
-                        FileType = FileType.Avatar,
-                        ContentType = icon.ContentType
-                    };*/
+                    var filename = model.ChannelBrandingId + ".jpg";
+                    var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/MyImages/Icons/") + filename;
+
                     using (var reader = new System.IO.BinaryReader(icon.InputStream))
                     {
                         var fileStream = reader.ReadBytes(icon.ContentLength);
+                        if (System.IO.File.Exists(filePath))
+                        {
+                            System.IO.File.Delete(filePath);
+                            System.IO.File.WriteAllBytes(filePath, fileStream);
+                        }
+                        System.IO.File.WriteAllBytes(filePath, fileStream);
                     }
-                    //student.Files = new List<File> { avatar };
+                    model.IconUrl = filePath;
                 }
                 channelBusiness.AddBrandingForChannel(model);
                 return RedirectToAction("Index");

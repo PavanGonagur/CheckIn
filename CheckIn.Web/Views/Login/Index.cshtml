@@ -15,58 +15,65 @@
 
 </head>
 <body>
-    <section id="loginForm" class="login-panel">
+<section class="header">
+    
+</section>
+<section id="loginForm" class="login-panel">
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-            <div class="panel panel-default">
-                <h3 class="panel-heading u-no-margin"><span class="brand-logo">Check In</span></h3>
-                <div class="panel-body">
-                    @**@
-                    <div class="form-group row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(x => x.Email, new {placeholder = @"Email", @class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.Email)
-                        </div>
-                        <div class="col-md-2">
-                        </div>
+        <div class="panel panel-default">
+            <h3 class="panel-heading u-no-margin"><span class="brand-logo">Check In</span></h3>
+            <div class="panel-body">
+                @**@
+                <div class="form-group row">
+                    <div class="col-md-2">
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8">
-                            @Html.PasswordFor(x => x.Password, new {placeholder = @"Password", @class = "form-control"})
-                            @Html.ValidationMessageFor(m => m.Password)
-                        </div>
-                        <div class="col-md-2">
-                        </div>
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(x => x.Email, new {placeholder = @"Email", @class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Email)
                     </div>
-                    <div class="form-group row">
-                        <button class="btn btn-default btn-lg" type="submit">Login</button>
+                    <div class="col-md-2">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        @Html.PasswordFor(x => x.Password, new {placeholder = @"Password", @class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <button class="btn btn-default btn-lg" type="submit">Login</button>
+                </div>
+                <div>
+                    <a class="btn" href="@Url.Action("Index", "Purchase")"> <i>Forgot Password</i></a> |
+                    <a class="btn" href="@Url.Action("Index", "Purchase")"> <span class="glyphicon glyphicon-shopping-cart"></span> <i>Purchase a new channel!</i></a>
+                </div>
             </div>
-        }
-    </section>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        </div>
+    }
+</section>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 <style>
     .login-panel {
         width: 425px;
         display: block;
         position: absolute;
         top: 50%;
-        height: 400px;
+        height: 500px;
         margin-top: -200px;
         left: 50%;
         margin-left: -222px;
         text-align: center;
-        
+
     }
 
     .login-panel .panel {
@@ -84,9 +91,9 @@
         padding-top: 25px
     }*/
     .login-panel .panel-heading {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
+        color: #31708f;
+        background-color: #d9edf7;
+        border-color: #bce8f1;
     }
     /*.login-panel .form-group input {
         border: none;

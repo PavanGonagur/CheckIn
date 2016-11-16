@@ -37,6 +37,10 @@ namespace CheckIn.Web.Controllers
             if (admin.AdminId != 0)
             {
                 SessionUtility.CurrentAdmin = admin;
+                if (admin.PasswordResetNeeded)
+                {
+                    return RedirectToAction("Reset");
+                }
                 return RedirectToAction("Index", "Channel");
                 //                return RedirectToAction("Index", new {id = id});
             }
@@ -48,10 +52,58 @@ namespace CheckIn.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ForgetPassword(/*string email*/)
+        {
+            //TODO: Validate Email not empty
+            //TODO: Search Admin, Generate Password, Save it, Make PasswordResetNeeded true
+            return RedirectToAction("Index");
+        }
+
         public ActionResult LogOff()
         {
             SessionUtility.CurrentAdmin = null;
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Reset()
+        {
+            if (SessionUtility.IsAuthenticated && !SessionUtility.CurrentAdmin.PasswordResetNeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reset(PasswordResetModel model)
+        {
+            if (model.Password != model.ConfirmPassword)
+            {
+                ModelState.AddModelError("", "Passwords do not match");
+                return View();
+            }
+            //TODO: Validate Old Password is correct
+            if (model.Password == model.OldPassword)
+            {
+                ModelState.AddModelError("", "Cannot use the previous password");
+                return View();
+            }
+            //TODO: Reset Password and change PasswordResetNeeded
+            //var admin = new AuthenticationUtility().AuthenticateUser(model.Password, model.Email);
+            if (true) //Password successfully reset //TODO: Add Proper Condition
+            {
+                SessionUtility.CurrentAdmin.PasswordResetNeeded = false;
+                return RedirectToAction("Index", "Channel");
+                //                return RedirectToAction("Index", new {id = id});
+            }
+            else
+            {
+                ModelState.AddModelError("", "Could not reset password");
+                //return View();
+            }
+            return View("Reset");
         }
     }
 }

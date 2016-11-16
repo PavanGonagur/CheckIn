@@ -307,6 +307,7 @@
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Models\Login\PasswordResetModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Channel\RegisterToChannelResponseModel.cs" />
     <Compile Include="Models\Purchase\PurchaseChannelModel.cs" />
@@ -433,6 +434,7 @@
     <Content Include="Views\Shared\_DeleteConfirmation.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\Login\Reset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

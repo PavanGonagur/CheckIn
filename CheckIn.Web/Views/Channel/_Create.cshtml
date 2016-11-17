@@ -88,16 +88,30 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TimeOfDeactivation, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.LabelFor(model => model.TimeOfDeactivation, htmlAttributes: new {@class = "control-label col-md-4"})
 
                 <div class="col-md-7">
                     <div class="input-group date" id="datetimepicker2">
-                        @Html.EditorFor(model => model.TimeOfDeactivation, new { htmlAttributes = new { @class = "form-control date" } })
+                        @Html.EditorFor(model => model.TimeOfDeactivation, new {htmlAttributes = new {@class = "form-control date"}})
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(model => model.TimeOfDeactivation, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.TimeOfDeactivation, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TwitterHashtag, htmlAttributes: new {@class = "control-label col-md-4"})
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.TwitterHashtag, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.TwitterHashtag, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MobileWebsite, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.MobileWebsite, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MobileWebsite, "", new { @class = "text-danger" })
                 </div>
             </div>
             <hr />

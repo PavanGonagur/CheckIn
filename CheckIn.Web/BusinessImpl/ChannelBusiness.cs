@@ -66,6 +66,8 @@ namespace CheckIn.Web.BusinessImpl
                                   Longitude = channelModel.Longitude,
                                   TimeOfActivation = channelModel.TimeOfActivation.ToString("dd-MM-yyyy HH:mm:ss"),
                                   TimeOfDeactivation = channelModel.TimeOfDeactivation.ToString("dd-MM-yyyy HH:mm:ss"),
+                                  TwitterHashtag = channelModel.TwitterHashtag,
+                                  MobileWebsite = channelModel.MobileWebsite
                               };
             if (channel.ChannelId == 0)
             {
@@ -282,7 +284,9 @@ namespace CheckIn.Web.BusinessImpl
                     Latitude = channel.Latitude,
                     Longitude = channel.Longitude,
                     TimeOfActivation = DateTime.ParseExact(channel.TimeOfActivation, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture),
-                    TimeOfDeactivation = DateTime.ParseExact(channel.TimeOfDeactivation, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                    TimeOfDeactivation = DateTime.ParseExact(channel.TimeOfDeactivation, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture),
+                    TwitterHashtag = channel.TwitterHashtag,
+                    MobileWebsite = channel.MobileWebsite
                 };
                 return channelModel;
             }

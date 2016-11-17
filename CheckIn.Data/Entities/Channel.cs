@@ -26,6 +26,10 @@ namespace CheckIn.Data.Entities
 
         public string Description { get; set; }
 
+        public string TwitterHashtag { get; set; }
+
+        public string MobileWebsite { get; set; }
+
         public virtual ICollection<AdminChannelMap> AdminChannelMaps { get; set; }
 
         public virtual ICollection<UserChannelMap> UserChannelMaps { get; set; }

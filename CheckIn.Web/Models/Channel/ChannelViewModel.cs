@@ -35,6 +35,12 @@ namespace CheckIn.Web.Models.Channel
         [DisplayName("Time Of Deactivation")]
         public DateTime TimeOfDeactivation { get; set; }
 
+        [DisplayName("Twitter Hashtag")]
+        public string TwitterHashtag { get; set; }
+
+        [DisplayName("Mobile Website")]
+        public string MobileWebsite { get; set; }
+
         public ChannelViewModel()
         {
             TimeOfActivation = DateTime.Now;

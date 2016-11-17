@@ -24,12 +24,14 @@ namespace CheckIn.Web
                         "~/Scripts/moment-with-locales.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/bootstrap-datetimepicker.js",
-                        "~/Scripts/respond.js"));
+                        "~/Scripts/respond.js",
+                        "~/Scripts/farbtastic.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/farbtastic.css"));
         }
     }
 }

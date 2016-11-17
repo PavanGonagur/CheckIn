@@ -31,6 +31,8 @@ namespace CheckIn.Web.Models
         [JsonProperty("password")]
         public string Password { get; set; }
 
+        public bool PasswordResetNeeded { get; set; }
+
         public string Validate()
         {
             return null;

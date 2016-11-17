@@ -13,6 +13,8 @@ namespace CheckIn.Handler.Handler
     {
         void DeleteChannel(Channel channel);
 
+        void DeleteChannelBranding(ChannelBranding channelBranding);
+
         List<Channel> RetrieveAllChannels();
 
         void UpdateChannel(Channel channel);

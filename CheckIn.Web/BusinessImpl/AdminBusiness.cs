@@ -72,5 +72,19 @@ namespace CheckIn.Web.BusinessImpl
         {
             return this.adminHandler.RetrieveAllAdmins();
         }
+
+        public void UpdateAdmin(Admin admin)
+        {
+            this.adminHandler.UpdateAdmin(admin);
+            if (admin.PasswordResetNeeded)
+            {
+                EmailGateway.SendMail(new EmailModel()
+                {
+                    Body = string.Format(Constants.ForgotPasswordBody, admin.Name, admin.Password),
+                    Subject = Constants.ForgotPasswordSubject,
+                    To = admin.Email
+                });
+            }
+        }
     }
 }

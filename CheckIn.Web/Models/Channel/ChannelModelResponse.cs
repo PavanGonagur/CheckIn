@@ -30,6 +30,7 @@ namespace CheckIn.Web.Models.Channel
 
         public bool IsAuthenticated { get; set; }
 
+        public ChannelBrandingModel ChannelBranding { get; set; }
         public ChannelModelResponse()
         {
             
@@ -54,6 +55,7 @@ namespace CheckIn.Web.Models.Channel
                                                         channel.Latitude
                                                 }
                                         };
+            this.ChannelBranding = new ChannelBrandingModel(channel.Branding.FirstOrDefault());
         }
     }
 }

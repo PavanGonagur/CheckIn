@@ -35,8 +35,8 @@ namespace CheckIn.Web.Utilities
             try
             {
                 var admin = this.adminBusiness.RetrieveAdminOnEmail(email);
-                //var hash = HashUtility.GetHash(password);
-                if (admin != null && admin.Password.Equals(password))
+                var hash = HashUtility.GetHash(password);
+                if (admin != null && admin.Password.Equals(hash))
                 {
                     return admin;
                 }

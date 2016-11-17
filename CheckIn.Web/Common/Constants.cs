@@ -29,6 +29,10 @@ namespace CheckIn.Web.Common
 
         public const string AutoProvisionAdminChannelSubject = "CheckIn Admin and Channel Created";
 
+        public const string ForgotPasswordBody = "Hi {0}, your password to login to CheckIn console {1}. It is Recommended to reset your password once you login.";
+
+        public const string ForgotPasswordSubject = "CheckIn Forgot Password";
+
         public const string ServerUrl = "http://10.85.193.92/CheckIn/";
 
     }

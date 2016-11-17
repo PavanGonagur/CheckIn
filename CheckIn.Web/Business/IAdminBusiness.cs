@@ -20,5 +20,7 @@ namespace CheckIn.Web.Business
         Admin RetrieveAdminOnEmail(string email);
 
         List<Admin> RetrieveAllAdmins();
+
+        void UpdateAdmin(Admin adminModel);
     }
 }

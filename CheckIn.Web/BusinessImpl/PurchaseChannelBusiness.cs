@@ -46,8 +46,9 @@ namespace CheckIn.Web.BusinessImpl
                     {
                         Email = purchaseChannelModel.Email,
                         Name = purchaseChannelModel.AdminName,
-                        Password = adminPass
-                        //TOdo: set flag to true
+                        Password = adminPass,
+                        PasswordResetNeeded = true
+                        
                     };
                     int adminId = this.adminBusiness.AddAdmin(adminModel);
                     if (adminId > 0)
